@@ -43,6 +43,15 @@ def _find_lib():
             return os.path.dirname(hits[0])
     return os.path.abspath(os.path.join(os.getcwd(), "..", "..", "asd_lib"))  # local run
 
+def _require_internet():
+    import socket
+    try:
+        socket.create_connection(("pypi.org", 443), timeout=10).close()
+    except OSError:
+        raise SystemExit("NO INTERNET in this Kaggle session: verify the account's phone number (Kaggle > Settings) "
+                         "and keep 'Internet on'. Stopping so no step runs with missing models or features.")
+_require_internet()
+
 LIB = _find_lib()
 sys.path.insert(0, LIB)
 import asd_utils as U

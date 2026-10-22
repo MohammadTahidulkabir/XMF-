@@ -186,6 +186,9 @@ def tick() -> str:
     """One stateless step (used by GitHub Actions every 20 min): push the next ready
     notebook if none of ours is running.  The project account is dedicated, so other
     kernels are not waited for when ASD_FORCE=1."""
+    if (TOOLS / "HOLD").exists():
+        log("tick: HOLD file present - nothing pushed")
+        return "hold"
     items = json.loads(QUEUE.read_text())["items"]
     st = snapshot(items)
     summary = {k: sum(v == k for v in st.values()) for k in ("DONE", "RUNNING", "PENDING", "FAILED", "BLOCKED", "UNKNOWN")}
