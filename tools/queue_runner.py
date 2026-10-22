@@ -214,7 +214,12 @@ def cloud_runner_active(repo="MohammadTahidulkabir/XMF-", minutes=45) -> bool:
         if not runs:
             return False
         t = datetime.datetime.strptime(runs[0]["created_at"], "%Y-%m-%dT%H:%M:%SZ")
-        return (datetime.datetime.utcnow() - t).total_seconds() < minutes * 60
+        if (datetime.datetime.utcnow() - t).total_seconds() > minutes * 60:
+            return False
+        # only defer when the cloud run can actually talk to Kaggle (not all UNKNOWN)
+        with urllib.request.urlopen(f"https://raw.githubusercontent.com/{repo}/main/outputs/_queue_status.json", timeout=20) as r:
+            st = json.loads(r.read())
+        return any(v != "UNKNOWN" for v in st.values())
     except Exception:
         return False
 
