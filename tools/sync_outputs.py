@@ -21,6 +21,17 @@ def main():
     items = json.loads(Q.QUEUE.read_text())["items"]
     st = Q.snapshot(items)
     OUT.mkdir(exist_ok=True)
+    import os
+    tok = os.environ.get("KAGGLE_API_TOKEN", "")
+    rc, cfg = K.sh(["config", "view"])
+    rc2, raw = K.sh(["kernels", "status", f"{K.USER}/{items[0]['slug']}"])
+    (OUT / "_kaggle_check.txt").write_text(
+        f"secret present: {bool(tok)} | starts with KGAT_: {tok.startswith('KGAT_')} | length: {len(tok)}
+"
+        + "
+".join(l for l in cfg.splitlines() if "username" in l) + "
+" + raw[-400:] + "
+")
     (OUT / "_queue_status.json").write_text(json.dumps(st, indent=1))
     for i in items:
         slug = i["slug"]
