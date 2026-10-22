@@ -10,7 +10,8 @@
   "enable_internet": true,
   "dataset_sources": [
     "shazedaoni/asd-xmf-lib",
-    "shazedaoni/asd-xmf-queue-bundle"
+    "shazedaoni/asd-xmf-queue-bundle",
+    "shazedaoni/asd-xmf-orch-key"
   ],
   "kernel_sources": [],
   "competition_sources": [],

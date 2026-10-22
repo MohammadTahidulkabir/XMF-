@@ -1,7 +1,7 @@
 # %% [meta]
 # {"slug": "asd-xmf-queue-orchestrator", "title": "ASD-XMF Queue Orchestrator",
 #  "gpu": false, "internet": true,
-#  "datasets": ["tahidulkabir/asd-xmf-queue-bundle"], "kernels": [], "phase": "Q"}
+#  "datasets": ["tahidulkabir/asd-xmf-queue-bundle", "tahidulkabir/asd-xmf-orch-key"], "kernels": [], "phase": "Q"}
 
 # %% [markdown]
 # # ASD-XMF queue orchestrator (runs on Kaggle CPU, no GPU quota)
@@ -17,13 +17,17 @@
 # %%
 import os, sys, subprocess, shutil
 from pathlib import Path
-try:
-    from kaggle_secrets import UserSecretsClient
-    TOKEN = UserSecretsClient().get_secret("KAGGLE_API_TOKEN")
-except Exception as e:
-    TOKEN = None
-    print("Secret KAGGLE_API_TOKEN is not attached to this notebook:", repr(e)[:200])
-    print("Add it under Add-ons -> Secrets, tick it for this notebook, then Save & Run All once.")
+TOKEN = None
+key = U.find_path("orch_access_token")          # private dataset asd-xmf-orch-key (never printed, not in /kaggle/working)
+if key is not None:
+    TOKEN = key.read_text().strip()
+if not TOKEN:
+    try:
+        from kaggle_secrets import UserSecretsClient
+        TOKEN = UserSecretsClient().get_secret("KAGGLE_API_TOKEN")
+    except Exception as e:
+        print("No token: attach the private dataset asd-xmf-orch-key or the KAGGLE_API_TOKEN secret.", repr(e)[:120])
+print("token available:", bool(TOKEN))
 
 # %%
 if TOKEN:
