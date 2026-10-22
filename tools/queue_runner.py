@@ -143,10 +143,6 @@ def loop(max_hours=None, self_slug=None):
             if summary != last_summary:
                 log(f"status {summary} | " + ", ".join(f"{s.replace('asd-xmf-', '')}={v}" for s, v in st.items() if v != "PENDING"))
                 last_summary = summary
-            if any(v == "UNKNOWN" for v in st.values()):
-                log("Kaggle unreachable or slow for some items - not pushing this cycle")
-                time.sleep(POLL)
-                continue
             if summary["RUNNING"]:
                 time.sleep(POLL)
                 continue
@@ -193,7 +189,7 @@ def tick() -> str:
     st = snapshot(items)
     summary = {k: sum(v == k for v in st.values()) for k in ("DONE", "RUNNING", "PENDING", "FAILED", "BLOCKED", "UNKNOWN")}
     log(f"tick status {summary}")
-    if summary["RUNNING"] or summary["UNKNOWN"]:
+    if summary["RUNNING"]:
         return "wait"
     ready = [i for i in items if st[i["slug"]] == "PENDING" and all(st.get(d) == "DONE" for d in i.get("after", []))]
     if not ready:
