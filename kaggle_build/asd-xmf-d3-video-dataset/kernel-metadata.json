@@ -1,0 +1,18 @@
+{
+  "id": "shazedaoni/asd-xmf-d3-video-dataset",
+  "title": "ASD-XMF D3 Video Dataset",
+  "code_file": "asd-xmf-d3-video-dataset.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "dataset_sources": [
+    "shazedaoni/asd-xmf-lib",
+    "gursewakbfcet/mmasd-final-dataset"
+  ],
+  "kernel_sources": [],
+  "competition_sources": [],
+  "model_sources": []
+}

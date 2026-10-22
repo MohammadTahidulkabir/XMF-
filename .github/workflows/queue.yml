@@ -1,0 +1,35 @@
+name: kaggle-queue
+on:
+  schedule:
+    - cron: "*/20 * * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: kaggle-queue
+  cancel-in-progress: false
+jobs:
+  tick:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
+      ASD_KAGGLE_USER: shazedaoni
+      ASD_FORCE: "1"
+      PYTHONUTF8: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -q kaggle
+      - name: Start the next notebook when the previous one has finished
+        run: python tools/queue_runner.py --tick
+      - name: Save finished outputs to the repository
+        run: python tools/sync_outputs.py
+      - name: Commit outputs
+        run: |
+          git config user.name "xmf-queue-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add outputs tools/queue_log.txt || true
+          git diff --cached --quiet || (git commit -m "Update notebook outputs" && git push)

@@ -1,0 +1,20 @@
+{
+  "id": "shazedaoni/asd-xmf-p1-photo-benchmark",
+  "title": "ASD-XMF P1 Photo Benchmark",
+  "code_file": "asd-xmf-p1-photo-benchmark.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "dataset_sources": [
+    "shazedaoni/asd-xmf-lib"
+  ],
+  "kernel_sources": [
+    "shazedaoni/asd-xmf-d1-photo-dataset"
+  ],
+  "competition_sources": [],
+  "model_sources": [],
+  "machine_shape": "NvidiaTeslaT4"
+}

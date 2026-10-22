@@ -1,0 +1,31 @@
+{
+  "_comment": "Run order on the project Kaggle account (one notebook at a time, free T4 GPU). Stage 1 = unified datasets D1-D4, Stage 2 = per-sector comparisons, Stage 3 = cohort pipeline (synthetic DEV cohort until the real cohort is attached) incl. fusion comparison.",
+  "items": [
+    {"slug": "asd-xmf-d1-photo-dataset", "stage": 1, "after": []},
+    {"slug": "asd-xmf-d2-audio-dataset", "stage": 1, "after": []},
+    {"slug": "asd-xmf-d3-video-dataset", "stage": 1, "after": []},
+    {"slug": "asd-xmf-d4-text-dataset", "stage": 1, "after": []},
+
+    {"slug": "asd-xmf-p1-photo-benchmark", "stage": 2, "after": ["asd-xmf-d1-photo-dataset"]},
+    {"slug": "asd-xmf-a1-audio-benchmark", "stage": 2, "after": ["asd-xmf-d2-audio-dataset"]},
+    {"slug": "asd-xmf-v1-video-benchmark", "stage": 2, "after": ["asd-xmf-d3-video-dataset"]},
+    {"slug": "asd-xmf-t1-text-benchmark", "stage": 2, "after": ["asd-xmf-d4-text-dataset"]},
+    {"slug": "asd-xmf-nb13-gaze-eyetracking", "stage": 2, "after": []},
+
+    {"slug": "asd-xmf-nb00-data-audit-manifest", "stage": 3, "after": []},
+    {"slug": "asd-xmf-nb01-face-pipeline", "stage": 3, "after": ["asd-xmf-nb00-data-audit-manifest"]},
+    {"slug": "asd-xmf-nb02-audio-pipeline", "stage": 3, "after": ["asd-xmf-nb00-data-audit-manifest"]},
+    {"slug": "asd-xmf-nb05-frame-embeddings", "stage": 3, "after": ["asd-xmf-nb01-face-pipeline", "asd-xmf-p1-photo-benchmark"]},
+    {"slug": "asd-xmf-nb04-frame-baselines-a-cnn", "stage": 3, "after": ["asd-xmf-nb01-face-pipeline", "asd-xmf-p1-photo-benchmark"]},
+    {"slug": "asd-xmf-nb04-frame-baselines-b-cnn", "stage": 3, "after": ["asd-xmf-nb01-face-pipeline", "asd-xmf-p1-photo-benchmark"]},
+    {"slug": "asd-xmf-nb04-frame-baselines-c-vit", "stage": 3, "after": ["asd-xmf-nb01-face-pipeline", "asd-xmf-p1-photo-benchmark"]},
+    {"slug": "asd-xmf-nb04-frame-baselines-d-yolo", "stage": 3, "after": ["asd-xmf-nb01-face-pipeline", "asd-xmf-p1-photo-benchmark"]},
+    {"slug": "asd-xmf-nb06-video-baselines", "stage": 3, "after": ["asd-xmf-nb05-frame-embeddings"]},
+    {"slug": "asd-xmf-nb07-audio-baselines", "stage": 3, "after": ["asd-xmf-nb02-audio-pipeline"]},
+    {"slug": "asd-xmf-nb08-fusion", "stage": 3, "after": ["asd-xmf-nb02-audio-pipeline", "asd-xmf-nb05-frame-embeddings"]},
+    {"slug": "asd-xmf-nb09-ablations-shortcuts", "stage": 3, "after": ["asd-xmf-nb08-fusion"]},
+    {"slug": "asd-xmf-nb10-xai", "stage": 3, "after": ["asd-xmf-nb08-fusion", "asd-xmf-nb04-frame-baselines-a-cnn"]},
+    {"slug": "asd-xmf-nb11-stats-figures", "stage": 3, "after": ["asd-xmf-nb04-frame-baselines-b-cnn", "asd-xmf-nb04-frame-baselines-c-vit", "asd-xmf-nb04-frame-baselines-d-yolo", "asd-xmf-nb06-video-baselines", "asd-xmf-nb07-audio-baselines", "asd-xmf-nb09-ablations-shortcuts", "asd-xmf-nb10-xai"]},
+    {"slug": "asd-xmf-nb12-export-app", "stage": 3, "after": ["asd-xmf-nb08-fusion", "asd-xmf-p1-photo-benchmark"]}
+  ]
+}

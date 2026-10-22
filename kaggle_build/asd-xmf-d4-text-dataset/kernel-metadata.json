@@ -1,0 +1,19 @@
+{
+  "id": "shazedaoni/asd-xmf-d4-text-dataset",
+  "title": "ASD-XMF D4 Text Dataset",
+  "code_file": "asd-xmf-d4-text-dataset.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "dataset_sources": [
+    "shazedaoni/asd-xmf-lib",
+    "sharafatahmed/tasd-dataset-text-based-early-asd-detection",
+    "fabdelja/autism-screening-for-toddlers"
+  ],
+  "kernel_sources": [],
+  "competition_sources": [],
+  "model_sources": []
+}

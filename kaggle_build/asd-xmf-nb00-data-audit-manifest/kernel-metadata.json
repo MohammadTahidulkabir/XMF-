@@ -1,0 +1,18 @@
+{
+  "id": "shazedaoni/asd-xmf-nb00-data-audit-manifest",
+  "title": "ASD-XMF NB00 Data Audit Manifest",
+  "code_file": "asd-xmf-nb00-data-audit-manifest.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "dataset_sources": [
+    "shazedaoni/asd-xmf-lib",
+    "shuvoalok/raf-db-dataset"
+  ],
+  "kernel_sources": [],
+  "competition_sources": [],
+  "model_sources": []
+}

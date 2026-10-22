@@ -1,0 +1,18 @@
+{
+  "id": "shazedaoni/asd-xmf-nb13-gaze-eyetracking",
+  "title": "ASD-XMF NB13 Gaze Eyetracking",
+  "code_file": "asd-xmf-nb13-gaze-eyetracking.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "dataset_sources": [
+    "shazedaoni/asd-xmf-lib",
+    "imtkaggleteam/eye-tracking-autism"
+  ],
+  "kernel_sources": [],
+  "competition_sources": [],
+  "model_sources": []
+}

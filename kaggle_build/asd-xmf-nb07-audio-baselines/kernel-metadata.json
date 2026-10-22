@@ -1,0 +1,21 @@
+{
+  "id": "shazedaoni/asd-xmf-nb07-audio-baselines",
+  "title": "ASD-XMF NB07 Audio Baselines",
+  "code_file": "asd-xmf-nb07-audio-baselines.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "dataset_sources": [
+    "shazedaoni/asd-xmf-lib"
+  ],
+  "kernel_sources": [
+    "shazedaoni/asd-xmf-nb00-data-audit-manifest",
+    "shazedaoni/asd-xmf-nb02-audio-pipeline"
+  ],
+  "competition_sources": [],
+  "model_sources": [],
+  "machine_shape": "NvidiaTeslaT4"
+}

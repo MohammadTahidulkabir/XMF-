@@ -1,0 +1,18 @@
+{
+  "id": "shazedaoni/asd-xmf-queue-orchestrator",
+  "title": "ASD-XMF Queue Orchestrator",
+  "code_file": "asd-xmf-queue-orchestrator.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "dataset_sources": [
+    "shazedaoni/asd-xmf-lib",
+    "shazedaoni/asd-xmf-queue-bundle"
+  ],
+  "kernel_sources": [],
+  "competition_sources": [],
+  "model_sources": []
+}

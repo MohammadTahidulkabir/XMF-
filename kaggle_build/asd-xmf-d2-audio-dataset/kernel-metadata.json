@@ -1,0 +1,21 @@
+{
+  "id": "shazedaoni/asd-xmf-d2-audio-dataset",
+  "title": "ASD-XMF D2 Audio Dataset",
+  "code_file": "asd-xmf-d2-audio-dataset.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "dataset_sources": [
+    "shazedaoni/asd-xmf-lib",
+    "shazedaoni/asd-xmf-recanvo",
+    "warcoder/infant-cry-audio-corpus",
+    "sanmithasadhish/infant-cry-dataset"
+  ],
+  "kernel_sources": [],
+  "competition_sources": [],
+  "model_sources": [],
+  "machine_shape": "NvidiaTeslaT4"
+}

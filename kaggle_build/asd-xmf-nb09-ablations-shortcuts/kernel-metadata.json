@@ -1,0 +1,22 @@
+{
+  "id": "shazedaoni/asd-xmf-nb09-ablations-shortcuts",
+  "title": "ASD-XMF NB09 Ablations Shortcuts",
+  "code_file": "asd-xmf-nb09-ablations-shortcuts.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "dataset_sources": [
+    "shazedaoni/asd-xmf-lib"
+  ],
+  "kernel_sources": [
+    "shazedaoni/asd-xmf-nb00-data-audit-manifest",
+    "shazedaoni/asd-xmf-nb01-face-pipeline",
+    "shazedaoni/asd-xmf-nb08-fusion"
+  ],
+  "competition_sources": [],
+  "model_sources": [],
+  "machine_shape": "NvidiaTeslaT4"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "shazedaoni/asd-xmf-d1-photo-dataset",
+  "title": "ASD-XMF D1 Photo Dataset",
+  "code_file": "asd-xmf-d1-photo-dataset.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "dataset_sources": [
+    "shazedaoni/asd-xmf-lib",
+    "msambare/fer2013",
+    "shuvoalok/raf-db-dataset",
+    "davilsena/ckdataset"
+  ],
+  "kernel_sources": [],
+  "competition_sources": [],
+  "model_sources": []
+}

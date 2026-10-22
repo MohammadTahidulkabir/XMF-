@@ -1,0 +1,20 @@
+{
+  "id": "shazedaoni/asd-xmf-v1-video-benchmark",
+  "title": "ASD-XMF V1 Video Benchmark",
+  "code_file": "asd-xmf-v1-video-benchmark.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "dataset_sources": [
+    "shazedaoni/asd-xmf-lib"
+  ],
+  "kernel_sources": [
+    "shazedaoni/asd-xmf-d3-video-dataset"
+  ],
+  "competition_sources": [],
+  "model_sources": [],
+  "machine_shape": "NvidiaTeslaT4"
+}

@@ -1,0 +1,28 @@
+{
+  "id": "shazedaoni/asd-xmf-nb11-stats-figures",
+  "title": "ASD-XMF NB11 Stats Figures",
+  "code_file": "asd-xmf-nb11-stats-figures.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "dataset_sources": [
+    "shazedaoni/asd-xmf-lib"
+  ],
+  "kernel_sources": [
+    "shazedaoni/asd-xmf-nb00-data-audit-manifest",
+    "shazedaoni/asd-xmf-nb04-frame-baselines-a-cnn",
+    "shazedaoni/asd-xmf-nb04-frame-baselines-b-cnn",
+    "shazedaoni/asd-xmf-nb04-frame-baselines-c-vit",
+    "shazedaoni/asd-xmf-nb04-frame-baselines-d-yolo",
+    "shazedaoni/asd-xmf-nb06-video-baselines",
+    "shazedaoni/asd-xmf-nb07-audio-baselines",
+    "shazedaoni/asd-xmf-nb08-fusion",
+    "shazedaoni/asd-xmf-nb09-ablations-shortcuts",
+    "shazedaoni/asd-xmf-nb10-xai"
+  ],
+  "competition_sources": [],
+  "model_sources": []
+}
