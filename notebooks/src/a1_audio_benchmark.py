@@ -41,10 +41,11 @@ def folds(task_rows):
     y, g = d.label.values, d.group.values
     if d.task.iloc[0] == "vocal_affect":
         return [(task_rows[g != s], task_rows[g == s]) for s in sorted(set(g))]
+    k = int(max(2, min(5, pd.Series(y).value_counts().min())))  # 5 folds; fewer only if a class is tiny
     if d.task.iloc[0] == "cry_reason":
-        cv = StratifiedGroupKFold(5, shuffle=True, random_state=0)
+        cv = StratifiedGroupKFold(k, shuffle=True, random_state=0)
         return [(task_rows[a], task_rows[b]) for a, b in cv.split(task_rows, y, g)]
-    cv = StratifiedKFold(5, shuffle=True, random_state=0)
+    cv = StratifiedKFold(k, shuffle=True, random_state=0)
     return [(task_rows[a], task_rows[b]) for a, b in cv.split(task_rows, y)]
 
 # %% [markdown]
