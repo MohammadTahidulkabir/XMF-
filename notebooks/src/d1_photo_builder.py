@@ -12,7 +12,7 @@
 # * official FER2013 / RAF-DB test splits are kept as test; 10 % of train becomes validation
 # * **CK+ is an external test set only** (its frames come in per-person sequences without subject IDs,
 #   so a random split would leak)
-# * perceptual-hash de-duplication across all sources: a training image that nearly duplicates a
+# * perceptual-hash de-duplication across all sources: a training image whose hash equals a
 #   test image is removed from training
 # * the scraped "Autistic Children Facial Data Set" and its mirrors are excluded (plan section 1)
 
@@ -70,19 +70,15 @@ df["split"] = np.where(df.orig_split == "test", "test", "train")
 tr = df.index[df.split == "train"].to_numpy()
 df.loc[rng.choice(tr, int(0.10 * len(tr)), replace=False), "split"] = "val"
 df["phash"] = [U.phash(im) for im in X]
-dups = U.near_duplicates(df.phash.tolist(), df.index.tolist(), max_dist=2)
-drop = set()
-for a, b in zip(dups.a, dups.b):
-    sa, sb = df.split[a], df.split[b]
-    if sa == sb == "train":
-        drop.add(b)                    # duplicate inside train: keep one
-    elif "test" in (sa, sb) and sa != sb:
-        drop.add(a if sa != "test" else b)  # never train/validate on a near copy of a test image
-    elif "val" in (sa, sb) and "train" in (sa, sb):
-        drop.add(a if sa == "train" else b)
-keep = np.array(sorted(set(df.index) - drop))
-print(f"near-duplicate pairs: {len(dups)} | removed: {len(drop)}")
-df, X = df.loc[keep].reset_index(drop=True), X[keep]
+# Vectorised de-duplication on identical pHash (seconds for ~52k images; a pairwise Hamming search
+# in Python does not finish in a 12 h session).  Priority test > val > train: a hash that occurs in
+# test is removed from val/train, one that occurs in val is removed from train, then one copy per split.
+pri = df.split.map({"test": 0, "val": 1, "train": 2})
+first = df.assign(pri=pri).sort_values("pri").drop_duplicates("phash")
+best_split = first.set_index("phash").split
+keep_mask = (df.split.values == df.phash.map(best_split).values) & ~df.duplicated(["phash", "split"]).values
+print(f"duplicate (identical pHash) images removed: {int((~keep_mask).sum())}")
+df, X = df[keep_mask].reset_index(drop=True), X[keep_mask]
 
 # %%
 np.save(OUT / "images.npy", X)
@@ -95,7 +91,7 @@ print(summary)
 (OUT / "DATASHEET.md").write_text(f"""# XMF-Photo
 Unified 7-class facial-expression dataset ({', '.join(CLS)}), {len(df)} images at {IMG} px RGB.
 Sources: FER2013 (msambare/fer2013), RAF-DB (shuvoalok/raf-db-dataset), CK+ (davilsena/ckdataset; external test only).
-Splits: official test sets kept; 10 % of training as validation; pHash near-duplicates (Hamming <= 2) removed across splits.
+Splits: official test sets kept; 10 % of training as validation; images with identical pHash removed (test > val > train priority).
 Use: pre-training of the face-expression encoder. Not an autism dataset. Licences: as stated by each original source (research use).
 
 {summary.to_markdown()}
