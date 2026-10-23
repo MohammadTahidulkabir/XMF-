@@ -19,6 +19,7 @@ Usage
 """
 import argparse
 import json
+import re
 import os
 import tempfile
 import time
@@ -68,12 +69,21 @@ def _ledger_add(slug, state):
 
 
 def has_full_marker(slug: str):
-    """True / False, or None when Kaggle could not be asked (network down, timeout)."""
-    with tempfile.TemporaryDirectory() as d:
-        rc, out = K.sh(["kernels", "output", f"{K.USER}/{slug}", "-p", d, "--file-pattern", MARKER.replace(".", r"\.")], timeout=600)
-        if any(p.name == MARKER for p in Path(d).rglob("*")):
+    """True / False, or None when Kaggle could not be asked.  Uses the output *file listing*:
+    `kernels output --file-pattern` silently matches nothing in Kaggle CLI 2.2.x."""
+    token = None
+    for _ in range(50):
+        args = ["kernels", "files", f"{K.USER}/{slug}", "--page-size", "200"] + (["--page-token", token] if token else [])
+        rc, out = K.sh(args, timeout=300)
+        if rc != 0 and "name" not in out:
+            return None
+        if re.search(r"(^|/|\s)" + re.escape(MARKER) + r"\s", out):
             return True
-        return False if rc == 0 else None
+        m = re.search(r"Next Page Token = (\S+)", out)
+        if not m:
+            return False
+        token = m.group(1)
+    return False
 
 
 def item_state(slug: str) -> str:
