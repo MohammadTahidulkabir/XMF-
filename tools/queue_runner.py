@@ -34,6 +34,7 @@ POLL = int(os.environ.get("ASD_QUEUE_POLL", 300))
 QUIET_CHECKS = 3
 MARKER = "_run_profile_full.txt"
 ORCH = "asd-xmf-queue-orchestrator"
+RETRIES = {}   # pushes made by THIS runner instance per notebook (protects against killed-run loops)
 FAILED = {"ERROR", "CANCEL_ACKNOWLEDGED", "CANCELLED", "CANCEL_REQUESTED"}
 
 
@@ -92,6 +93,10 @@ def item_state(slug: str) -> str:
             st = "DONE" if s == "COMPLETE" else "FAILED"
             _ledger_add(slug, st)
             return st
+        if s in FAILED and RETRIES.get(slug, 0) >= 1:
+            # a run we started was killed (out of memory / time) and left no output: retry once, then stop
+            _ledger_add(slug, "FAILED")
+            return "FAILED"
     return "PENDING"
 
 
@@ -166,6 +171,7 @@ def loop(max_hours=None, self_slug=None):
                 time.sleep(POLL)
                 continue
             nxt = ready[0]["slug"]
+            RETRIES[nxt] = RETRIES.get(nxt, 0) + 1
             out = K.push(nxt, "full")
             log(f"PUSH {nxt}: {out[-250:]}")
             if "quota" in out.lower() or "429" in out:
@@ -196,6 +202,7 @@ def tick() -> str:
         return "finished" if not summary["PENDING"] else "blocked"
     if os.environ.get("ASD_FORCE") != "1" and foreign_active({i["slug"] for i in items} | {ORCH}):
         return "busy"
+    RETRIES[ready[0]["slug"]] = RETRIES.get(ready[0]["slug"], 0) + 1
     out = K.push(ready[0]["slug"], "full")
     log(f"PUSH {ready[0]['slug']}: {out[-200:]}")
     return "pushed"

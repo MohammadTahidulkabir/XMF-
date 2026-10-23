@@ -59,6 +59,7 @@ ckdf = pd.DataFrame({"path": [f"ckplus/{i}" for i in ck.index], "label": [CLS.in
                      "source": "ckplus", "orig_split": "test"})
 df = pd.concat([df, ckdf], ignore_index=True)
 X = np.stack(imgs + ck_imgs)
+del imgs, ck_imgs  # keep peak memory low (~2 copies of a 4 GB array at most)
 print("decoded", X.shape)
 
 # %% [markdown]
