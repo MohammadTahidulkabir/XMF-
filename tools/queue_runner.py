@@ -129,6 +129,8 @@ def item_state(slug: str, kind: str = "single") -> str:
         return "RUNNING"  # just pushed: Kaggle may still report the previous run
     if s.startswith("UNKNOWN"):
         return "UNKNOWN"
+    if s == "MISSING" and slug not in PUSHED:
+        return "PENDING"  # never run under this slug (its file listing fails too)
     st = combined_state(slug) if kind == "combined" else None
     if st in ("DONE", "FAILED", "UNKNOWN"):
         return st
