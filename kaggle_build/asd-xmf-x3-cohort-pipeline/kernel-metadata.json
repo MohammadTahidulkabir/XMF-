@@ -1,0 +1,22 @@
+{
+  "id": "shazedaoni/asd-xmf-x3-cohort-pipeline",
+  "title": "ASD-XMF X3 Cohort Pipeline",
+  "code_file": "asd-xmf-x3-cohort-pipeline.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "dataset_sources": [
+    "shazedaoni/asd-xmf-lib",
+    "shazedaoni/asd-xmf-orch-key",
+    "shuvoalok/raf-db-dataset"
+  ],
+  "kernel_sources": [
+    "shazedaoni/asd-xmf-x2-photo-gaze"
+  ],
+  "competition_sources": [],
+  "model_sources": [],
+  "machine_shape": "NvidiaTeslaT4"
+}

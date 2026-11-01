@@ -1,0 +1,25 @@
+{
+  "id": "shazedaoni/asd-xmf-x1-datasets-benchmarks",
+  "title": "ASD-XMF X1 Datasets Benchmarks",
+  "code_file": "asd-xmf-x1-datasets-benchmarks.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "dataset_sources": [
+    "shazedaoni/asd-xmf-lib",
+    "shazedaoni/asd-xmf-orch-key",
+    "shazedaoni/asd-xmf-recanvo",
+    "warcoder/infant-cry-audio-corpus",
+    "sanmithasadhish/infant-cry-dataset",
+    "gursewakbfcet/mmasd-final-dataset",
+    "sharafatahmed/tasd-dataset-text-based-early-asd-detection",
+    "fabdelja/autism-screening-for-toddlers"
+  ],
+  "kernel_sources": [],
+  "competition_sources": [],
+  "model_sources": [],
+  "machine_shape": "NvidiaTeslaT4"
+}

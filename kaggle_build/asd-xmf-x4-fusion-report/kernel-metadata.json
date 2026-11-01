@@ -1,0 +1,22 @@
+{
+  "id": "shazedaoni/asd-xmf-x4-fusion-report",
+  "title": "ASD-XMF X4 Fusion Report",
+  "code_file": "asd-xmf-x4-fusion-report.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "dataset_sources": [
+    "shazedaoni/asd-xmf-lib",
+    "shazedaoni/asd-xmf-orch-key"
+  ],
+  "kernel_sources": [
+    "shazedaoni/asd-xmf-x3-cohort-pipeline",
+    "shazedaoni/asd-xmf-x2-photo-gaze"
+  ],
+  "competition_sources": [],
+  "model_sources": [],
+  "machine_shape": "NvidiaTeslaT4"
+}

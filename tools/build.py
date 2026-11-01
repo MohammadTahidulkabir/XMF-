@@ -130,11 +130,91 @@ def build_one(src: Path, profile: str, variant: dict = None):
     return slug, meta
 
 
+def _read_meta(src: Path) -> dict:
+    cells = split_cells(src.read_text(encoding="utf-8"))
+    return json.loads("\n".join(l[1:].strip() if l.startswith("#") else l for l in cells[0][1]))
+
+
+def section_code(src: Path) -> str:
+    """The notebook source without its meta cell; markdown cells stay as comments."""
+    out = []
+    for kind, lines in split_cells(src.read_text(encoding="utf-8")):
+        if kind == "meta":
+            continue
+        if kind == "markdown":
+            lines = [l if l.startswith("#") else "# " + l for l in lines]
+        out += lines + [""]
+    return "\n".join(out).strip("\n") + "\n"
+
+
+def build_combined(nbdef: dict, profile: str):
+    """One Kaggle notebook that runs several former notebooks as sections (asd_lib/asd_runner.py)."""
+    slug = nbdef["slug"]
+    # Kaggle derives the notebook URL from the title; a different slug makes `kernels status <id>` fail
+    title_slug = re.sub(r"[^a-z0-9]+", "-", nbdef["title"].lower()).strip("-")
+    assert title_slug == slug, f"title {nbdef['title']!r} gives slug {title_slug!r}, not {slug!r}"
+    secs =[{"name": s["name"], "after": s.get("after", [])} for s in nbdef["sections"]]
+    nb = nbformat.v4.new_notebook()
+    rows = "\n".join(f"| `{s['name']}` | `{s['src']}` | {', '.join(s.get('after', [])) or '-'} |" for s in nbdef["sections"])
+    nb.cells.append(nbformat.v4.new_markdown_cell(
+        f"# {nbdef['title']}\n{nbdef['about']}\n\n"
+        "Each section is one former notebook, run as its own process. A section waits for the ones it needs; "
+        "a time guard stops before Kaggle's 12-hour limit and the next run continues where this one stopped.\n\n"
+        "| section | source | needs |\n|---|---|---|\n" + rows))
+    nb.cells.append(nbformat.v4.new_code_cell(BOOTSTRAP.format(profile=profile, user=USER)))
+    nb.cells.append(nbformat.v4.new_code_cell(
+        "import asd_runner as R\n"
+        f"R.setup({USER + '/' + slug!r}, RUN_PROFILE, {json.dumps(secs)}, hours=11.0)"))
+    datasets = []
+    for s in nbdef["sections"]:
+        src = SRC / s["src"]
+        meta = _read_meta(src)
+        vars_ = {}
+        if s.get("variant"):
+            vars_ = next(v for v in meta["variants"] if v["suffix"] == s["variant"])["vars"]
+        title = next((l.lstrip("# ").strip() for kind, lines in split_cells(src.read_text(encoding="utf-8"))
+                      if kind == "markdown" for l in lines if l.startswith("# #")), s["src"])
+        suffix = f" ({s['variant']})" if s.get("variant") else ""
+        nb.cells.append(nbformat.v4.new_markdown_cell(f"## Section `{s['name']}`: {title}{suffix}"))
+        nb.cells.append(nbformat.v4.new_code_cell(f"%%writefile {{R.SEC_DIR}}/{s['name']}.py\n" + section_code(src)))
+        nb.cells.append(nbformat.v4.new_code_cell(f"R.run({s['name']!r}" + (f", {json.dumps(vars_)}" if vars_ else "") + ")"))
+        for ds in meta.get("datasets", []):
+            ds = ds.replace("tahidulkabir/", USER + "/")
+            if ds not in datasets:
+                datasets.append(ds)
+    nb.cells.append(nbformat.v4.new_code_cell("R.finish()"))
+    nb.metadata["kernelspec"] = {"name": "python3", "display_name": "Python 3", "language": "python"}
+    nb.metadata["language_info"] = {"name": "python"}
+    d = (OUT if profile == "full" else OUT.parent / f"kaggle_build_{profile}") / slug
+    d.mkdir(parents=True, exist_ok=True)
+    nbformat.write(nb, d / f"{slug}.ipynb")
+    gpu = bool(nbdef.get("gpu")) and profile in ("full", "smoke")
+    km = {
+        "id": f"{USER}/{slug}", "title": nbdef["title"], "code_file": f"{slug}.ipynb", "language": "python",
+        "kernel_type": "notebook", "is_private": True, "enable_gpu": gpu, "enable_tpu": False, "enable_internet": True,
+        # the orch key lets a run download its own previous output to resume after the time guard
+        "dataset_sources": [LIB_DATASET, f"{USER}/asd-xmf-orch-key"] + datasets,
+        "kernel_sources": [f"{USER}/{k}" for k in nbdef.get("kernels", [])],
+        "competition_sources": [], "model_sources": [],
+    }
+    if gpu:
+        km["machine_shape"] = "NvidiaTeslaT4"
+    (d / "kernel-metadata.json").write_text(json.dumps(km, indent=2))
+    print(f"built {slug:55s} sections={len(secs)} gpu={gpu} profile={profile}")
+    return slug
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--profile", default="full", choices=["full", "preflight", "smoke"])
     ap.add_argument("--only", default=None, help="substring filter on source file names")
+    ap.add_argument("--combined", action="store_true", help="build the 4 combined notebooks X1-X4")
     a = ap.parse_args()
+    if a.combined:
+        for nbdef in json.loads((ROOT / "notebooks" / "combined.json").read_text())["notebooks"]:
+            if not a.only or a.only in nbdef["slug"]:
+                build_combined(nbdef, a.profile)
+        return
     built = []
     for src in sorted(SRC.glob("*.py")):
         if a.only and a.only not in src.name:

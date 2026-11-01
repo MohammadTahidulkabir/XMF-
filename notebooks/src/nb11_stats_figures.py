@@ -30,7 +30,7 @@ SYN = bool(man.is_synthetic.iloc[0])
 N_BOOT = 300 if PREFLIGHT else 2000
 TARGET_SENS = 0.85
 PROPOSED = "fusion_xmf_noquest"   # headline model: no questionnaire input (avoids overlap with the reference)
-preds = U.load_all_preds([U.INPUT_ROOT])
+preds = U.load_all_preds([U.INPUT_ROOT, U.WORK])
 preds = preds[preds.child_id.isin(man.child_id)]
 print("prediction files:", preds.src_file.nunique(), "| models:", preds.model.nunique())
 

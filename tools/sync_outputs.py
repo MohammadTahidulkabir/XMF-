@@ -22,21 +22,14 @@ def main():
     st = Q.snapshot(items)
     OUT.mkdir(exist_ok=True)
     import os
-    tok = os.environ.get("KAGGLE_API_TOKEN", "")
-    rc, cfg = K.sh(["config", "view"])
     rc2, raw = K.sh(["kernels", "status", f"{K.USER}/{items[0]['slug']}"])
     (OUT / "_kaggle_check.txt").write_text(
-        f"secret present: {bool(tok)} | starts with KGAT_: {tok.startswith('KGAT_')} | length: {len(tok)}
-"
-        + "
-".join(l for l in cfg.splitlines() if "username" in l) + "
-" + raw[-400:] + "
-")
+        f"secret present: {bool(os.environ.get('KAGGLE_API_TOKEN'))}\n" + raw[-400:] + "\n")
     (OUT / "_queue_status.json").write_text(json.dumps(st, indent=1))
     for i in items:
         slug = i["slug"]
-        if st[slug] not in ("DONE", "FAILED"):
-            continue
+        if st[slug] not in ("DONE", "FAILED") or i.get("kind") != "combined":
+            continue  # D1's output is the 4 GB image cache, not results
         dst = OUT / slug
         if (dst / "_synced.txt").exists():
             continue

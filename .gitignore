@@ -2,3 +2,4 @@ __pycache__/
 *.pyc
 tools/done_ledger.json
 logs*/
+kaggle_build_preflight/

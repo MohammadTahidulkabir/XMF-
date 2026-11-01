@@ -57,6 +57,19 @@ flowchart TB
 **Until the consented cohort exists, Stage 3 runs on a clearly labelled synthetic DEV cohort.** That only proves
 the pipeline works, and none of its numbers are results.
 
+On Kaggle these run as **D1 plus 4 combined notebooks** (`notebooks/combined.json`, built with
+`python tools/build.py --combined`). Each former notebook is a *section* run as its own process by
+`asd_lib/asd_runner.py`; a section waits for the sections it needs, and a time guard stops before Kaggle's 12-hour
+limit so the next run continues where the last one stopped.
+
+| Kaggle notebook | sections |
+|---|---|
+| D1 Photo dataset (done) | D1 |
+| X1 Datasets and Benchmarks | D2, D3, D4, V1, T1, A1 |
+| X2 Photo and Gaze | NB13, P1 |
+| X3 Cohort Pipeline | NB00, NB01, NB02, NB05, NB07, NB06, NB04 a-d |
+| X4 Fusion and Report | NB08, NB09, NB10, NB12, NB11 |
+
 ## 3. Protocol for every comparison
 * The same splits, image size, epoch budget and seeds for all models. Subject-, speaker- or child-wise splits wherever IDs exist.
 * Early stopping on validation; the test data is used once. Label smoothing, weight decay, augmentation and mixup.
@@ -65,8 +78,10 @@ the pipeline works, and none of its numbers are results.
 * The scraped "Autistic Children Facial Data Set" and its mirrors are **not used** (38+ retractions).
 
 ## 4. How it runs
-`.github/workflows/queue.yml` wakes every 20 minutes. It starts the next Kaggle notebook when the previous one has
-finished, and commits each finished notebook's tables, figures and logs to `outputs/<notebook>/`.
+The **queue orchestrator** notebook (Kaggle, CPU) is the only thing that starts queue notebooks: it pushes the next
+one when the previous one has finished and relaunches itself before its own 12-hour limit.
+`.github/workflows/queue.yml` wakes every 20 minutes as a watchdog: it relaunches the orchestrator if it is not
+running, and commits each finished notebook's tables, figures and logs to `outputs/<notebook>/`.
 It needs one repository secret, `KAGGLE_API_TOKEN` (Settings → Secrets and variables → Actions).
 
 ## 5. Layout

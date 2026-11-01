@@ -42,6 +42,11 @@ WORK = Path("/kaggle/working") if IS_KAGGLE else Path(os.environ.get("ASD_WORK",
 WORK.mkdir(parents=True, exist_ok=True)
 LIB_DIR = Path(__file__).resolve().parent
 
+
+def _search_roots() -> List[Path]:
+    """Inside a combined notebook (X1-X4, asd_runner) earlier sections write to WORK, so look there first."""
+    return [WORK, INPUT_ROOT] if os.environ.get("ASD_SEARCH_WORK") == "1" else [INPUT_ROOT]
+
 SYNTHETIC_BANNER = (
     "SYNTHETIC DEV COHORT - pipeline test only. These numbers are NOT results "
     "and must never appear in a paper."
@@ -53,7 +58,7 @@ def find_path(name: str, roots: Optional[Sequence[Path]] = None, maxdepth: int =
     """Breadth-first search for a file or directory called `name` under the
     Kaggle input root (mount layout differs between datasets, kernel outputs
     and Kaggle versions, so never hard-code /kaggle/input/<slug>)."""
-    roots = [Path(r) for r in (roots or [INPUT_ROOT])]
+    roots = [Path(r) for r in (roots or _search_roots())]
     for root in roots:
         if not root.exists():
             continue
@@ -82,7 +87,7 @@ def find_path(name: str, roots: Optional[Sequence[Path]] = None, maxdepth: int =
 
 def find_all(name: str, roots: Optional[Sequence[Path]] = None, maxdepth: int = 7) -> List[Path]:
     out = []
-    for root in [Path(r) for r in (roots or [INPUT_ROOT])]:
+    for root in [Path(r) for r in (roots or _search_roots())]:
         if not root.exists():
             continue
         for dirpath, dirnames, filenames in os.walk(root, followlinks=True):

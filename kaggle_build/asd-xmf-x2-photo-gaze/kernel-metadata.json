@@ -1,0 +1,22 @@
+{
+  "id": "shazedaoni/asd-xmf-x2-photo-gaze",
+  "title": "ASD-XMF X2 Photo Gaze",
+  "code_file": "asd-xmf-x2-photo-gaze.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "dataset_sources": [
+    "shazedaoni/asd-xmf-lib",
+    "shazedaoni/asd-xmf-orch-key",
+    "imtkaggleteam/eye-tracking-autism"
+  ],
+  "kernel_sources": [
+    "shazedaoni/asd-xmf-d1-photo-dataset"
+  ],
+  "competition_sources": [],
+  "model_sources": [],
+  "machine_shape": "NvidiaTeslaT4"
+}
