@@ -22,7 +22,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: pip install -q kaggle
+      - run: pip install -q kaggle six
       - name: Start the next notebook when the previous one has finished
         run: python tools/queue_runner.py --tick
       - name: Save finished outputs to the repository
