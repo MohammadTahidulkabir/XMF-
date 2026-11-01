@@ -19,6 +19,13 @@ def _acct_user(default):
     try:
         return json.loads((ACCT_DIR / "account.json").read_text())["user"]
     except Exception:
+        pass
+    try:
+        # inside Kaggle there is no account.json: the built notebooks carry the owner in their id
+        # (falling back to the default made every status check ask the wrong account -> endless re-pushes)
+        meta = ROOT / "kaggle_build" / "asd-xmf-queue-orchestrator" / "kernel-metadata.json"
+        return json.loads(meta.read_text())["id"].split("/")[0]
+    except Exception:
         return default
 USER = os.environ.get("ASD_KAGGLE_USER") or _acct_user("tahidulkabir")
 KAGGLE = shutil.which("kaggle") or "kaggle"

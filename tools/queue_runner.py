@@ -169,6 +169,12 @@ def foreign_active(ours):
 
 def snapshot(items):
     st = {i["slug"]: item_state(i["slug"], i.get("kind", "single")) for i in items}
+    for i in items:
+        # an active run we did not push whose inputs are not finished can only be a preflight test:
+        # it must not hold back the queue
+        if st[i["slug"]] == "RUNNING" and i["slug"] not in PUSHED and \
+                any(st.get(d) != "DONE" for d in i.get("after", [])):
+            st[i["slug"]] = "PENDING"
     for _ in range(len(items)):  # propagate failures to dependants
         for i in items:
             if st[i["slug"]] == "PENDING" and any(st.get(d) in ("FAILED", "BLOCKED") for d in i.get("after", [])):
