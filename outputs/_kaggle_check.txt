@@ -1,0 +1,8 @@
+secret present: False
+api_extended import KaggleApi
+  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/kaggle/api/kaggle_api_extended.py", line 266, in <module>
+    from ..models.upload_file import UploadFile
+  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/kaggle/models/upload_file.py", line 22, in <module>
+    import six
+ModuleNotFoundError: No module named 'six'
+
