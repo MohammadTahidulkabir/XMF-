@@ -2,7 +2,7 @@
   "_comment": "Run order on the project Kaggle account (one notebook at a time, free T4 GPU). D1 already ran in full; the rest of the work is 4 combined notebooks (notebooks/combined.json, built with tools/build.py --combined). The 23 single notebooks in notebooks/src are their sections.",
   "items": [
     {"slug": "asd-xmf-d1-photo-dataset", "stage": 1, "after": []},
-    {"slug": "asd-xmf-x1-datasets-benchmarks", "kind": "combined", "stage": 1, "after": []},
+    {"slug": "asd-xmf-x1-datasets-benchmarks", "kind": "combined", "rev": 2, "stage": 1, "after": []},
     {"slug": "asd-xmf-x2-photo-gaze", "kind": "combined", "stage": 2, "after": ["asd-xmf-d1-photo-dataset"]},
     {"slug": "asd-xmf-x3-cohort-pipeline", "kind": "combined", "stage": 3, "after": ["asd-xmf-x2-photo-gaze"]},
     {"slug": "asd-xmf-x4-fusion-report", "kind": "combined", "stage": 3, "after": ["asd-xmf-x3-cohort-pipeline"]}

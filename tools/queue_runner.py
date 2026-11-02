@@ -98,15 +98,17 @@ def has_full_marker(slug: str):
     return None if m is None else bool(m)
 
 
-def combined_state(slug: str) -> str:
-    """State of an X1-X4 notebook whose latest run is not active."""
-    m = has_file(slug, ["_xmf_complete_full.txt", "_xmf_failed_full.txt", "_xmf_resume_full.txt", MARKER])
+def combined_state(slug: str, rev: int = 1) -> str:
+    """State of an X1-X4 notebook whose latest run is not active.  Markers of an older revision count as
+    not run yet (the new run reuses the unchanged sections)."""
+    r = "" if rev == 1 else f"_r{rev}"
+    m = has_file(slug, [f"_xmf_complete_full{r}.txt", f"_xmf_failed_full{r}.txt", f"_xmf_resume_full{r}.txt", MARKER])
     if m is None:
         return "UNKNOWN"
-    if m == "_xmf_complete_full.txt":
+    if m == f"_xmf_complete_full{r}.txt":
         _ledger_add(slug, "DONE")
         return "DONE"
-    if m == "_xmf_failed_full.txt":
+    if m == f"_xmf_failed_full{r}.txt":
         _ledger_add(slug, "FAILED")
         return "FAILED"
     if m == MARKER and RETRIES.get(slug, 0) >= 2:
@@ -116,7 +118,7 @@ def combined_state(slug: str) -> str:
     return "PENDING"  # never run, preflight only, or stopped by its time guard (the next run continues)
 
 
-def item_state(slug: str, kind: str = "single") -> str:
+def item_state(slug: str, kind: str = "single", rev: int = 1) -> str:
     led = _ledger().get(slug, {}).get("state")
     s = K.status(f"{K.USER}/{slug}")
     if s in K.ACTIVE:
@@ -131,7 +133,7 @@ def item_state(slug: str, kind: str = "single") -> str:
         return "UNKNOWN"
     if s == "MISSING" and slug not in PUSHED:
         return "PENDING"  # never run under this slug (its file listing fails too)
-    st = combined_state(slug) if kind == "combined" else None
+    st = combined_state(slug, rev) if kind == "combined" else None
     if st in ("DONE", "FAILED", "UNKNOWN"):
         return st
     if RETRIES.get(slug, 0) >= MAX_PUSHES:
@@ -168,7 +170,7 @@ def foreign_active(ours):
 
 
 def snapshot(items):
-    st = {i["slug"]: item_state(i["slug"], i.get("kind", "single")) for i in items}
+    st = {i["slug"]: item_state(i["slug"], i.get("kind", "single"), i.get("rev", 1)) for i in items}
     for i in items:
         # an active run we did not push whose inputs are not finished can only be a preflight test:
         # it must not hold back the queue

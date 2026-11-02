@@ -221,15 +221,24 @@ class SeqLSTM(nn.Module):
 
 
 class SeqXMF(nn.Module):
-    """Proposed temporal encoder (plan 5.1): projection -> 2-layer transformer -> attention pooling."""
+    """Proposed temporal encoder (plan 5.1), v2: [pose, velocity] per frame -> 2-layer transformer -> attention
+    pooling.  Velocity (frame difference) makes movement explicit; during training a random 15% of the valid
+    frames is hidden (frame dropout) so the model cannot memorise single poses of a child."""
 
-    def __init__(self, d_in, n_cls, d=128):
+    def __init__(self, d_in, n_cls, d=128, frame_drop=0.15):
         super().__init__()
-        self.enc = M.TemporalFace(d_in, d, layers=2, heads=4, dropout=0.2, max_t=256)
+        self.enc = M.TemporalFace(2 * d_in, d, layers=2, heads=4, dropout=0.2, max_t=256)
         self.fc = nn.Sequential(nn.Dropout(0.3), nn.Linear(d, n_cls))
+        self.frame_drop = frame_drop
 
     def forward(self, x, m):
-        tok, _ = self.enc(x, m)
+        vel = torch.zeros_like(x)
+        vel[:, 1:] = (x[:, 1:] - x[:, :-1]) * (m[:, 1:] & m[:, :-1]).unsqueeze(-1).float()
+        if self.training and self.frame_drop:
+            keep = torch.rand(m.shape, device=m.device) >= self.frame_drop
+            keep[(m & keep).sum(1) == 0] = True  # never hide every frame of a clip
+            m = m & keep
+        tok, _ = self.enc(torch.cat([x, vel], -1), m)
         return self.fc(tok)
 
 
@@ -267,7 +276,9 @@ def seq_cv(X, mask, y, groups, n_cls, models, out: Path, tag: str, epochs=80, fo
                 order = tr[rng.permutation(len(tr))]
                 for s in range(0, len(order), 64):
                     idx = torch.tensor(order[s:s + 64], device=dev)
-                    xb = Xn[idx] + 0.05 * torch.randn_like(Xn[idx])  # jitter augmentation
+                    # same augmentation for every model: per-clip random scale + per-frame jitter
+                    scale = 1 + 0.1 * (2 * torch.rand(len(idx), 1, 1, device=dev) - 1)
+                    xb = Xn[idx] * scale + 0.05 * torch.randn_like(Xn[idx])
                     loss = F.cross_entropy(model(xb, Mk[idx]), Y[idx], label_smoothing=0.1)
                     opt.zero_grad(); loss.backward(); opt.step(); step += 1
                     if max_steps and step >= max_steps:

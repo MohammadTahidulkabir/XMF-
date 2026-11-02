@@ -5,10 +5,13 @@ Runs several former notebooks ("sections") inside one Kaggle notebook (X1-X4).
 * a section starts only when the sections it needs finished; dependants of a failed section are skipped
 * a time guard stops before Kaggle's 12-hour limit; the next run downloads this notebook's previous
   output and continues (finished sections and finished training jobs are skipped)
-* the notebook ends with exactly one marker in /kaggle/working, read by tools/queue_runner.py:
-    _xmf_complete_<profile>.txt   all sections finished
-    _xmf_resume_<profile>.txt     stopped by the time guard, run it again to continue
-    _xmf_failed_<profile>.txt     a section failed (needs a code fix, not a retry)
+* revisions: every section has a `rev` (notebooks/combined.json).  A new run reuses the previous run's finished
+  sections whose rev is unchanged (and whose inputs were reused); a section with a new rev runs again
+* the notebook ends with exactly one marker in /kaggle/working, read by tools/queue_runner.py
+  (<r> is "" for notebook rev 1, else "_r<rev>"):
+    _xmf_complete_<profile><r>.txt   all sections finished
+    _xmf_resume_<profile><r>.txt     stopped by the time guard, run it again to continue
+    _xmf_failed_<profile><r>.txt     a section failed (needs a code fix, not a retry)
 """
 import json
 import os
@@ -31,7 +34,8 @@ _cfg = {}
 
 
 def _marker(kind):
-    return U.WORK / f"_xmf_{kind}_{_cfg['profile']}.txt"
+    r = "" if _cfg["rev"] == 1 else f"_r{_cfg['rev']}"
+    return U.WORK / f"_xmf_{kind}_{_cfg['profile']}{r}.txt"
 
 
 def _kaggle(args, timeout=1800):
@@ -43,7 +47,8 @@ def _kaggle(args, timeout=1800):
 
 
 def _resume_from_previous(slug):
-    """Copy the previous run's output back into /kaggle/working when it stopped on the time guard."""
+    """Copy the previous full run's output back into /kaggle/working (time guard stop, or an earlier revision whose
+    unchanged sections can be reused).  Returns how many time-guard resumes this revision has had."""
     key = U.find_path("orch_access_token")
     if key is None:
         print("resume: no token dataset attached - starting from scratch")
@@ -52,9 +57,9 @@ def _resume_from_previous(slug):
     if subprocess.run([sys.executable, "-m", "pip", "install", "-q", "-U", "kaggle"]).returncode != 0:
         return 0
     rc, out = _kaggle(["kernels", "files", slug, "--page-size", "200"], timeout=300)
-    name = f"_xmf_resume_{_cfg['profile']}.txt"
-    if name not in out:
-        print("resume: previous run did not stop on the time guard - starting from scratch")
+    prof = _cfg["profile"]
+    if not any(f"_xmf_{k}_{prof}" in out for k in ("complete", "resume", "failed")):
+        print("resume: no earlier full run of this notebook - starting from scratch")
         return 0
     with tempfile.TemporaryDirectory() as tmp:
         rc, out = _kaggle(["kernels", "output", slug, "-p", tmp], timeout=3 * 3600)
@@ -66,28 +71,46 @@ def _resume_from_previous(slug):
                 os.replace(f, t)
                 n += 1
     count = 0
-    old = U.WORK / name
-    if old.exists():
+    same = _marker("resume")
+    if same.exists():  # stopped by the time guard in this same revision
         try:
-            count = int(old.read_text().split()[0])
+            count = int(same.read_text().split()[0]) + 1
         except Exception:
             count = 1
+    for old in U.WORK.glob(f"_xmf_*_{prof}*.txt"):
         old.unlink()
-    print(f"resume: restored {n} files from the previous run (resume #{count + 1})")
-    return count + 1
+    print(f"resume: restored {n} files from the previous run" + (f" (time-guard resume #{count})" if count else ""))
+    return count
 
 
-def setup(slug, profile, sections, hours=11.0):
-    """sections: [{"name", "after": [...]}] in run order."""
-    _cfg.update(slug=slug, profile=profile, sections=sections, deadline=T0 + hours * 3600, resumes=0)
+def _done_rev(name):
+    try:
+        txt = (STATE / f"{name}.done").read_text()
+        return int(txt.split("rev=")[1].split()[0]) if "rev=" in txt else 1
+    except Exception:
+        return None
+
+
+def setup(slug, profile, sections, hours=11.0, rev=1):
+    """sections: [{"name", "after": [...], "rev": n}] in run order; rev = notebook revision (queue markers)."""
+    _cfg.update(slug=slug, profile=profile, sections=sections, deadline=T0 + hours * 3600, resumes=0, rev=rev)
     STATE.mkdir(parents=True, exist_ok=True)
     SEC_DIR.mkdir(parents=True, exist_ok=True)
     if profile == "full":
         _cfg["resumes"] = _resume_from_previous(slug)
+    redo = set()
+    for sec in sections:  # in run order, so a re-run section also re-runs everything that needs it
+        name = sec["name"]
+        if not (STATE / f"{name}.done").exists():
+            continue
+        if _done_rev(name) != sec.get("rev", 1) or any(d in redo for d in sec.get("after", [])):
+            (STATE / f"{name}.done").unlink()
+            redo.add(name)
     for kind in ("complete", "resume", "failed"):
         _marker(kind).unlink(missing_ok=True)
-    print("sections:", ", ".join(s["name"] for s in sections),
-          "| already done:", [s["name"] for s in sections if (STATE / f"{s['name']}.done").exists()])
+    print("sections:", ", ".join(f"{s['name']}(rev {s.get('rev', 1)})" for s in sections),
+          "| reused from earlier runs:", [s["name"] for s in sections if (STATE / f"{s['name']}.done").exists()],
+          "| re-run (new revision):", sorted(redo))
 
 
 def _state(name):
@@ -169,7 +192,7 @@ def run(name, vars_=None):
         _set(name, "stopped", f"time guard after {mins:.0f} min")
         print(f"[{name}] STOPPED by the time guard after {mins:.0f} min - the next run continues it")
     elif p.returncode == 0:
-        _set(name, "done", f"{mins:.1f} min")
+        _set(name, "done", f"{mins:.1f} min rev={sec.get('rev', 1)}")
         print(f"[{name}] done in {mins:.1f} min")
     else:
         _set(name, "failed", f"exit {p.returncode} after {mins:.1f} min")

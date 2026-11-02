@@ -1,16 +1,16 @@
 {
- "_comment": "The remaining work as 4 Kaggle notebooks. Each section is one former notebook (notebooks/src), run in order as its own process by asd_lib/asd_runner.py. 'after' = sections of the same notebook that must finish first. D1 (asd-xmf-d1-photo-dataset) already ran in full and stays a separate input.",
+ "_comment": "The remaining work as 4 Kaggle notebooks. Each section is one former notebook (notebooks/src), run in order as its own process by asd_lib/asd_runner.py. 'after' = sections of the same notebook that must finish first. D1 (asd-xmf-d1-photo-dataset) already ran in full and stays a separate input. 'rev' (default 1): raise a section's rev to re-run it (and what needs it) while finished sections are reused; raise the notebook's rev (and the same item's rev in tools/queue.json) so the queue runs it again.",
  "notebooks": [
-  {"slug": "asd-xmf-x1-datasets-benchmarks", "title": "ASD-XMF X1 Datasets Benchmarks",
+  {"slug": "asd-xmf-x1-datasets-benchmarks", "title": "ASD-XMF X1 Datasets Benchmarks", "rev": 2,
    "about": "Stage 1 datasets D2-D4, then the audio, video and text sector comparisons (A1, V1, T1).",
    "gpu": true, "kernels": [],
    "sections": [
     {"name": "d2", "src": "d2_audio_builder.py"},
     {"name": "d3", "src": "d3_video_builder.py"},
     {"name": "d4", "src": "d4_text_builder.py"},
-    {"name": "v1", "src": "v1_video_benchmark.py", "after": ["d3"]},
-    {"name": "t1", "src": "t1_text_benchmark.py", "after": ["d4"]},
-    {"name": "a1", "src": "a1_audio_benchmark.py", "after": ["d2"]}
+    {"name": "v1", "src": "v1_video_benchmark.py", "rev": 2, "after": ["d3"]},
+    {"name": "t1", "src": "t1_text_benchmark.py", "rev": 2, "after": ["d4"]},
+    {"name": "a1", "src": "a1_audio_benchmark.py", "rev": 2, "after": ["d2"]}
    ]},
   {"slug": "asd-xmf-x2-photo-gaze", "title": "ASD-XMF X2 Photo Gaze",
    "about": "Photo sector comparison P1 on D1 (proposed XMF-Face vs 11 baselines) and the gaze study NB13.",

@@ -4,8 +4,13 @@
 
 # %% [markdown]
 # # T1 - Text sector: proposed XMF-Text vs baselines (ASD vs non-ASD statements) + questionnaire leakage audit
-# **Proposed (plan 5.1 text branch):** XMF-Text = multilingual XLM-RoBERTa-base encoder (ready for Bangla text)
-# -> 256-d token projection -> attention pooling -> classifier.
+# **Proposed (plan 5.1 text branch):** XMF-Text v2 = two branches fused late:
+# * semantic: multilingual XLM-RoBERTa-base encoder (ready for Bangla text) -> 256-d token projection ->
+#   attention pooling -> classifier
+# * lexical: word 1-2-gram TF-IDF + logistic regression (parents' word choice carries much of the signal)
+#
+# Both branches are trained on the same inner training split; the fusion weight w in
+# p = w * p_semantic + (1 - w) * p_lexical is chosen on the inner validation split only, never on the test fold.
 # **Baselines:** TF-IDF + LR, TF-IDF + SVM, BiLSTM, DistilBERT, BERT-base, RoBERTa-base.
 # Repeated stratified 5-fold CV (same folds for all), inner validation split for early stopping,
 # train vs validation accuracy reported for every model.
@@ -42,12 +47,19 @@ class AttnPoolCls(nn.Module):
             return self.fc((a.unsqueeze(-1) * h).sum(1))
         return self.fc(h[:, 0])
 
+def lexical_branch(fit, idx_list):
+    """TF-IDF + LR fitted on `fit`; returns P(ASD) for each index array in idx_list."""
+    v = TfidfVectorizer(ngram_range=(1, 2), min_df=1, sublinear_tf=True); A = v.fit_transform(X[fit])
+    c = LogisticRegression(C=4.0, max_iter=3000).fit(A, y[fit])
+    return [c.predict_proba(v.transform(X[i]))[:, 1] for i in idx_list]
+
 def run_transformer(name, ckpt, proposed=False):
     from transformers import AutoModel, AutoTokenizer
     tok = AutoTokenizer.from_pretrained(ckpt)
     enc = tok(list(X), truncation=True, max_length=128, padding="max_length", return_tensors="pt")
     ids, am = enc["input_ids"].to(dev), enc["attention_mask"].to(dev)
     pred, trs, vas = np.full(len(y), -1), [], []
+    fusion_w = []
     for f, (tr, te) in enumerate(FOLDS):
         U.seed_everything(f)
         rng = np.random.default_rng(f); va = rng.choice(tr, len(tr) // 8, replace=False); fit = np.setdiff1d(tr, va)
@@ -72,9 +84,24 @@ def run_transformer(name, ckpt, proposed=False):
             elif ep - best_ep >= 3:
                 break
         model.load_state_dict(best_state); model.eval()
-        with torch.no_grad(), M.amp_ctx():
-            pred[te] = pr(te); trs.append((pr(fit) == y[fit]).mean()); vas.append(best)
+        if proposed:
+            prob = lambda idx: torch.cat([model(ids[idx[s:s + 64]], am[idx[s:s + 64]]).float().softmax(1)[:, 1]
+                                          for s in range(0, len(idx), 64)]).cpu().numpy()
+            with torch.no_grad(), M.amp_ctx():
+                ps_va, ps_te, ps_fit = prob(va), prob(te), prob(fit)
+            pl_va, pl_te, pl_fit = lexical_branch(fit, [va, te, fit])
+            grid = np.round(np.linspace(0, 1, 11), 2)   # fusion weight chosen on validation only (ties -> 0.5)
+            accs = [((w * ps_va + (1 - w) * pl_va > 0.5) == y[va]).mean() for w in grid]
+            w = max(grid, key=lambda g: (accs[list(grid).index(g)], -abs(g - 0.5)))
+            fusion_w.append(float(w))
+            pred[te] = (w * ps_te + (1 - w) * pl_te > 0.5).astype(int)
+            trs.append(((w * ps_fit + (1 - w) * pl_fit > 0.5) == y[fit]).mean()); vas.append(max(accs))
+        else:
+            with torch.no_grad(), M.amp_ctx():
+                pred[te] = pr(te); trs.append((pr(fit) == y[fit]).mean()); vas.append(best)
         del model, base; torch.cuda.empty_cache()
+    if proposed:
+        print(f"{name}: fusion weight on the semantic branch per fold (chosen on validation): {fusion_w}")
     return pred, trs, vas
 
 def run_tfidf(clf):

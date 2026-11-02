@@ -153,7 +153,10 @@ def build_combined(nbdef: dict, profile: str):
     # Kaggle derives the notebook URL from the title; a different slug makes `kernels status <id>` fail
     title_slug = re.sub(r"[^a-z0-9]+", "-", nbdef["title"].lower()).strip("-")
     assert title_slug == slug, f"title {nbdef['title']!r} gives slug {title_slug!r}, not {slug!r}"
-    secs =[{"name": s["name"], "after": s.get("after", [])} for s in nbdef["sections"]]
+    secs = [{"name": s["name"], "after": s.get("after", []), "rev": s.get("rev", 1)} for s in nbdef["sections"]]
+    queue_rev = next((i.get("rev", 1) for i in json.loads((ROOT / "tools" / "queue.json").read_text())["items"]
+                      if i["slug"] == slug), 1)
+    assert queue_rev == nbdef.get("rev", 1), f"{slug}: rev {nbdef.get('rev', 1)} in combined.json but {queue_rev} in queue.json"
     nb = nbformat.v4.new_notebook()
     rows = "\n".join(f"| `{s['name']}` | `{s['src']}` | {', '.join(s.get('after', [])) or '-'} |" for s in nbdef["sections"])
     nb.cells.append(nbformat.v4.new_markdown_cell(
@@ -164,7 +167,7 @@ def build_combined(nbdef: dict, profile: str):
     nb.cells.append(nbformat.v4.new_code_cell(BOOTSTRAP.format(profile=profile, user=USER)))
     nb.cells.append(nbformat.v4.new_code_cell(
         "import asd_runner as R\n"
-        f"R.setup({USER + '/' + slug!r}, RUN_PROFILE, {json.dumps(secs)}, hours=11.0)"))
+        f"R.setup({USER + '/' + slug!r}, RUN_PROFILE, {json.dumps(secs)}, hours=11.0, rev={nbdef.get('rev', 1)})"))
     datasets = []
     for s in nbdef["sections"]:
         src = SRC / s["src"]

@@ -4,9 +4,11 @@
 
 # %% [markdown]
 # # A1 - Audio sector: proposed XMF-Audio vs baselines (voice and cry)
-# **Proposed (plan 5.1 voice/cry branch):** XMF-Audio = gated fusion of three feature blocks
-# (wav2vec2-base mid-layer mean, eGeMAPS prosody, MFCC-40 statistics): each block -> 128-d projection,
-# a learned softmax gate weights the blocks, block dropout during training.
+# **Proposed (plan 5.1 voice/cry branch):** XMF-Audio v2 = gated fusion of five feature blocks
+# (wav2vec2-base mid-layer mean, eGeMAPS prosody, MFCC-40 statistics, AST and CNN14 embeddings): each block ->
+# 128-d projection, a learned softmax gate weights the blocks, block dropout during training, fully
+# class-balanced loss, and the probabilities of 3 independently seeded heads are averaged.
+# Imbalanced tasks are ranked by macro-F1 (accuracy mostly rewards the majority class there).
 # **Baselines:** MFCC + SVM, eGeMAPS + LR, wav2vec2 + LR, AST + LR, CNN14 + LR, log-mel EfficientNet-B0 CNN,
 # log-mel CNN-LSTM (proposal).
 #
@@ -76,7 +78,7 @@ def fit_xmf(blocks, y, tr, te, n_cls, seed=0, epochs=200):
     mus = [(b[fit].mean(0), b[fit].std(0) + 1e-5) for b in blocks]
     T = [torch.tensor((b - m) / s, dtype=torch.float32, device=dev) for b, (m, s) in zip(blocks, mus)]
     Y = torch.tensor(y, device=dev)
-    w = torch.tensor(np.bincount(y[fit], minlength=n_cls).clip(1) ** -0.5, dtype=torch.float32, device=dev)
+    w = torch.tensor(np.bincount(y[fit], minlength=n_cls).clip(1) ** -1.0, dtype=torch.float32, device=dev)  # fully balanced
     net = XMFAudio([b.shape[1] for b in blocks], n_cls).to(dev)
     opt = torch.optim.AdamW(net.parameters(), lr=1e-3, weight_decay=0.05)
     best, best_state, best_ep = -1, None, 0
@@ -96,8 +98,14 @@ def fit_xmf(blocks, y, tr, te, n_cls, seed=0, epochs=200):
             break
     net.load_state_dict(best_state); net.eval()
     with torch.no_grad():
-        p = lambda ids: net([t[ids] for t in T]).argmax(1).cpu().numpy()
-        return p(te), (p(fit) == y[fit]).mean(), (p(va) == y[va]).mean()
+        p = lambda ids: net([t[ids] for t in T]).softmax(1).cpu().numpy()
+        return p(te), (p(fit).argmax(1) == y[fit]).mean(), (p(va).argmax(1) == y[va]).mean()
+
+def fit_xmf_ensemble(blocks, y, tr, te, n_cls, seeds=(0, 1, 2), epochs=200):
+    """XMF-Audio v2: average the class probabilities of independently seeded heads (own inner validation split each)."""
+    outs = [fit_xmf(blocks, y, tr, te, n_cls, seed=s, epochs=epochs) for s in seeds]
+    prob = np.mean([o[0] for o in outs], 0)
+    return prob.argmax(1), float(np.mean([o[1] for o in outs])), float(np.mean([o[2] for o in outs]))
 
 # %% [markdown]
 # ## Run every model on the same folds
@@ -123,8 +131,9 @@ for task, g in idx.groupby("task"):
                    else make_pipeline(StandardScaler(), LogisticRegression(C=0.05, max_iter=3000, class_weight="balanced")))
             clf.fit(X[tr], y[tr])
             preds[m][te] = clf.predict(X[te]); tr_acc[m].append((clf.predict(X[tr]) == y[tr]).mean()); va_acc[m].append(np.nan)
-        blocks = [FEATS[k] for k in ("w2v", "egemaps", "mfcc") if k in FEATS]
-        pt, a_tr, a_va = fit_xmf(blocks, y, tr, te, n_cls, epochs=3 if PREFLIGHT else 200)
+        blocks = [FEATS[k] for k in ("w2v", "egemaps", "mfcc", "ast", "cnn14") if k in FEATS]
+        pt, a_tr, a_va = fit_xmf_ensemble(blocks, y, tr, te, n_cls, seeds=(0,) if PREFLIGHT else (0, 1, 2),
+                                          epochs=3 if PREFLIGHT else 200)
         preds["xmf_audio"][te] = pt; tr_acc["xmf_audio"].append(a_tr); va_acc["xmf_audio"].append(a_va)
     # log-mel CNN and CNN-LSTM on GPU, same folds
     lab = OUT / f"{task}_items.csv"; idx.assign(label_id=y).to_csv(lab, index=False)
@@ -151,6 +160,7 @@ for task, g in idx.groupby("task"):
         B._save(OUT, f"{task}__{m}", rows[-1] | {"cm": mm["cm"], "classes": classes}, [])
 
 # %%
-tab = B.comparison_table(pd.DataFrame(rows))
+# ranked by macro-F1: cry reason and vocal affect are imbalanced, so accuracy mostly rewards the majority class
+tab = B.comparison_table(pd.DataFrame(rows), metric="test_macro_f1")
 print(tab.to_markdown(index=False, floatfmt=".3f"))
 tab.to_csv(OUT / "audio_comparison.csv", index=False)
