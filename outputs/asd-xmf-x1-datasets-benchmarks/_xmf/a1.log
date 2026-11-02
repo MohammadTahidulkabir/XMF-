@@ -1,0 +1,69 @@
+{'mfcc': (7443, 160), 'egemaps': (7443, 88), 'w2v': (7443, 768), 'ast': (7443, 768)}
+[mon] 11:35:51 RAM 3.0/33.7 GB ; GPU 233 MiB, 15360 MiB, 16 % | 3 MiB, 15360 MiB, 0 % ; work disk used 0.4 GB
+[job] effb0_cry_detect_f0 exit=0 :: Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[job] effb0_cry_detect_f1 exit=0 :: Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[job] effb0_cry_detect_f2 exit=0 :: Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[job] effb0_cry_detect_f3 exit=0 :: Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[job] cnn_lstm_cry_detect_f0 exit=0 :: 
+[job] cnn_lstm_cry_detect_f1 exit=0 :: 
+[job] cnn_lstm_cry_detect_f2 exit=0 :: 
+[job] effb0_cry_detect_f4 exit=0 :: Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[job] cnn_lstm_cry_detect_f3 exit=0 :: 
+[job] cnn_lstm_cry_detect_f4 exit=0 :: 
+[mon] 11:40:22 RAM 2.9/33.7 GB ; GPU 235 MiB, 15360 MiB, 16 % | 3 MiB, 15360 MiB, 0 % ; work disk used 0.4 GB
+[job] effb0_cry_reason_f0 exit=0 :: Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[job] effb0_cry_reason_f1 exit=0 :: Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[job] effb0_cry_reason_f2 exit=0 :: Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[job] effb0_cry_reason_f3 exit=0 :: Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[job] cnn_lstm_cry_reason_f0 exit=0 :: 
+[job] cnn_lstm_cry_reason_f1 exit=0 :: 
+[job] cnn_lstm_cry_reason_f2 exit=0 :: 
+[job] effb0_cry_reason_f4 exit=0 :: Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[job] cnn_lstm_cry_reason_f3 exit=0 :: 
+[job] cnn_lstm_cry_reason_f4 exit=0 :: 
+[mon] 11:53:28 RAM 3.5/33.7 GB ; GPU 291 MiB, 15360 MiB, 28 % | 3 MiB, 15360 MiB, 0 % ; work disk used 0.4 GB
+[job] effb0_vocal_affect_f0 exit=0 :: Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[job] effb0_vocal_affect_f1 exit=0 :: Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[mon] 11:58:28 RAM 6.8/33.7 GB ; GPU 1785 MiB, 15360 MiB, 62 % | 1283 MiB, 15360 MiB, 18 % ; work disk used 0.4 GB
+[job] effb0_vocal_affect_f2 exit=0 :: Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[job] effb0_vocal_affect_f3 exit=0 :: Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[mon] 12:03:28 RAM 7.0/33.7 GB ; GPU 1785 MiB, 15360 MiB, 58 % | 867 MiB, 15360 MiB, 0 % ; work disk used 0.4 GB
+[job] effb0_vocal_affect_f5 exit=0 :: Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[job] effb0_vocal_affect_f4 exit=0 :: Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[mon] 12:08:28 RAM 7.4/33.7 GB ; GPU 1785 MiB, 15360 MiB, 79 % | 1497 MiB, 15360 MiB, 81 % ; work disk used 0.4 GB
+[job] effb0_vocal_affect_f6 exit=0 :: Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[job] effb0_vocal_affect_f7 exit=0 :: Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[mon] 12:13:28 RAM 6.8/33.7 GB ; GPU 2053 MiB, 15360 MiB, 82 % | 1765 MiB, 15360 MiB, 82 % ; work disk used 0.4 GB
+[job] cnn_lstm_vocal_affect_f0 exit=0 :: 
+[job] cnn_lstm_vocal_affect_f1 exit=0 :: 
+[job] cnn_lstm_vocal_affect_f2 exit=0 :: 
+[mon] 12:18:28 RAM 5.2/33.7 GB ; GPU 2053 MiB, 15360 MiB, 86 % | 3 MiB, 15360 MiB, 0 % ; work disk used 0.4 GB
+[job] cnn_lstm_vocal_affect_f3 exit=0 :: 
+[job] cnn_lstm_vocal_affect_f5 exit=0 :: 
+[job] cnn_lstm_vocal_affect_f4 exit=0 :: 
+[mon] 12:23:28 RAM 6.8/33.7 GB ; GPU 2053 MiB, 15360 MiB, 83 % | 1765 MiB, 15360 MiB, 84 % ; work disk used 0.4 GB
+[job] cnn_lstm_vocal_affect_f7 exit=0 :: 
+[job] cnn_lstm_vocal_affect_f6 exit=0 :: 
+| task         | model            | proposed   |    n |   test_acc |   ci_lo |   ci_hi |   test_macro_f1 |   test_bal_acc |   train_acc |   val_acc |    gap |   majority_baseline | fit       |
+|:-------------|:-----------------|:-----------|-----:|-----------:|--------:|--------:|----------------:|---------------:|------------:|----------:|-------:|--------------------:|:----------|
+| cry_detect   | xmf_audio        | True       |  284 |      0.996 |   0.989 |   1.000 |           0.995 |          0.998 |       0.993 |     1.000 | -0.003 |               0.761 | ok        |
+| cry_detect   | mfcc_svm         | False      |  284 |      1.000 |   1.000 |   1.000 |           1.000 |          1.000 |       1.000 |   nan     |  0.000 |               0.761 | ok        |
+| cry_detect   | egemaps_lr       | False      |  284 |      1.000 |   1.000 |   1.000 |           1.000 |          1.000 |       1.000 |   nan     |  0.000 |               0.761 | ok        |
+| cry_detect   | ast_lr           | False      |  284 |      1.000 |   1.000 |   1.000 |           1.000 |          1.000 |       1.000 |   nan     |  0.000 |               0.761 | ok        |
+| cry_detect   | w2v_lr           | False      |  284 |      0.996 |   0.989 |   1.000 |           0.995 |          0.993 |       1.000 |   nan     |  0.004 |               0.761 | ok        |
+| cry_detect   | logmel_cnn_lstm  | False      |  284 |      0.996 |   0.989 |   1.000 |           0.995 |          0.993 |       0.999 |   nan     |  0.003 |               0.761 | ok        |
+| cry_detect   | logmel_cnn_effb0 | False      |  284 |      0.968 |   0.947 |   0.986 |           0.958 |          0.979 |       0.967 |   nan     | -0.002 |               0.761 | ok        |
+| cry_reason   | xmf_audio        | True       |  457 |      0.210 |   0.173 |   0.249 |           0.150 |          0.299 |       0.393 |     0.243 |  0.183 |               0.836 | overfit?  |
+| cry_reason   | ast_lr           | False      |  457 |      0.740 |   0.698 |   0.777 |           0.202 |          0.205 |       0.984 |   nan     |  0.245 |               0.836 | overfit?  |
+| cry_reason   | w2v_lr           | False      |  457 |      0.735 |   0.696 |   0.777 |           0.202 |          0.203 |       0.993 |   nan     |  0.258 |               0.836 | overfit?  |
+| cry_reason   | egemaps_lr       | False      |  457 |      0.453 |   0.409 |   0.501 |           0.183 |          0.206 |       0.631 |   nan     |  0.178 |               0.836 | overfit?  |
+| cry_reason   | mfcc_svm         | False      |  457 |      0.825 |   0.790 |   0.860 |           0.181 |          0.197 |       0.999 |   nan     |  0.175 |               0.836 | overfit?  |
+| cry_reason   | logmel_cnn_effb0 | False      |  457 |      0.352 |   0.308 |   0.396 |           0.147 |          0.181 |       0.525 |   nan     |  0.173 |               0.836 | overfit?  |
+| cry_reason   | logmel_cnn_lstm  | False      |  457 |      0.239 |   0.199 |   0.282 |           0.108 |          0.133 |       0.333 |   nan     |  0.095 |               0.836 | underfit? |
+| vocal_affect | xmf_audio        | True       | 6702 |      0.190 |   0.181 |   0.200 |           0.161 |          0.344 |       0.695 |     0.451 |  0.505 |               0.281 | overfit?  |
+| vocal_affect | ast_lr           | False      | 6702 |      0.217 |   0.208 |   0.227 |           0.145 |          0.150 |       0.752 |   nan     |  0.534 |               0.281 | overfit?  |
+| vocal_affect | logmel_cnn_lstm  | False      | 6702 |      0.212 |   0.202 |   0.222 |           0.142 |          0.143 |       0.727 |   nan     |  0.515 |               0.281 | overfit?  |
+| vocal_affect | egemaps_lr       | False      | 6702 |      0.175 |   0.166 |   0.184 |           0.136 |          0.150 |       0.453 |   nan     |  0.278 |               0.281 | overfit?  |
+| vocal_affect | w2v_lr           | False      | 6702 |      0.197 |   0.188 |   0.207 |           0.136 |          0.142 |       0.734 |   nan     |  0.537 |               0.281 | overfit?  |
+| vocal_affect | logmel_cnn_effb0 | False      | 6702 |      0.224 |   0.214 |   0.233 |           0.132 |          0.133 |       0.997 |   nan     |  0.773 |               0.281 | overfit?  |
+| vocal_affect | mfcc_svm         | False      | 6702 |      0.228 |   0.217 |   0.237 |           0.128 |          0.134 |       0.901 |   nan     |  0.673 |               0.281 | overfit?  |

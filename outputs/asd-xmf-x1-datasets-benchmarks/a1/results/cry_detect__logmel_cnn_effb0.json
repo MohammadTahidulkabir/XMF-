@@ -1,0 +1,29 @@
+{
+ "task": "cry_detect",
+ "model": "logmel_cnn_effb0",
+ "proposed": false,
+ "n": 284,
+ "test_acc": 0.9683098591549296,
+ "ci_lo": 0.9471830985915493,
+ "ci_hi": 0.9859154929577465,
+ "test_macro_f1": 0.9583272193690389,
+ "test_bal_acc": 0.9791666666666667,
+ "train_acc": 0.9665391452198779,
+ "val_acc": NaN,
+ "gap": -0.001770713935051682,
+ "majority_baseline": 0.7605633802816901,
+ "cm": [
+  [
+   68,
+   0
+  ],
+  [
+   9,
+   207
+  ]
+ ],
+ "classes": [
+  "cry",
+  "non_cry"
+ ]
+}

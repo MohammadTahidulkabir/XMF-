@@ -1,7 +1,7 @@
 {
  "asd-xmf-d1-photo-dataset": "UNKNOWN",
- "asd-xmf-x1-datasets-benchmarks": "UNKNOWN",
- "asd-xmf-x2-photo-gaze": "UNKNOWN",
- "asd-xmf-x3-cohort-pipeline": "UNKNOWN",
- "asd-xmf-x4-fusion-report": "UNKNOWN"
+ "asd-xmf-x1-datasets-benchmarks": "DONE",
+ "asd-xmf-x2-photo-gaze": "PENDING",
+ "asd-xmf-x3-cohort-pipeline": "PENDING",
+ "asd-xmf-x4-fusion-report": "PENDING"
 }

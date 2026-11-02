@@ -1,14 +1,4 @@
-secret present: False
-r you.
-    kaggle auth login
-
-If you'd rather not use OAuth, generate an API token at
-  https://www.kaggle.com/settings/api  (click "Generate New Token" under "API")
-and supply it to the CLI in one of these ways:
-
-  Option A: Environment variable
-    export KAGGLE_API_TOKEN=xxxxxxxxxxxxxx  # token copied from the settings UI
-
-  Option B: API token file
-    Save the token to ~/.kaggle/access_token
+secret present: True
+Warning: Looks like you're using an outdated `kaggle` version (installed: 2.2.4), please consider upgrading to the latest version (2.2.5)
+shazedaoni/asd-xmf-d1-photo-dataset has status "KernelWorkerStatus.COMPLETE"
 
