@@ -42,6 +42,8 @@ RETRIES = {}   # pushes made by THIS runner instance per notebook (protects agai
 PUSHED = {}    # slug -> time of our last push
 SEEN_ACTIVE = set()  # slugs whose run after our last push has been seen RUNNING/QUEUED
 PUSH_GRACE = 45 * 60
+ENDED = {}     # slug -> when our pushed run was first seen finished
+OUTPUT_GRACE = 30 * 60  # a just-finished run can list the previous run's files for a while
 MAX_PUSHES = 4
 FAILED = {"ERROR", "CANCEL_ACKNOWLEDGED", "CANCELLED", "CANCEL_REQUESTED"}
 
@@ -111,6 +113,12 @@ def combined_state(slug: str, rev: int = 1) -> str:
     if m == f"_xmf_failed_full{r}.txt":
         _ledger_add(slug, "FAILED")
         return "FAILED"
+    if m in ("", MARKER) and slug in SEEN_ACTIVE:
+        # our pushed run has finished but its result marker is not listed yet (the listing can still show the
+        # previous run's files): wait instead of pushing it again
+        t = ENDED.setdefault(slug, time.time())
+        if time.time() - t < OUTPUT_GRACE:
+            return "RUNNING"
     if m == MARKER and RETRIES.get(slug, 0) >= 2:
         # a full run that ended without a result marker was killed (memory, 12 h limit) - twice now
         _ledger_add(slug, "FAILED")
@@ -252,6 +260,7 @@ def push_item(slug: str) -> str:
     if "successfully pushed" in out:
         PUSHED[slug] = time.time()
         SEEN_ACTIVE.discard(slug)
+        ENDED.pop(slug, None)
     log(f"PUSH {slug} (#{RETRIES[slug]}): {out[-250:]}")
     return out
 
