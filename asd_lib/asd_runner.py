@@ -134,8 +134,11 @@ def run(name, vars_=None):
     t0 = time.time()
     print(f"[{name}] start ({left / 3600:.1f} h left in this run)", flush=True)
     with open(logp, "w", encoding="utf-8") as logf:
-        p = subprocess.Popen([sys.executable, "-u", str(script)], stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
-                             text=True, env=env, cwd=str(U.WORK), start_new_session=True)
+        # not run as __main__: "spawn" worker pools (NB01, D1) re-import a main *file* and would re-run the whole
+        # section; with `-c` there is no main file, exactly like a notebook kernel
+        launch = "import runpy, sys; runpy.run_path(sys.argv[1], run_name='__xmf_section__')"
+        p = subprocess.Popen([sys.executable, "-u", "-c", launch, str(script)], stdout=subprocess.PIPE,
+                             stderr=subprocess.STDOUT, text=True, env=env, cwd=str(U.WORK), start_new_session=True)
         lines = queue.Queue()
         reader = threading.Thread(target=lambda: [lines.put(l) for l in p.stdout] + [lines.put(None)], daemon=True)
         reader.start()
