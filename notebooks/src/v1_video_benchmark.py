@@ -12,15 +12,17 @@
 # %%
 import numpy as np, pandas as pd
 import asd_bench as B
+_V = globals().get("VARIANT", {})
+SEED = int(_V.get("seed", 0))  # seed sweep (R3): folds and model seeds change, results go to v1_s<seed>/
 SRC = U.find_path("skeleton.npy").parent
-OUT = U.WORK / "v1"; OUT.mkdir(parents=True, exist_ok=True)
+OUT = U.WORK / ("v1" + (f"_s{SEED}" if "seed" in _V else "")); OUT.mkdir(parents=True, exist_ok=True)
 X = np.load(SRC / "skeleton.npy"); Mk = np.load(SRC / "mask.npy")
 meta = pd.read_csv(SRC / "manifest.csv", dtype={"subject": str})
 classes = sorted(meta.activity.unique()); y = meta.activity.map({c: i for i, c in enumerate(classes)}).values
 print(X.shape, len(classes), "activities,", meta.subject.nunique(), "children")
 with U.Timer("video benchmark"):
     rows = B.seq_cv(X, Mk, y, meta.subject.values, len(classes), list(B.SEQ_MODELS), OUT, "mmasd_activity",
-                    epochs=3 if PREFLIGHT else 150, folds=3 if PREFLIGHT else 5, max_steps=5 if PREFLIGHT else None)
+                    epochs=3 if PREFLIGHT else 150, folds=3 if PREFLIGHT else 5, seed=SEED, max_steps=5 if PREFLIGHT else None)
 tab = B.comparison_table(rows)
 tab["majority_baseline"] = pd.Series(y).value_counts(normalize=True).iloc[0]
 print(tab.to_markdown(index=False, floatfmt=".3f"))

@@ -23,9 +23,11 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.svm import LinearSVC
 import asd_models as M, asd_bench as B
 SRC = U.find_path("text.csv").parent
-OUT = U.WORK / "t1"; OUT.mkdir(parents=True, exist_ok=True)
+_V = globals().get("VARIANT", {})
+SEED = int(_V.get("seed", 0))  # seed sweep (R3): folds and model seeds change, results go to t1_s<seed>/
+OUT = U.WORK / ("t1" + (f"_s{SEED}" if "seed" in _V else "")); OUT.mkdir(parents=True, exist_ok=True)
 df = pd.read_csv(SRC / "text.csv"); X, y = df.text.values, df.label.values
-FOLDS = list(StratifiedKFold(5, shuffle=True, random_state=0).split(X, y))
+FOLDS = list(StratifiedKFold(5, shuffle=True, random_state=SEED).split(X, y))
 if PREFLIGHT:
     FOLDS = FOLDS[:2]
 dev = M.device()
@@ -61,8 +63,8 @@ def run_transformer(name, ckpt, proposed=False):
     pred, trs, vas = np.full(len(y), -1), [], []
     fusion_w = []
     for f, (tr, te) in enumerate(FOLDS):
-        U.seed_everything(f)
-        rng = np.random.default_rng(f); va = rng.choice(tr, len(tr) // 8, replace=False); fit = np.setdiff1d(tr, va)
+        U.seed_everything(f + 100 * SEED)
+        rng = np.random.default_rng(f + 100 * SEED); va = rng.choice(tr, len(tr) // 8, replace=False); fit = np.setdiff1d(tr, va)
         base = AutoModel.from_pretrained(ckpt)
         model = AttnPoolCls(base, base.config.hidden_size, proposed).to(dev)
         opt = torch.optim.AdamW(model.parameters(), lr=2e-5, weight_decay=0.01)
@@ -124,7 +126,8 @@ def run_bilstm():
     from collections import Counter
     pred, trs, vas = np.full(len(y), -1), [], []
     for f, (tr, te) in enumerate(FOLDS):
-        rng = np.random.default_rng(f); va = rng.choice(tr, len(tr) // 8, replace=False); fit = np.setdiff1d(tr, va)
+        U.seed_everything(f + 100 * SEED)
+        rng = np.random.default_rng(f + 100 * SEED); va = rng.choice(tr, len(tr) // 8, replace=False); fit = np.setdiff1d(tr, va)
         cnt = Counter(w for s in X[fit] for w in s.lower().split()); vocab = {w: i + 2 for i, (w, _) in enumerate(cnt.most_common(20000))}
         enc = lambda s: ([vocab.get(w, 1) for w in s.lower().split()][:64] + [0] * 64)[:64]
         I = torch.tensor([enc(s) for s in X], device=dev); Y = torch.tensor(y, device=dev)

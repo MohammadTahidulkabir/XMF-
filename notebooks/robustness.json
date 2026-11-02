@@ -1,0 +1,251 @@
+{
+ "_comment": "Robustness batch R1-R4 on the tahidulkabir account (build with: ASD_KAGGLE_USER=tahidulkabir python tools/build.py --combined --defs robustness.json). Each notebook fits in one session, so no orch key / resume. 'vars' are passed to the section as VARIANT (seed sweeps).",
+ "notebooks": [
+  {
+   "slug": "asd-xmf-r1-photo-data-gaze",
+   "title": "ASD-XMF R1 Photo Data Gaze",
+   "orch_key": false,
+   "gpu": false,
+   "kernels": [],
+   "about": "CPU: rebuild the XMF-Photo dataset (D1), near-duplicate audit of its test sets, gaze study with 10 CV repeats and the gaze-vs-recording-quality checks.",
+   "sections": [
+    {
+     "name": "d1",
+     "src": "d1_photo_builder.py"
+    },
+    {
+     "name": "dup",
+     "src": "dup_photo_near_duplicates.py",
+     "after": [
+      "d1"
+     ]
+    },
+    {
+     "name": "nb13",
+     "src": "nb13_gaze_eyetracking.py",
+     "vars": {
+      "n_seeds": 10
+     }
+    },
+    {
+     "name": "g1",
+     "src": "g1_gaze_robustness.py",
+     "after": [
+      "nb13"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "asd-xmf-r2-photo-seeds",
+   "title": "ASD-XMF R2 Photo Seeds",
+   "orch_key": false,
+   "gpu": true,
+   "kernels": [
+    "asd-xmf-r1-photo-data-gaze"
+   ],
+   "about": "GPU: XMF-Face v2 and its three closest baselines over 5 seeds, scored on the full and the near-duplicate-free test set.",
+   "sections": [
+    {
+     "name": "p2",
+     "src": "p2_photo_seeds.py"
+    }
+   ]
+  },
+  {
+   "slug": "asd-xmf-r3-audio-text-video-seeds",
+   "title": "ASD-XMF R3 Audio Text Video Seeds",
+   "orch_key": false,
+   "gpu": true,
+   "kernels": [],
+   "about": "GPU: rebuild D2-D4, then the video, text and audio comparisons over 5 seeds (folds and model seeds change with the seed).",
+   "sections": [
+    {
+     "name": "d2",
+     "src": "d2_audio_builder.py"
+    },
+    {
+     "name": "d3",
+     "src": "d3_video_builder.py"
+    },
+    {
+     "name": "d4",
+     "src": "d4_text_builder.py"
+    },
+    {
+     "name": "v1s0",
+     "src": "v1_video_benchmark.py",
+     "vars": {
+      "seed": 0
+     },
+     "after": [
+      "d3"
+     ]
+    },
+    {
+     "name": "v1s1",
+     "src": "v1_video_benchmark.py",
+     "vars": {
+      "seed": 1
+     },
+     "after": [
+      "d3"
+     ]
+    },
+    {
+     "name": "v1s2",
+     "src": "v1_video_benchmark.py",
+     "vars": {
+      "seed": 2
+     },
+     "after": [
+      "d3"
+     ]
+    },
+    {
+     "name": "v1s3",
+     "src": "v1_video_benchmark.py",
+     "vars": {
+      "seed": 3
+     },
+     "after": [
+      "d3"
+     ]
+    },
+    {
+     "name": "v1s4",
+     "src": "v1_video_benchmark.py",
+     "vars": {
+      "seed": 4
+     },
+     "after": [
+      "d3"
+     ]
+    },
+    {
+     "name": "t1s0",
+     "src": "t1_text_benchmark.py",
+     "vars": {
+      "seed": 0
+     },
+     "after": [
+      "d4"
+     ]
+    },
+    {
+     "name": "t1s1",
+     "src": "t1_text_benchmark.py",
+     "vars": {
+      "seed": 1
+     },
+     "after": [
+      "d4"
+     ]
+    },
+    {
+     "name": "t1s2",
+     "src": "t1_text_benchmark.py",
+     "vars": {
+      "seed": 2
+     },
+     "after": [
+      "d4"
+     ]
+    },
+    {
+     "name": "t1s3",
+     "src": "t1_text_benchmark.py",
+     "vars": {
+      "seed": 3
+     },
+     "after": [
+      "d4"
+     ]
+    },
+    {
+     "name": "t1s4",
+     "src": "t1_text_benchmark.py",
+     "vars": {
+      "seed": 4
+     },
+     "after": [
+      "d4"
+     ]
+    },
+    {
+     "name": "a1s0",
+     "src": "a1_audio_benchmark.py",
+     "vars": {
+      "seed": 0,
+      "skip_melcnn": true
+     },
+     "after": [
+      "d2"
+     ]
+    },
+    {
+     "name": "a1s1",
+     "src": "a1_audio_benchmark.py",
+     "vars": {
+      "seed": 1,
+      "skip_melcnn": true
+     },
+     "after": [
+      "d2"
+     ]
+    },
+    {
+     "name": "a1s2",
+     "src": "a1_audio_benchmark.py",
+     "vars": {
+      "seed": 2,
+      "skip_melcnn": true
+     },
+     "after": [
+      "d2"
+     ]
+    },
+    {
+     "name": "a1s3",
+     "src": "a1_audio_benchmark.py",
+     "vars": {
+      "seed": 3,
+      "skip_melcnn": true
+     },
+     "after": [
+      "d2"
+     ]
+    },
+    {
+     "name": "a1s4",
+     "src": "a1_audio_benchmark.py",
+     "vars": {
+      "seed": 4,
+      "skip_melcnn": true
+     },
+     "after": [
+      "d2"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "asd-xmf-r4-robustness-summary",
+   "title": "ASD-XMF R4 Robustness Summary",
+   "orch_key": false,
+   "gpu": false,
+   "kernels": [
+    "asd-xmf-r1-photo-data-gaze",
+    "asd-xmf-r2-photo-seeds",
+    "asd-xmf-r3-audio-text-video-seeds"
+   ],
+   "about": "CPU: mean +- SD over seeds, paired tests, gaze quality checks and the published-results table for every sector.",
+   "sections": [
+    {
+     "name": "s1",
+     "src": "s1_robustness_summary.py"
+    }
+   ]
+  }
+ ]
+}

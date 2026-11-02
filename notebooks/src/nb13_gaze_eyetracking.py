@@ -26,7 +26,7 @@ from pathlib import Path
 import matplotlib; matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 OUT = U.WORK / "nb13"; OUT.mkdir(parents=True, exist_ok=True)
-SEEDS = (0, 1, 2)
+SEEDS = tuple(range(int(globals().get("VARIANT", {}).get("n_seeds", 3))))  # R1 repeats the child-wise CV 10 times
 N_BOOT = 300 if PREFLIGHT else 2000
 
 meta_p = U.find_path("Metadata_Participants.csv")

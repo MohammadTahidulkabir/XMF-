@@ -175,9 +175,10 @@ def build_combined(nbdef: dict, profile: str):
         vars_ = {}
         if s.get("variant"):
             vars_ = next(v for v in meta["variants"] if v["suffix"] == s["variant"])["vars"]
+        vars_ = {**vars_, **s.get("vars", {})}  # per-section settings, e.g. {"seed": 3} for a seed sweep
         title = next((l.lstrip("# ").strip() for kind, lines in split_cells(src.read_text(encoding="utf-8"))
                       if kind == "markdown" for l in lines if l.startswith("# #")), s["src"])
-        suffix = f" ({s['variant']})" if s.get("variant") else ""
+        suffix = f" ({s['variant']})" if s.get("variant") else (f" (seed {s['vars']['seed']})" if "seed" in s.get("vars", {}) else "")
         nb.cells.append(nbformat.v4.new_markdown_cell(f"## Section `{s['name']}`: {title}{suffix}"))
         nb.cells.append(nbformat.v4.new_code_cell(f"%%writefile {{R.SEC_DIR}}/{s['name']}.py\n" + section_code(src)))
         nb.cells.append(nbformat.v4.new_code_cell(f"R.run({s['name']!r}" + (f", {json.dumps(vars_)}" if vars_ else "") + ")"))
@@ -195,8 +196,9 @@ def build_combined(nbdef: dict, profile: str):
     km = {
         "id": f"{USER}/{slug}", "title": nbdef["title"], "code_file": f"{slug}.ipynb", "language": "python",
         "kernel_type": "notebook", "is_private": True, "enable_gpu": gpu, "enable_tpu": False, "enable_internet": True,
-        # the orch key lets a run download its own previous output to resume after the time guard
-        "dataset_sources": [LIB_DATASET, f"{USER}/asd-xmf-orch-key"] + datasets,
+        # the orch key lets a run download its own previous output to resume after the time guard;
+        # notebooks that fit in one session (R1-R4) run without it
+        "dataset_sources": [LIB_DATASET] + ([f"{USER}/asd-xmf-orch-key"] if nbdef.get("orch_key", True) else []) + datasets,
         "kernel_sources": [f"{USER}/{k}" for k in nbdef.get("kernels", [])],
         "competition_sources": [], "model_sources": [],
     }
@@ -211,10 +213,11 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--profile", default="full", choices=["full", "preflight", "smoke"])
     ap.add_argument("--only", default=None, help="substring filter on source file names")
-    ap.add_argument("--combined", action="store_true", help="build the 4 combined notebooks X1-X4")
+    ap.add_argument("--combined", action="store_true", help="build the combined notebooks of --defs")
+    ap.add_argument("--defs", default="combined.json", help="notebooks/combined.json (X1-X4) or notebooks/robustness.json (R1-R4)")
     a = ap.parse_args()
     if a.combined:
-        for nbdef in json.loads((ROOT / "notebooks" / "combined.json").read_text())["notebooks"]:
+        for nbdef in json.loads((ROOT / "notebooks" / a.defs).read_text())["notebooks"]:
             if not a.only or a.only in nbdef["slug"]:
                 build_combined(nbdef, a.profile)
         return

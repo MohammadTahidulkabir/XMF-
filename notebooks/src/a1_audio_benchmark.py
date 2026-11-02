@@ -15,6 +15,10 @@
 # Cross-validation never mixes a speaker / infant between train and test: leave-one-speaker-out for
 # `vocal_affect`, 5-fold group CV by infant for `cry_reason`, stratified 5-fold for `cry_detect`.
 # Every model uses the same folds.  Train vs validation accuracy is reported (over/underfitting).
+#
+# **Seed sweep (R3):** with `VARIANT = {"seed": s}` the CV folds and every model seed change with `s` and the
+# results go to `a1_s<s>/`; `"skip_melcnn": true` leaves out the two log-mel CNNs (they ranked below the
+# feature models on every task in the single-seed run and cost most of the GPU time).
 
 # %%
 import numpy as np, pandas as pd, torch, torch.nn as nn, torch.nn.functional as F
@@ -25,8 +29,10 @@ from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import StratifiedGroupKFold, StratifiedKFold
 import asd_models as M, asd_bench as B
+_V = globals().get("VARIANT", {})
+SEED = int(_V.get("seed", 0))
 SRC = U.find_path("audio_index.csv").parent
-OUT = U.WORK / "a1"; OUT.mkdir(parents=True, exist_ok=True)
+OUT = U.WORK / ("a1" + (f"_s{SEED}" if "seed" in _V else "")); OUT.mkdir(parents=True, exist_ok=True)
 idx = pd.read_csv(SRC / "audio_index.csv")
 def feat(name):
     p = SRC / f"audio_{name}.npy"
@@ -45,9 +51,9 @@ def folds(task_rows):
         return [(task_rows[g != s], task_rows[g == s]) for s in sorted(set(g))]
     k = int(max(2, min(5, pd.Series(y).value_counts().min())))  # 5 folds; fewer only if a class is tiny
     if d.task.iloc[0] == "cry_reason":
-        cv = StratifiedGroupKFold(k, shuffle=True, random_state=0)
+        cv = StratifiedGroupKFold(k, shuffle=True, random_state=SEED)
         return [(task_rows[a], task_rows[b]) for a, b in cv.split(task_rows, y, g)]
-    cv = StratifiedKFold(k, shuffle=True, random_state=0)
+    cv = StratifiedKFold(k, shuffle=True, random_state=SEED)
     return [(task_rows[a], task_rows[b]) for a, b in cv.split(task_rows, y)]
 
 # %% [markdown]
@@ -132,17 +138,19 @@ for task, g in idx.groupby("task"):
             clf.fit(X[tr], y[tr])
             preds[m][te] = clf.predict(X[te]); tr_acc[m].append((clf.predict(X[tr]) == y[tr]).mean()); va_acc[m].append(np.nan)
         blocks = [FEATS[k] for k in ("w2v", "egemaps", "mfcc", "ast", "cnn14") if k in FEATS]
-        pt, a_tr, a_va = fit_xmf_ensemble(blocks, y, tr, te, n_cls, seeds=(0,) if PREFLIGHT else (0, 1, 2),
+        pt, a_tr, a_va = fit_xmf_ensemble(blocks, y, tr, te, n_cls, seeds=(3 * SEED,) if PREFLIGHT else tuple(range(3 * SEED, 3 * SEED + 3)),
                                           epochs=3 if PREFLIGHT else 200)
         preds["xmf_audio"][te] = pt; tr_acc["xmf_audio"].append(a_tr); va_acc["xmf_audio"].append(a_va)
     # log-mel CNN and CNN-LSTM on GPU, same folds
     lab = OUT / f"{task}_items.csv"; idx.assign(label_id=y).to_csv(lab, index=False)
+    mel = () if _V.get("skip_melcnn") else (("effb0", "logmel_cnn_effb0"), ("cnn_lstm", "logmel_cnn_lstm"))
     jobs = [{"name": f"{arch}_{task}_f{f}", "arch": arch, "index": str(lab), "mel_dir": str(SRC / "audio_mel"), "label_col": "label_id",
-             "train_rows": tr.tolist(), "test_rows": te.tolist(), "fold": f, "out_dir": str(OUT), "seed": 0,
+             "train_rows": tr.tolist(), "test_rows": te.tolist(), "fold": f, "out_dir": str(OUT), "seed": SEED,
              "epochs": 1 if PREFLIGHT else 30, "batch": 64, "lr": 1e-3, "max_steps": 3 if PREFLIGHT else None, "crop_frames": 300}
-            for arch in ("effb0", "cnn_lstm") for f, (tr, te) in enumerate(F_)]
-    U.run_jobs_parallel("asd_audio", "melcnn_fold_task", jobs, log_dir=OUT / "logs")
-    for arch, name in (("effb0", "logmel_cnn_effb0"), ("cnn_lstm", "logmel_cnn_lstm")):
+            for arch, _ in mel for f, (tr, te) in enumerate(F_)]
+    if jobs:
+        U.run_jobs_parallel("asd_audio", "melcnn_fold_task", jobs, log_dir=OUT / "logs")
+    for arch, name in mel:
         preds[name] = np.full(len(idx), -1); tr_acc[name] = []; va_acc[name] = []
         for f in range(len(F_)):
             d = pd.read_csv(OUT / "preds" / f"{arch}_{task}_f{f}.csv")
