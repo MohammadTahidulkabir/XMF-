@@ -1,0 +1,36 @@
+{
+ "frame_encoder": {
+  "params": 4337795,
+  "flops": 393655744,
+  "mb_fp32": 17.338139,
+  "shipped": "frame_encoder_fp16.onnx",
+  "mb_shipped": 9.386364,
+  "ms_fp32_cpu": 5.269129266662276,
+  "ms_shipped_cpu": 5.808479533334321,
+  "calibration_frames": 181,
+  "int8_heldout_cosine": 0.6692681777916971,
+  "emb_cosine_fp32_vs_shipped": 0.9999960064888
+ },
+ "xmf_fusion": {
+  "checkpoint": "xmf_noquest_s0_f0.pt",
+  "modalities": [
+   "face",
+   "voice",
+   "cry"
+  ],
+  "params": 3441161,
+  "flops": 967946496,
+  "mb_fp32": 13.845185,
+  "mb_int8": 3.704636,
+  "ms_fp32_cpu": 7.339298866675866,
+  "ms_int8_cpu": 6.9522294333334385,
+  "p_torch": 0.45223990082740784,
+  "p_onnx_fp32": 0.45223984122276306,
+  "p_onnx_int8": 0.4446382522583008,
+  "temperature": 1.569298195051938,
+  "norm_stats_file": "xmf_norm.json"
+ },
+ "tflite": [
+  "frame_encoder_fp32_float32.tflite"
+ ]
+}

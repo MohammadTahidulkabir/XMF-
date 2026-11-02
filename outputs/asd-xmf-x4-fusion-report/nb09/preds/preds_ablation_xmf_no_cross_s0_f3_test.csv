@@ -1,0 +1,13 @@
+child_id,y_true,prob,uncertainty,model,seed,fold,part
+DEV0001,0,0.033284093370315515,0.46044424,ablation_xmf_no_cross,0,3,test
+DEV0004,0,0.06224580314363834,0.50224644,ablation_xmf_no_cross,0,3,test
+DEV0008,0,0.09672354263265538,0.5352524,ablation_xmf_no_cross,0,3,test
+DEV0009,1,0.8159407589154345,0.53198165,ablation_xmf_no_cross,0,3,test
+DEV0012,0,0.09858882941787714,0.5681063,ablation_xmf_no_cross,0,3,test
+DEV0015,0,0.04282272772048321,0.45135516,ablation_xmf_no_cross,0,3,test
+DEV0022,1,0.9768606753013919,0.457948,ablation_xmf_no_cross,0,3,test
+DEV0023,1,0.05791656148384742,0.48447192,ablation_xmf_no_cross,0,3,test
+DEV0027,0,0.03713673164280343,0.4806642,ablation_xmf_no_cross,0,3,test
+DEV0049,0,0.09723187806717613,0.51691276,ablation_xmf_no_cross,0,3,test
+DEV0053,1,0.9311368640933003,0.49561065,ablation_xmf_no_cross,0,3,test
+DEV0055,0,0.6751712733417687,0.47631216,ablation_xmf_no_cross,0,3,test

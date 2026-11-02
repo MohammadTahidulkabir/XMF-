@@ -1,0 +1,13 @@
+child_id,y_true,prob,uncertainty,model,seed,fold,part
+DEV0001,0,0.33452146191735366,0.0,fusion_tfn,1,3,test
+DEV0004,0,0.12436808266842532,0.0,fusion_tfn,1,3,test
+DEV0008,0,0.3888297748463191,0.0,fusion_tfn,1,3,test
+DEV0009,1,0.6533715021944237,0.0,fusion_tfn,1,3,test
+DEV0012,0,0.14184409285583238,0.0,fusion_tfn,1,3,test
+DEV0015,0,0.3857859420411427,0.0,fusion_tfn,1,3,test
+DEV0022,1,0.9527232799181774,0.0,fusion_tfn,1,3,test
+DEV0023,1,0.4069599449462965,0.0,fusion_tfn,1,3,test
+DEV0027,0,0.001074255267266165,0.0,fusion_tfn,1,3,test
+DEV0049,0,0.23273371609702814,0.0,fusion_tfn,1,3,test
+DEV0053,1,0.40018919885969784,0.0,fusion_tfn,1,3,test
+DEV0055,0,0.3909363400710246,0.0,fusion_tfn,1,3,test

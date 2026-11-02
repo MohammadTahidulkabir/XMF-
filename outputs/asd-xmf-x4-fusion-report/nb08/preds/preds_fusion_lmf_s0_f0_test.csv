@@ -1,0 +1,13 @@
+child_id,y_true,prob,uncertainty,model,seed,fold,part
+DEV0001,0,0.5027283942745845,0.0,fusion_lmf,0,0,test
+DEV0004,0,0.5027283882965016,0.0,fusion_lmf,0,0,test
+DEV0008,0,0.5027284959020069,0.0,fusion_lmf,0,0,test
+DEV0009,1,0.5027287170911797,0.0,fusion_lmf,0,0,test
+DEV0012,0,0.5027284719896702,0.0,fusion_lmf,0,0,test
+DEV0015,0,0.5027284660115862,0.0,fusion_lmf,0,0,test
+DEV0022,1,0.5027273122428231,0.0,fusion_lmf,0,0,test
+DEV0023,1,0.5027283823184187,0.0,fusion_lmf,0,0,test
+DEV0027,0,0.5027288366529387,0.0,fusion_lmf,0,0,test
+DEV0049,0,0.502728537748599,0.0,fusion_lmf,0,0,test
+DEV0053,1,0.5027286274198807,0.0,fusion_lmf,0,0,test
+DEV0055,0,0.5027284420992512,0.0,fusion_lmf,0,0,test

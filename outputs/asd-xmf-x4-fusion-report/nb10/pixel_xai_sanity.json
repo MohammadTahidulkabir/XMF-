@@ -1,0 +1,22 @@
+{
+ "sanity": [
+  {
+   "randomised_top_layers": 1,
+   "spearman_to_original": 0.05141905055026352
+  },
+  {
+   "randomised_top_layers": 2,
+   "spearman_to_original": 0.028839401781507446
+  },
+  {
+   "randomised_top_layers": 3,
+   "spearman_to_original": 0.13344944336618947
+  }
+ ],
+ "stability": [
+  {
+   "spearman_brightness": 0.9881057782031494,
+   "spearman_shift4px": 0.8186049898754387
+  }
+ ]
+}

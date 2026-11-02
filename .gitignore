@@ -3,3 +3,4 @@ __pycache__/
 tools/done_ledger.json
 logs*/
 kaggle_build_preflight/
+*DO_NOT_SHARE*

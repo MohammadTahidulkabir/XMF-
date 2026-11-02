@@ -1,0 +1,11 @@
+child_id,y_true,prob,uncertainty,model,seed,fold,part
+DEV0011,0,0.9653667454721283,,behaviour_logreg,1,2,val
+DEV0013,1,0.14934407589718773,,behaviour_logreg,1,2,val
+DEV0016,0,0.34007365217266056,,behaviour_logreg,1,2,val
+DEV0020,0,0.5893648712583007,,behaviour_logreg,1,2,val
+DEV0021,0,0.119960924285082,,behaviour_logreg,1,2,val
+DEV0037,1,0.3787505300895048,,behaviour_logreg,1,2,val
+DEV0048,1,0.10569932364358521,,behaviour_logreg,1,2,val
+DEV0050,1,0.33278789830189426,,behaviour_logreg,1,2,val
+DEV0058,0,0.2841592235860988,,behaviour_logreg,1,2,val
+DEV0059,0,0.33541875895492573,,behaviour_logreg,1,2,val

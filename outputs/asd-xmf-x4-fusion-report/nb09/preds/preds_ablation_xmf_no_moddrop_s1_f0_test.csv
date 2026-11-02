@@ -1,0 +1,13 @@
+child_id,y_true,prob,uncertainty,model,seed,fold,part
+DEV0001,0,0.03921158527497953,0.45845315,ablation_xmf_no_moddrop,1,0,test
+DEV0004,0,0.03552543513023308,0.4339343,ablation_xmf_no_moddrop,1,0,test
+DEV0008,0,0.10828143915290271,0.4801304,ablation_xmf_no_moddrop,1,0,test
+DEV0009,1,0.959898593884546,0.46068963,ablation_xmf_no_moddrop,1,0,test
+DEV0012,0,0.08990150194669012,0.544752,ablation_xmf_no_moddrop,1,0,test
+DEV0015,0,0.0831342368698923,0.44545448,ablation_xmf_no_moddrop,1,0,test
+DEV0022,1,0.9951172818919103,0.3548968,ablation_xmf_no_moddrop,1,0,test
+DEV0023,1,0.42820561859223644,0.56317437,ablation_xmf_no_moddrop,1,0,test
+DEV0027,0,0.08296121742260357,0.44701564,ablation_xmf_no_moddrop,1,0,test
+DEV0049,0,0.09885405464798039,0.400477,ablation_xmf_no_moddrop,1,0,test
+DEV0053,1,0.8153394660746273,0.50311154,ablation_xmf_no_moddrop,1,0,test
+DEV0055,0,0.6486352756622806,0.45755273,ablation_xmf_no_moddrop,1,0,test

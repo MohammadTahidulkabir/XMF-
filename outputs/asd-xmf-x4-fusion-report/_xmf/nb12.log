@@ -1,0 +1,107 @@
+WARNING:root:Please consider to run pre-processing before quantization. Refer to example: https://github.com/microsoft/onnxruntime-inference-examples/blob/main/quantization/image_classification/cpu/ReadMe.md 
+WARNING:root:Axis 1 is out-of-range for weight 'n.emb_head.2.weight' with rank 1
+WARNING:root:Please consider pre-processing before quantization. See https://github.com/microsoft/onnxruntime-inference-examples/blob/main/quantization/image_classification/cpu/ReadMe.md 
+INT8 held-out embedding cosine = 0.669 -> shipping frame_encoder_fp16.onnx
+{'params': 4337795, 'flops': 393655744, 'mb_fp32': 17.338139, 'shipped': 'frame_encoder_fp16.onnx', 'mb_shipped': 9.386364, 'ms_fp32_cpu': 5.269129266662276, 'ms_shipped_cpu': 5.808479533334321, 'calibration_frames': 181, 'int8_heldout_cosine': 0.6692681777916971, 'emb_cosine_fp32_vs_shipped': 0.9999960064888}
+WARNING:root:Please consider to run pre-processing before quantization. Refer to example: https://github.com/microsoft/onnxruntime-inference-examples/blob/main/quantization/image_classification/cpu/ReadMe.md 
+{'checkpoint': 'xmf_noquest_s0_f0.pt', 'modalities': ['face', 'voice', 'cry'], 'params': 3441161, 'flops': 967946496, 'mb_fp32': 13.845185, 'mb_int8': 3.704636, 'ms_fp32_cpu': 7.339298866675866, 'ms_int8_cpu': 6.9522294333334385, 'p_torch': 0.45223990082740784, 'p_onnx_fp32': 0.45223984122276306, 'p_onnx_int8': 0.4446382522583008, 'temperature': 1.569298195051938, 'norm_stats_file': 'xmf_norm.json'}
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+bigframes 2.48.0 requires google-cloud-bigquery-storage<3.0.0,>=2.30.0, which is not installed.
+grpcio-tools 1.71.2 requires protobuf<6.0dev,>=5.26.1, but you have protobuf 7.35.1 which is incompatible.
+dopamine-rl 4.1.2 requires gym<=0.25.2, but you have gym 0.26.2 which is incompatible.
+gradio 6.26.0 requires pillow<13.0,>=8.0, but you have pillow 13.0.0 which is incompatible.
+moviepy 1.0.3 requires decorator<5.0,>=4.0.2, but you have decorator 5.3.1 which is incompatible.
+google-ai-generativelanguage 0.6.15 requires protobuf!=4.21.0,!=4.21.1,!=4.21.2,!=4.21.3,!=4.21.4,!=4.21.5,<6.0.0dev,>=3.20.2, but you have protobuf 7.35.1 which is incompatible.
+ydf 0.15.0 requires protobuf<7.0.0,>=5.29.1, but you have protobuf 7.35.1 which is incompatible.
+grpcio-status 1.71.2 requires protobuf<6.0dev,>=5.26.1, but you have protobuf 7.35.1 which is incompatible.
+tchNormalization │ 1              │ 1                │
+│ Constant           │ 173            │ 173              │
+│ Conv               │ 81             │ 81               │
+│ Div                │ 1              │ 1                │
+│ Erf                │ 1              │ 1                │
+│ Flatten            │ 1              │ 1                │
+│ Gemm               │ 2              │ 2                │
+│ GlobalAveragePool  │ 1              │ 1                │
+│ Mul                │ 67             │ 67               │
+│ ReduceMean         │ 16             │ 16               │
+│ Sigmoid            │ 65             │ 65               │
+│ Model Size         │ 16.6MiB        │ 16.6MiB          │
+└────────────────────┴────────────────┴──────────────────┘
+
+[32mModel optimizing complete![0m
+
+[07mAutomatic generation of each OP name started[0m ========================================
+[32mAutomatic generation of each OP name complete![0m
+
+[07mModel loaded[0m ========================================================================
+
+[07mflatbuffer_direct fast path started[0m ===============================================
+flatbuffer_direct write timing: stage=float32 mode=builder_direct total=0.107s serialize=0.098s (sanitize=0.000s build=0.008s pack=0.086s output=0.003s) write=0.007s size=16.55MB
+flatbuffer_direct write timing: stage=float32 mode=builder_direct total=0.093s serialize=0.081s (sanitize=0.000s build=0.006s pack=0.072s output=0.002s) write=0.009s size=16.55MB
+ /usr/local/lib/python3.13/dist-packages/onnx2tf/tflite_builder/__init__.py", line 775, in export_tflite_model_flatbuffer_direct
+    calibration_samples = load_calibration_samples(
+        custom_input_op_name_np_data_path=custom_input_op_name_np_data_path,
+        input_names=[str(v) for v in model_ir.inputs],
+    )
+  File "/usr/local/lib/python3.13/dist-packages/onnx2tf/tflite_builder/quantization.py", line 305, in load_calibration_samples
+    raise StrictFullIntegerQuantizationError(
+    ...<2 lines>...
+    )
+onnx2tf.tflite_builder.quantization.StrictFullIntegerQuantizationError: flatbuffer_direct strict integer quantization requires custom_input_op_name_np_data_path entries with input name, npy path, mean, and std.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/bin/onnx2tf", line 6, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/usr/local/lib/python3.13/dist-packages/onnx2tf/__init__.py", line 21, in main
+    return _main(*args, **kwargs)
+  File "/usr/local/lib/python3.13/dist-packages/onnx2tf/onnx2tf.py", line 9032, in main
+    model = convert(
+        input_onnx_file_path=args.input_onnx_file_path,
+    ...<86 lines>...
+        verbosity=args.verbosity,
+    )
+  File "/usr/local/lib/python3.13/dist-packages/onnx2tf/onnx2tf.py", line 6453, in convert
+    raise RuntimeError(
+        'flatbuffer_direct fast path failed.'
+    ) from ex
+RuntimeError: flatbuffer_direct fast path failed.
+
+{
+ "frame_encoder": {
+  "params": 4337795,
+  "flops": 393655744,
+  "mb_fp32": 17.338139,
+  "shipped": "frame_encoder_fp16.onnx",
+  "mb_shipped": 9.386364,
+  "ms_fp32_cpu": 5.269129266662276,
+  "ms_shipped_cpu": 5.808479533334321,
+  "calibration_frames": 181,
+  "int8_heldout_cosine": 0.6692681777916971,
+  "emb_cosine_fp32_vs_shipped": 0.9999960064888
+ },
+ "xmf_fusion": {
+  "checkpoint": "xmf_noquest_s0_f0.pt",
+  "modalities": [
+   "face",
+   "voice",
+   "cry"
+  ],
+  "params": 3441161,
+  "flops": 967946496,
+  "mb_fp32": 13.845185,
+  "mb_int8": 3.704636,
+  "ms_fp32_cpu": 7.339298866675866,
+  "ms_int8_cpu": 6.9522294333334385,
+  "p_torch": 0.45223990082740784,
+  "p_onnx_fp32": 0.45223984122276306,
+  "p_onnx_int8": 0.4446382522583008,
+  "temperature": 1.569298195051938,
+  "norm_stats_file": "xmf_norm.json"
+ },
+ "tflite": [
+  "frame_encoder_fp32_float32.tflite"
+ ]
+}

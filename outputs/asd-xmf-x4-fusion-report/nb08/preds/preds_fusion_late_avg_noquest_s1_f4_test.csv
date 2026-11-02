@@ -1,0 +1,13 @@
+child_id,y_true,prob,uncertainty,model,seed,fold,part
+DEV0001,0,0.10802505252544843,0.016278287,fusion_late_avg_noquest,1,4,test
+DEV0004,0,0.10211616926064322,0.018815916,fusion_late_avg_noquest,1,4,test
+DEV0008,0,0.2807894509674278,0.013825611,fusion_late_avg_noquest,1,4,test
+DEV0009,1,0.8201290971886523,0.026863744,fusion_late_avg_noquest,1,4,test
+DEV0012,0,0.26321602279933115,0.0006317912,fusion_late_avg_noquest,1,4,test
+DEV0015,0,0.14077459524368086,0.003823793,fusion_late_avg_noquest,1,4,test
+DEV0022,1,0.9573684222146551,0.030338332,fusion_late_avg_noquest,1,4,test
+DEV0023,1,0.4535188958441326,4.5396097e-05,fusion_late_avg_noquest,1,4,test
+DEV0027,0,0.13453776033845088,0.025730206,fusion_late_avg_noquest,1,4,test
+DEV0049,0,0.22845890620045062,0.0075353202,fusion_late_avg_noquest,1,4,test
+DEV0053,1,0.8466643504746774,0.047747236,fusion_late_avg_noquest,1,4,test
+DEV0055,0,0.8534826509176949,0.004272941,fusion_late_avg_noquest,1,4,test

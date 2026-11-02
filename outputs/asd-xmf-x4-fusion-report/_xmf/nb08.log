@@ -1,0 +1,252 @@
+face embedding: /kaggle/input/notebooks/shazedaoni/asd-xmf-x3-cohort-pipeline/emb/emb_efficientnet_b0_expr.npy
+{'child_id': (60,), 'y': (60,), 'face': (60, 10, 40, 320), 'face_frame_mask': (60, 10, 40), 'face_mask': (60, 10), 'voice': (60, 10, 1624), 'voice_mask': (60, 10), 'cry': (60, 3, 1624), 'cry_mask': (60, 3), 'quest': (60, 20), 'quest_mask': (60,)}
+modality availability (children): {'face': 1.0, 'voice': 0.7, 'cry': 0.4666666666666667, 'quest': 1.0}
+[mon] 16:43:17 RAM 1.6/33.7 GB ; GPU 3 MiB, 15360 MiB, 0 % | 3 MiB, 15360 MiB, 0 % ; work disk used 0.0 GB
+[job] xmf_s0_f0 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers) | /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:852: UserWarning: Specified kernel cache directory could not be created! This disables kernel caching. Specified directory is /root/.cache/torch/kernels. This warning will appear only once per process. (Triggered internally at /pytorch/aten/src/ATen/native/cuda/jit_utils.cpp:1505.) |   kl = (torch.lgamma(St) - math.lgamma(2) - torch.lgamma(at).sum(-1)
+[job] xmf_s0_f1 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] xmf_s0_f2 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] xmf_s0_f3 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] xmf_s0_f4 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] xmf_s1_f0 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] xmf_s1_f1 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] xmf_s1_f2 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] xmf_s1_f3 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] xmf_s1_f4 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] xmf_s2_f0 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] xmf_s2_f1 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] xmf_s2_f2 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] xmf_s2_f3 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] xmf_s2_f4 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] xmf_noquest_s0_f0 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] xmf_noquest_s0_f1 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] xmf_noquest_s0_f2 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] xmf_noquest_s0_f3 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] xmf_noquest_s0_f4 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] xmf_noquest_s1_f0 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] xmf_noquest_s1_f1 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] xmf_noquest_s1_f2 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] xmf_noquest_s1_f3 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] xmf_noquest_s1_f4 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] xmf_noquest_s2_f0 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] xmf_noquest_s2_f1 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] xmf_noquest_s2_f2 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] xmf_noquest_s2_f3 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] xmf_noquest_s2_f4 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] early_concat_s0_f0 exit=0 :: 
+[job] early_concat_s0_f1 exit=0 :: 
+[job] early_concat_s0_f2 exit=0 :: 
+[job] early_concat_s0_f3 exit=0 :: 
+[job] early_concat_s0_f4 exit=0 :: 
+[job] early_concat_s1_f0 exit=0 :: 
+[job] early_concat_s1_f1 exit=0 :: 
+[job] early_concat_s1_f2 exit=0 :: 
+[job] early_concat_s1_f3 exit=0 :: 
+[job] early_concat_s1_f4 exit=0 :: 
+[job] early_concat_s2_f0 exit=0 :: 
+[job] early_concat_s2_f1 exit=0 :: 
+[job] early_concat_s2_f2 exit=0 :: 
+[job] early_concat_s2_f3 exit=0 :: 
+[job] early_concat_s2_f4 exit=0 :: 
+[job] early_concat_noquest_s0_f0 exit=0 :: 
+[job] early_concat_noquest_s0_f1 exit=0 :: 
+[job] early_concat_noquest_s0_f2 exit=0 :: 
+[job] early_concat_noquest_s0_f3 exit=0 :: 
+[job] early_concat_noquest_s0_f4 exit=0 :: 
+[job] early_concat_noquest_s1_f0 exit=0 :: 
+[job] early_concat_noquest_s1_f1 exit=0 :: 
+[job] early_concat_noquest_s1_f2 exit=0 :: 
+[job] early_concat_noquest_s1_f3 exit=0 :: 
+[job] early_concat_noquest_s1_f4 exit=0 :: 
+[job] early_concat_noquest_s2_f0 exit=0 :: 
+[mon] 16:48:17 RAM 3.6/33.7 GB ; GPU 219 MiB, 15360 MiB, 25 % | 219 MiB, 15360 MiB, 26 % ; work disk used 0.4 GB
+[job] early_concat_noquest_s2_f1 exit=0 :: 
+[job] early_concat_noquest_s2_f2 exit=0 :: 
+[job] early_concat_noquest_s2_f3 exit=0 :: 
+[job] early_concat_noquest_s2_f4 exit=0 :: 
+[job] late_avg_s0_f0 exit=0 :: 
+[job] late_avg_s0_f1 exit=0 :: 
+[job] late_avg_s0_f2 exit=0 :: 
+[job] late_avg_s0_f3 exit=0 :: 
+[job] late_avg_s0_f4 exit=0 :: 
+[job] late_avg_s1_f0 exit=0 :: 
+[job] late_avg_s1_f1 exit=0 :: 
+[job] late_avg_s1_f2 exit=0 :: 
+[job] late_avg_s1_f3 exit=0 :: 
+[job] late_avg_s1_f4 exit=0 :: 
+[job] late_avg_s2_f0 exit=0 :: 
+[job] late_avg_s2_f1 exit=0 :: 
+[job] late_avg_s2_f2 exit=0 :: 
+[job] late_avg_s2_f3 exit=0 :: 
+[job] late_avg_s2_f4 exit=0 :: 
+[job] late_avg_noquest_s0_f0 exit=0 :: 
+[job] late_avg_noquest_s0_f1 exit=0 :: 
+[job] late_avg_noquest_s0_f2 exit=0 :: 
+[job] late_avg_noquest_s0_f3 exit=0 :: 
+[job] late_avg_noquest_s0_f4 exit=0 :: 
+[job] late_avg_noquest_s1_f0 exit=0 :: 
+[job] late_avg_noquest_s1_f1 exit=0 :: 
+[job] late_avg_noquest_s1_f2 exit=0 :: 
+[job] late_avg_noquest_s1_f3 exit=0 :: 
+[job] late_avg_noquest_s1_f4 exit=0 :: 
+[job] late_avg_noquest_s2_f0 exit=0 :: 
+[job] late_avg_noquest_s2_f1 exit=0 :: 
+[job] late_avg_noquest_s2_f2 exit=0 :: 
+[job] late_avg_noquest_s2_f3 exit=0 :: 
+[job] late_avg_noquest_s2_f4 exit=0 :: 
+[job] stacking_s0_f0 exit=0 :: 
+[job] stacking_s0_f1 exit=0 :: 
+[job] stacking_s0_f2 exit=0 :: 
+[job] stacking_s0_f3 exit=0 :: 
+[job] stacking_s0_f4 exit=0 :: 
+[job] stacking_s1_f0 exit=0 :: 
+[job] stacking_s1_f1 exit=0 :: 
+[job] stacking_s1_f2 exit=0 :: 
+[job] stacking_s1_f3 exit=0 :: 
+[job] stacking_s1_f4 exit=0 :: 
+[job] stacking_s2_f0 exit=0 :: 
+[job] stacking_s2_f1 exit=0 :: 
+[job] stacking_s2_f2 exit=0 :: 
+[job] stacking_s2_f3 exit=0 :: 
+[job] stacking_s2_f4 exit=0 :: 
+[job] stacking_noquest_s0_f0 exit=0 :: 
+[job] stacking_noquest_s0_f1 exit=0 :: 
+[job] stacking_noquest_s0_f2 exit=0 :: 
+[job] stacking_noquest_s0_f3 exit=0 :: 
+[job] stacking_noquest_s0_f4 exit=0 :: 
+[job] stacking_noquest_s1_f0 exit=0 :: 
+[job] stacking_noquest_s1_f1 exit=0 :: 
+[job] stacking_noquest_s1_f2 exit=0 :: 
+[job] stacking_noquest_s1_f3 exit=0 :: 
+[job] stacking_noquest_s1_f4 exit=0 :: 
+[job] stacking_noquest_s2_f0 exit=0 :: 
+[job] stacking_noquest_s2_f2 exit=0 :: 
+[mon] 16:53:17 RAM 2.3/33.7 GB ; GPU 3 MiB, 15360 MiB, 0 % | 3 MiB, 15360 MiB, 0 % ; work disk used 0.4 GB
+[job] stacking_noquest_s2_f1 exit=0 :: 
+[job] stacking_noquest_s2_f3 exit=0 :: 
+[job] stacking_noquest_s2_f4 exit=0 :: 
+[job] tfn_s0_f0 exit=0 :: 
+[job] tfn_s0_f1 exit=0 :: 
+[job] tfn_s0_f2 exit=0 :: 
+[job] tfn_s0_f3 exit=0 :: 
+[job] tfn_s0_f4 exit=0 :: 
+[job] tfn_s1_f0 exit=0 :: 
+[job] tfn_s1_f1 exit=0 :: 
+[job] tfn_s1_f2 exit=0 :: 
+[job] tfn_s1_f3 exit=0 :: 
+[job] tfn_s1_f4 exit=0 :: 
+[job] tfn_s2_f0 exit=0 :: 
+[job] tfn_s2_f1 exit=0 :: 
+[job] tfn_s2_f2 exit=0 :: 
+[job] tfn_s2_f3 exit=0 :: 
+[job] tfn_s2_f4 exit=0 :: 
+[job] tfn_noquest_s0_f0 exit=0 :: 
+[job] tfn_noquest_s0_f1 exit=0 :: 
+[job] tfn_noquest_s0_f2 exit=0 :: 
+[job] tfn_noquest_s0_f3 exit=0 :: 
+[job] tfn_noquest_s0_f4 exit=0 :: 
+[job] tfn_noquest_s1_f0 exit=0 :: 
+[job] tfn_noquest_s1_f1 exit=0 :: 
+[job] tfn_noquest_s1_f2 exit=0 :: 
+[job] tfn_noquest_s1_f3 exit=0 :: 
+[job] tfn_noquest_s1_f4 exit=0 :: 
+[job] tfn_noquest_s2_f0 exit=0 :: 
+[job] tfn_noquest_s2_f1 exit=0 :: 
+[job] tfn_noquest_s2_f2 exit=0 :: 
+[job] tfn_noquest_s2_f3 exit=0 :: 
+[job] tfn_noquest_s2_f4 exit=0 :: 
+[job] lmf_s0_f0 exit=0 :: 
+[job] lmf_s0_f1 exit=0 :: 
+[job] lmf_s0_f2 exit=0 :: 
+[job] lmf_s0_f3 exit=0 :: 
+[job] lmf_s0_f4 exit=0 :: 
+[job] lmf_s1_f0 exit=0 :: 
+[job] lmf_s1_f1 exit=0 :: 
+[job] lmf_s1_f2 exit=0 :: 
+[job] lmf_s1_f3 exit=0 :: 
+[job] lmf_s1_f4 exit=0 :: 
+[job] lmf_s2_f0 exit=0 :: 
+[job] lmf_s2_f1 exit=0 :: 
+[job] lmf_s2_f2 exit=0 :: 
+[job] lmf_s2_f3 exit=0 :: 
+[job] lmf_s2_f4 exit=0 :: 
+[job] lmf_noquest_s0_f0 exit=0 :: 
+[job] lmf_noquest_s0_f1 exit=0 :: 
+[job] lmf_noquest_s0_f2 exit=0 :: 
+[job] lmf_noquest_s0_f3 exit=0 :: 
+[job] lmf_noquest_s0_f4 exit=0 :: 
+[job] lmf_noquest_s1_f0 exit=0 :: 
+[job] lmf_noquest_s1_f1 exit=0 :: 
+[job] lmf_noquest_s1_f2 exit=0 :: 
+[job] lmf_noquest_s1_f3 exit=0 :: 
+[job] lmf_noquest_s1_f4 exit=0 :: 
+[job] lmf_noquest_s2_f0 exit=0 :: 
+[job] lmf_noquest_s2_f1 exit=0 :: 
+[job] lmf_noquest_s2_f2 exit=0 :: 
+[mon] 16:58:17 RAM 2.9/33.7 GB ; GPU 3 MiB, 15360 MiB, 0 % | 201 MiB, 15360 MiB, 26 % ; work disk used 0.4 GB
+[job] lmf_noquest_s2_f3 exit=0 :: 
+[job] lmf_noquest_s2_f4 exit=0 :: 
+[job] mult_s0_f0 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] mult_s0_f1 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] mult_s0_f2 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] mult_s0_f3 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] mult_s0_f4 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] mult_s1_f0 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] mult_s1_f1 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] mult_s1_f2 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] mult_s1_f3 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] mult_s1_f4 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] mult_s2_f0 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] mult_s2_f1 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] mult_s2_f2 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] mult_s2_f3 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] mult_s2_f4 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] mult_noquest_s0_f0 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] mult_noquest_s0_f1 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] mult_noquest_s0_f2 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] mult_noquest_s0_f3 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] mult_noquest_s0_f4 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] mult_noquest_s1_f0 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] mult_noquest_s1_f1 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] mult_noquest_s1_f2 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] mult_noquest_s1_f3 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] mult_noquest_s1_f4 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] mult_noquest_s2_f0 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] mult_noquest_s2_f1 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] mult_noquest_s2_f2 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] mult_noquest_s2_f3 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[job] mult_noquest_s2_f4 exit=0 :: /kaggle/input/datasets/shazedaoni/asd-xmf-lib/asd_models.py:703: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True |   self.enc = nn.TransformerEncoder(layer, layers)
+[time] fusion: 17.7 min
+non-zero exits: 0
+| model                       |   oof_auroc |   test_auroc |   test_sens |   test_spec |   test_ece |
+|:----------------------------|------------:|-------------:|------------:|------------:|-----------:|
+| fusion_stacking             |       0.992 |        0.969 |       0.750 |       1.000 |      0.212 |
+| fusion_mult                 |       0.983 |        0.969 |       1.000 |       0.750 |      0.211 |
+| fusion_mult_noquest         |       0.973 |        0.969 |       0.750 |       0.875 |      0.215 |
+| fusion_stacking_noquest     |       0.962 |        0.938 |       1.000 |       0.750 |      0.162 |
+| fusion_early_concat_noquest |       0.962 |        0.969 |       0.750 |       0.875 |      0.314 |
+| fusion_early_concat         |       0.958 |        1.000 |       0.750 |       1.000 |      0.264 |
+| fusion_late_avg_noquest     |       0.949 |        0.969 |       1.000 |       0.875 |      0.330 |
+| fusion_tfn                  |       0.947 |        0.969 |       0.750 |       1.000 |      0.360 |
+| fusion_xmf                  |       0.945 |        1.000 |       1.000 |       0.875 |      0.300 |
+| fusion_late_avg             |       0.930 |        1.000 |       1.000 |       0.875 |      0.314 |
+| fusion_xmf_noquest          |       0.922 |        0.875 |       0.750 |       0.875 |      0.122 |
+| fusion_tfn_noquest          |       0.880 |        0.969 |       1.000 |       0.875 |      0.404 |
+| fusion_lmf_noquest          |       0.611 |        1.000 |       0.000 |       1.000 |      0.127 |
+| fusion_lmf                  |       0.575 |        0.562 |       0.000 |       1.000 |      0.138 |
+XMF test AUROC with modalities removed at test time (mean over folds):
+none                0.940
+face                0.992
+voice               0.765
+cry                 0.912
+quest               0.927
+face-voice          0.856
+face-cry            0.952
+face-quest          0.956
+voice-cry           0.640
+voice-quest         0.677
+cry-quest           0.890
+face-voice-cry      0.762
+face-voice-quest    0.662
+face-cry-quest      0.925
+voice-cry-quest     0.517
+SYNTHETIC DEV COHORT - pipeline test only. These numbers are NOT results and must never appear in a paper.

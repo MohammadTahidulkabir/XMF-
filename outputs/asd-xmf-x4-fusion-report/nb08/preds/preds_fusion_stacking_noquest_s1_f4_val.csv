@@ -1,0 +1,10 @@
+child_id,y_true,prob,uncertainty,model,seed,fold,part
+DEV0017,0,0.2063599135749697,,fusion_stacking_noquest,1,4,val
+DEV0018,0,0.10168580829822464,,fusion_stacking_noquest,1,4,val
+DEV0019,1,0.6346098420136759,,fusion_stacking_noquest,1,4,val
+DEV0026,0,0.18249106331225243,,fusion_stacking_noquest,1,4,val
+DEV0031,0,0.4685714646528034,,fusion_stacking_noquest,1,4,val
+DEV0038,1,0.7449964446445911,,fusion_stacking_noquest,1,4,val
+DEV0043,0,0.2716081760942325,,fusion_stacking_noquest,1,4,val
+DEV0044,1,0.6672801344840751,,fusion_stacking_noquest,1,4,val
+DEV0051,0,0.09953647872304672,,fusion_stacking_noquest,1,4,val
