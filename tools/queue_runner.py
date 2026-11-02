@@ -79,15 +79,24 @@ def _ledger_add(slug, state):
 
 def has_file(slug: str, names):
     """The first of `names` in the latest run's output, "" if none, None when Kaggle could not be asked.
-    Uses the output *file listing*: `kernels output --file-pattern` silently matches nothing in Kaggle CLI 2.2.x."""
+    Uses the output *file listing*: `kernels output --file-pattern` silently matches nothing in Kaggle CLI 2.2.x.
+    Names starting with "_" are listed first, so the scan stops as soon as one of names[:-1] is seen (X1 has
+    ~7000 output files: reading every page hit Kaggle's rate limit inside the orchestrator)."""
     names = [names] if isinstance(names, str) else list(names)
+    early = set(names[:-1]) if len(names) > 1 else set(names)
     token, found = None, set()
-    for _ in range(50):
+    for _ in range(60):
         args = ["kernels", "files", f"{K.USER}/{slug}", "--page-size", "200"] + (["--page-token", token] if token else [])
-        rc, out = K.sh(args, timeout=300)
-        if rc != 0 and "name" not in out:
-            return None
+        for attempt in range(3):
+            rc, out = K.sh(args, timeout=300)
+            if rc == 0 or "name" in out:
+                break
+            time.sleep(20 * (attempt + 1))
+        else:
+            return next((n for n in names if n in found), None)  # keep what earlier pages showed
         found |= {n for n in names if re.search(r"(^|/|\s)" + re.escape(n) + r"\s", out)}
+        if found & early:
+            break
         m = re.search(r"Next Page Token = (\S+)", out)
         if not m:
             break
@@ -239,7 +248,7 @@ def loop(max_hours=None, self_slug=None):
             ready = [i for i in items if st[i["slug"]] == "PENDING"
                      and all(st.get(d) == "DONE" for d in i.get("after", []))]
             if not ready:
-                if not summary["PENDING"]:
+                if not (summary["PENDING"] or summary["RUNNING"] or summary["UNKNOWN"]):
                     log("queue finished - nothing left to run")
                     return
                 time.sleep(POLL)
