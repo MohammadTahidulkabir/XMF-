@@ -1,10 +1,11 @@
 {
  "model": "swin_t",
  "proposed": false,
+ "recipe": "plain",
  "params_m": 27.512593,
  "best_epoch": 16,
  "epochs_run": 20,
- "train_minutes": 39.27077182133993,
+ "train_minutes": 38.219491195678714,
  "train": {
   "n": 6000,
   "acc": 0.9176666666666666,
