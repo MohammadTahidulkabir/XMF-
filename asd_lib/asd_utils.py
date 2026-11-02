@@ -43,6 +43,10 @@ WORK.mkdir(parents=True, exist_ok=True)
 LIB_DIR = Path(__file__).resolve().parent
 
 
+# helper copies that must never be found by name: NB09's background-only face store has its own face_index.csv
+SEARCH_SKIP = {"bgstore"}
+
+
 def _search_roots() -> List[Path]:
     """Inside a combined notebook (X1-X4, asd_runner) earlier sections write to WORK, so look there first."""
     return [WORK, INPUT_ROOT] if os.environ.get("ASD_SEARCH_WORK") == "1" else [INPUT_ROOT]
@@ -78,7 +82,7 @@ def find_path(name: str, roots: Optional[Sequence[Path]] = None, maxdepth: int =
                 subdirs = [e for e in entries if e.is_dir()]
                 if len(entries) - len(subdirs) > 3000:
                     continue
-                nxt.extend(Path(e.path) for e in subdirs)
+                nxt.extend(Path(e.path) for e in subdirs if e.name not in SEARCH_SKIP)
             frontier = nxt
             if not frontier:
                 break
@@ -96,6 +100,7 @@ def find_all(name: str, roots: Optional[Sequence[Path]] = None, maxdepth: int = 
                 out.append(Path(dirpath) / name)
             if depth >= maxdepth or len(filenames) > 3000:
                 dirnames[:] = []
+            dirnames[:] = [d for d in dirnames if d not in SEARCH_SKIP]
     return out
 
 

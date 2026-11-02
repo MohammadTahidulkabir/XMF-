@@ -12,27 +12,27 @@
     {"name": "t1", "src": "t1_text_benchmark.py", "rev": 2, "after": ["d4"]},
     {"name": "a1", "src": "a1_audio_benchmark.py", "rev": 2, "after": ["d2"]}
    ]},
-  {"slug": "asd-xmf-x2-photo-gaze", "title": "ASD-XMF X2 Photo Gaze",
+  {"slug": "asd-xmf-x2-photo-gaze", "title": "ASD-XMF X2 Photo Gaze", "rev": 2,
    "about": "Photo sector comparison P1 on D1 (proposed XMF-Face vs 11 baselines) and the gaze study NB13.",
    "gpu": true, "kernels": ["asd-xmf-d1-photo-dataset"],
    "sections": [
     {"name": "nb13", "src": "nb13_gaze_eyetracking.py"},
-    {"name": "p1", "src": "p1_photo_benchmark.py"}
+    {"name": "p1", "src": "p1_photo_benchmark.py", "rev": 2}
    ]},
-  {"slug": "asd-xmf-x3-cohort-pipeline", "title": "ASD-XMF X3 Cohort Pipeline",
+  {"slug": "asd-xmf-x3-cohort-pipeline", "title": "ASD-XMF X3 Cohort Pipeline", "rev": 2,
    "about": "Cohort audit and splits, face and audio pipelines, frame embeddings and all single-modality baselines (NB00-NB07).",
    "gpu": true, "kernels": ["asd-xmf-x2-photo-gaze"],
    "sections": [
     {"name": "nb00", "src": "nb00_data_audit_manifest.py"},
     {"name": "nb01", "src": "nb01_face_pipeline.py", "after": ["nb00"]},
     {"name": "nb02", "src": "nb02_audio_pipeline.py", "after": ["nb00"]},
-    {"name": "nb05", "src": "nb05_frame_embeddings.py", "after": ["nb01"]},
+    {"name": "nb05", "src": "nb05_frame_embeddings.py", "rev": 2, "after": ["nb01"]},
     {"name": "nb07", "src": "nb07_audio_baselines.py", "after": ["nb02"]},
     {"name": "nb06", "src": "nb06_video_baselines.py", "after": ["nb05"]},
-    {"name": "nb04a", "src": "nb04_frame_baselines.py", "variant": "a-cnn", "after": ["nb01"]},
-    {"name": "nb04b", "src": "nb04_frame_baselines.py", "variant": "b-cnn", "after": ["nb01"]},
-    {"name": "nb04c", "src": "nb04_frame_baselines.py", "variant": "c-vit", "after": ["nb01"]},
-    {"name": "nb04d", "src": "nb04_frame_baselines.py", "variant": "d-yolo", "after": ["nb01"]}
+    {"name": "nb04a", "src": "nb04_frame_baselines.py", "rev": 2, "variant": "a-cnn", "after": ["nb01"]},
+    {"name": "nb04b", "src": "nb04_frame_baselines.py", "rev": 2, "variant": "b-cnn", "after": ["nb01"]},
+    {"name": "nb04c", "src": "nb04_frame_baselines.py", "rev": 2, "variant": "c-vit", "after": ["nb01"]},
+    {"name": "nb04d", "src": "nb04_frame_baselines.py", "rev": 2, "variant": "d-yolo", "after": ["nb01"]}
    ]},
   {"slug": "asd-xmf-x4-fusion-report", "title": "ASD-XMF X4 Fusion Report",
    "about": "XMF fusion vs 6 fusion baselines, ablations and shortcut tests, XAI, statistics and figures, app export (NB08-NB12).",

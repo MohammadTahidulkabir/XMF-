@@ -8,8 +8,14 @@
 # embedding every cohort frame is later mapped to).  **Baselines (plan 5.3 + proposal):** ResNet-18/50,
 # EfficientNet-B0/V2-S, MobileNetV3-L, ConvNeXt-T, ViT-S/16, DeiT-S, Swin-T, YOLOv8-cls, YOLOv8-ATT.
 #
-# Identical protocol for all: same splits, 160 px, max 20 epochs, early stopping on validation macro-F1
-# (patience 5), AdamW + cosine, label smoothing 0.1, mixup on half the batches, GPU augmentation, fp16.
+# Identical protocol for all baselines: same splits, 160 px, max 20 epochs, early stopping on validation
+# macro-F1 (patience 5), AdamW + cosine, label smoothing 0.1, mixup on half the batches, GPU augmentation, fp16.
+#
+# **XMF-Face v2 training recipe (part of the proposed method):** same splits, 160 px and augmentation, plus
+# knowledge distillation from an EfficientNetV2-S teacher trained on the same train split (T=4, alpha=0.5),
+# EMA weights, horizontal-flip test-time augmentation, max 30 epochs / patience 8.  Every value is fixed a
+# priori and the best epoch is still chosen on validation macro-F1, so the test sets are still used once.
+# The plain EfficientNet-B0 baseline (same backbone, plain recipe) shows what the recipe adds.
 # Over/underfitting is reported for every model (train vs validation accuracy gap, learning curves).
 # Test sets (FER2013, RAF-DB, external CK+) are used once.
 
@@ -27,12 +33,29 @@ MODELS = ["xmf_face", "efficientnet_b0", "resnet18", "resnet50", "efficientnetv2
 HEAVY = {"convnext_tiny", "vit_s16", "deit_s", "swin_t", "efficientnetv2_s", "resnet50"}
 if PREFLIGHT:
     MODELS = ["xmf_face", "resnet18"]
-jobs = [{"name": m, "model": m, "cache": str(CACHE), "out_dir": str(OUT), "img_size": 160,
-         "epochs": 1 if PREFLIGHT else 20, "patience": 5, "batch": 16 if PREFLIGHT else (128 if m in HEAVY else 256),
-         "lr": (5e-4 if m in ("vit_s16", "deit_s", "swin_t", "convnext_tiny") else 1.5e-3), "seed": 0, "workers": 2,
-         "limit": 600 if PREFLIGHT else None, "max_steps": 4 if PREFLIGHT else None} for m in MODELS]
+def job_for(m, name=None, **kw):
+    return {"name": name or m, "model": m, "cache": str(CACHE), "out_dir": str(OUT), "img_size": 160,
+            "epochs": 1 if PREFLIGHT else 20, "patience": 5, "batch": 16 if PREFLIGHT else (128 if m in HEAVY else 256),
+            "lr": (5e-4 if m in ("vit_s16", "deit_s", "swin_t", "convnext_tiny") else 1.5e-3), "seed": 0, "workers": 2,
+            "limit": 600 if PREFLIGHT else None, "max_steps": 4 if PREFLIGHT else None, **kw}
+
+# an XMF-Face result from the plain recipe (earlier run) is re-trained with the v2 recipe; finished baselines are reused
+old = OUT / "results" / "xmf_face.json"
+if old.exists() and json.loads(old.read_text()).get("recipe") != "xmf_v2":
+    (OUT / "flags" / "xmf_face.done").unlink(missing_ok=True)
+    print("XMF-Face: earlier plain-recipe result found - re-training with the v2 recipe")
+
+TEACHER = "kd_teacher_efficientnetv2_s"
 with U.Timer("photo benchmark"):
-    U.run_jobs_parallel("asd_bench", "photo_task", jobs, log_dir=OUT / "logs")
+    # 1) the baselines and the distillation teacher (EfficientNetV2-S, baseline recipe, same train split)
+    U.run_jobs_parallel("asd_bench", "photo_task",
+                        [job_for(m) for m in MODELS if m != "xmf_face"] +
+                        [job_for("efficientnetv2_s", TEACHER, save_train_logits=True)], log_dir=OUT / "logs")
+    # 2) the proposed XMF-Face with the v2 recipe, distilled from the teacher's train-set logits
+    U.run_jobs_parallel("asd_bench", "photo_task",
+                        [job_for("xmf_face", teacher=str(OUT / "results" / f"{TEACHER}_train_logits.npy"),
+                                 kd_t=4.0, kd_alpha=0.5, ema=0.998, tta=True, recipe="xmf_v2",
+                                 epochs=1 if PREFLIGHT else 30, patience=8)], log_dir=OUT / "logs")
 
 # %% [markdown]
 # ## Comparison table (proposed first), with over/underfitting check

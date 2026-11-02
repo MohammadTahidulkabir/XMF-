@@ -11,6 +11,7 @@ mixed precision, channels_last.  The test split is used once, at the end.
 """
 from __future__ import annotations
 
+import copy
 import json
 import math
 import time
@@ -56,6 +57,10 @@ def _save(out: Path, name: str, res: Dict, curves: List[Dict]):
 # PHOTO: 7-class facial expression on the unified XMF-Photo dataset
 # ----------------------------------------------------------------------------
 PROPOSED_PHOTO = "xmf_face"   # plan 5.1: EfficientNet-B0 expression encoder with 256-d embedding
+# XMF-Face v2 recipe (part of the proposed method; baselines keep the plain recipe):
+#   knowledge distillation from an EfficientNetV2-S teacher trained on the same train split (T=4, alpha=0.5),
+#   EMA weights, horizontal-flip test-time augmentation, 30 epochs / patience 8.  All values fixed a priori;
+#   the best epoch is still chosen on validation macro-F1.
 
 
 def build_photo_model(name: str, n_cls: int, img: int):
@@ -85,28 +90,43 @@ def photo_task(job: Dict) -> None:
         va, te = va[: job["limit"] // 4], te[: job["limit"] // 2]
     model, size = build_photo_model(job["model"], n_cls, job["img_size"])
     model = model.to(dev).to(memory_format=torch.channels_last)
+    teacher = None
+    if job.get("teacher"):  # [N, n_cls] logits of the teacher for the training images
+        teacher = torch.tensor(np.load(job["teacher"]), dtype=torch.float32, device=dev)
+        Yall = torch.tensor(y, device=dev)
+    kd_t, kd_a = float(job.get("kd_t", 4.0)), float(job.get("kd_alpha", 0.5))
+    ema = copy.deepcopy(model).eval() if job.get("ema") else None
+    net = ema if ema is not None else model   # the weights that are evaluated and saved
     opt = torch.optim.AdamW(model.parameters(), lr=job["lr"], weight_decay=job.get("wd", 0.05))
     scaler = M.make_scaler()
     counts = np.bincount(y[tr], minlength=n_cls).astype(float)
     w = torch.tensor(np.clip((counts.sum() / np.maximum(counts, 1) / n_cls) ** 0.5, 0.3, 3), dtype=torch.float32, device=dev)
     crit = nn.CrossEntropyLoss(weight=w, label_smoothing=0.1)
     bs = job["batch"]
-    mk = lambda ids, sh: torch.utils.data.DataLoader(M.MemmapImages(cache / "images.npy", y, ids), batch_size=bs if sh else bs * 2,
+    # with a teacher the loader yields the image index, so labels and soft targets are looked up on the GPU
+    mk = lambda ids, sh: torch.utils.data.DataLoader(M.MemmapImages(cache / "images.npy", np.arange(len(y)) if (sh and teacher is not None) else y, ids),
+                                                      batch_size=bs if sh else bs * 2,
                                                       shuffle=sh, num_workers=job.get("workers", 2), pin_memory=True, drop_last=sh)
     steps_per = max(1, len(tr) // bs)
     total = job["epochs"] * steps_per
     ck = out / "ckpt" / f"{job['name']}.pt"
     ck.parent.mkdir(parents=True, exist_ok=True)
 
-    def predict(ids):
-        model.eval()
-        P, L = [], 0.0
+    def predict(ids, logits=False):
+        net.eval()
+        P, L, R = [], 0.0, []
         with torch.no_grad(), M.amp_ctx():
             for xb, yb in mk(ids, False):
-                lo = model(M.gpu_prepare(xb.to(dev, non_blocking=True), size, train=False)).float()
+                xin = M.gpu_prepare(xb.to(dev, non_blocking=True), size, train=False)
+                lo = net(xin).float()
+                if job.get("tta"):
+                    lo = (lo + net(xin.flip(-1)).float()) / 2
+                R.append(lo.cpu().numpy())
                 L += F.cross_entropy(lo, yb.to(dev), reduction="sum").item()
                 P.append(lo.argmax(1).cpu().numpy())
         P = np.concatenate(P) if P else np.zeros(0, int)
+        if logits:
+            return np.concatenate(R)
         return P, L / max(1, len(ids))
 
     curves, best, best_ep, step, t0 = [], -1.0, -1, 0, time.time()
@@ -117,6 +137,10 @@ def photo_task(job: Dict) -> None:
         for xb, yb in mk(tr, True):
             xb = M.gpu_prepare(xb.to(dev, non_blocking=True), size, train=True, gray=True)
             yb = yb.to(dev)
+            soft = None
+            if teacher is not None:
+                soft = (teacher[yb] / kd_t).softmax(1)
+                yb = Yall[yb]
             M.cosine_lr(opt, [job["lr"]], step, total, warmup=steps_per)
             lam, perm = 1.0, None
             if np.random.rand() < 0.5:   # mixup on half the batches (regularisation)
@@ -126,12 +150,24 @@ def photo_task(job: Dict) -> None:
             with M.amp_ctx():
                 lo = model(xb).float()
                 loss = lam * crit(lo, yb) + ((1 - lam) * crit(lo, yb[perm]) if perm is not None else 0)
+                if soft is not None:   # distillation towards the teacher's (equally mixed) soft targets
+                    tgt = soft if perm is None else lam * soft + (1 - lam) * soft[perm]
+                    kd = F.kl_div((lo / kd_t).log_softmax(1), tgt, reduction="batchmean") * kd_t ** 2
+                    loss = (1 - kd_a) * loss + kd_a * kd
             opt.zero_grad(set_to_none=True)
             scaler.scale(loss).backward()
             scaler.unscale_(opt)
             nn.utils.clip_grad_norm_(model.parameters(), 2.0)
             scaler.step(opt)
             scaler.update()
+            if ema is not None:
+                d = min(float(job["ema"]), (1 + step) / (10 + step))
+                with torch.no_grad():
+                    for pe, pm in zip(ema.state_dict().values(), model.state_dict().values()):
+                        if pe.dtype.is_floating_point:
+                            pe.mul_(d).add_(pm.detach(), alpha=1 - d)
+                        else:
+                            pe.copy_(pm)
             run += loss.item() * len(yb)
             n += len(yb)
             step += 1
@@ -145,16 +181,23 @@ def photo_task(job: Dict) -> None:
         print(f"[{job['name']}] ep{ep} train_acc={mtr['acc']:.3f} val_acc={mva['acc']:.3f} val_f1={mva['macro_f1']:.3f}", flush=True)
         if mva["macro_f1"] > best:
             best, best_ep = mva["macro_f1"], ep
-            torch.save(model.state_dict(), ck)
+            torch.save(net.state_dict(), ck)
         elif ep - best_ep >= job.get("patience", 5):
             break
         if job.get("max_steps") and step >= job["max_steps"]:
             break
     model.load_state_dict(torch.load(ck, map_location=dev))
+    net = model
     ptr, _ = predict(tr_eval)
     pva, _ = predict(va)
     pte, _ = predict(te)
-    res = {"model": job["model"], "proposed": job["model"] == PROPOSED_PHOTO, "params_m": M.count_params(model) / 1e6,
+    if job.get("save_train_logits"):  # teacher for the proposed model's distillation
+        full = np.zeros((len(y), n_cls), np.float32)
+        full[tr] = predict(tr, logits=True)
+        (out / "results").mkdir(parents=True, exist_ok=True)
+        np.save(out / "results" / f"{job['name']}_train_logits.npy", full)
+    res = {"model": job["model"], "proposed": job["model"] == PROPOSED_PHOTO, "recipe": job.get("recipe", "plain"),
+           "params_m": M.count_params(model) / 1e6,
            "best_epoch": best_ep, "epochs_run": len(curves), "train_minutes": (time.time() - t0) / 60,
            "train": cls_metrics(y[tr_eval], ptr, n_cls), "val": cls_metrics(y[va], pva, n_cls),
            "test": cls_metrics(y[te], pte, n_cls)}
