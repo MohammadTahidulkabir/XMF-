@@ -34,15 +34,15 @@
     {"name": "nb04c", "src": "nb04_frame_baselines.py", "rev": 2, "variant": "c-vit", "after": ["nb01"]},
     {"name": "nb04d", "src": "nb04_frame_baselines.py", "rev": 2, "variant": "d-yolo", "after": ["nb01"]}
    ]},
-  {"slug": "asd-xmf-x4-fusion-report", "title": "ASD-XMF X4 Fusion Report",
+  {"slug": "asd-xmf-x4-fusion-report", "title": "ASD-XMF X4 Fusion Report", "rev": 2,
    "about": "XMF fusion vs 6 fusion baselines, ablations and shortcut tests, XAI, statistics and figures, app export (NB08-NB12).",
    "gpu": true, "kernels": ["asd-xmf-x3-cohort-pipeline", "asd-xmf-x2-photo-gaze"],
    "sections": [
-    {"name": "nb08", "src": "nb08_fusion.py"},
-    {"name": "nb09", "src": "nb09_ablations_shortcuts.py", "after": ["nb08"]},
-    {"name": "nb10", "src": "nb10_xai.py", "after": ["nb08"]},
-    {"name": "nb12", "src": "nb12_export_app.py", "after": ["nb08"]},
-    {"name": "nb11", "src": "nb11_stats_figures.py", "after": ["nb09", "nb10"]}
+    {"name": "nb08", "src": "nb08_fusion.py", "rev": 2},
+    {"name": "nb09", "src": "nb09_ablations_shortcuts.py", "rev": 2, "after": ["nb08"]},
+    {"name": "nb10", "src": "nb10_xai.py", "rev": 2, "after": ["nb08"]},
+    {"name": "nb12", "src": "nb12_export_app.py", "rev": 2, "after": ["nb08"]},
+    {"name": "nb11", "src": "nb11_stats_figures.py", "rev": 2, "after": ["nb09", "nb10"]}
    ]}
  ]
 }

@@ -192,11 +192,25 @@ def snapshot(items):
     return st
 
 
+def newer_orchestrator(t0: float) -> bool:
+    """True when the orchestrator notebook was started again after this instance began.  Pushing a new
+    version does not stop a running session, so without this every restart left one more pusher behind."""
+    import datetime
+    for r in K.recent_kernels(25):
+        if r.get("ref", "").endswith("/" + ORCH) and r.get("lastRunTime"):
+            t = datetime.datetime.strptime(r["lastRunTime"][:19], "%Y-%m-%d %H:%M:%S").replace(tzinfo=datetime.timezone.utc)
+            return t.timestamp() > t0 + 300
+    return False
+
+
 def loop(max_hours=None, self_slug=None):
     t0, quiet, last_summary = time.time(), 0, None
     log(f"queue runner started (max_hours={max_hours}, self={self_slug})")
     while True:
         try:
+            if self_slug and newer_orchestrator(t0):
+                log("a newer orchestrator run has started - this one stops")
+                return
             if max_hours and time.time() - t0 > max_hours * 3600:
                 if self_slug:
                     log("time limit reached - relaunching the orchestrator as a new Kaggle run")

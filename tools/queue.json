@@ -5,6 +5,6 @@
     {"slug": "asd-xmf-x1-datasets-benchmarks", "kind": "combined", "rev": 2, "stage": 1, "after": []},
     {"slug": "asd-xmf-x2-photo-gaze", "kind": "combined", "rev": 2, "stage": 2, "after": ["asd-xmf-d1-photo-dataset"]},
     {"slug": "asd-xmf-x3-cohort-pipeline", "kind": "combined", "rev": 2, "stage": 3, "after": ["asd-xmf-x2-photo-gaze"]},
-    {"slug": "asd-xmf-x4-fusion-report", "kind": "combined", "stage": 3, "after": ["asd-xmf-x3-cohort-pipeline"]}
+    {"slug": "asd-xmf-x4-fusion-report", "kind": "combined", "rev": 2, "stage": 3, "after": ["asd-xmf-x3-cohort-pipeline"]}
   ]
 }
