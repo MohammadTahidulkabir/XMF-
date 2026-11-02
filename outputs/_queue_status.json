@@ -2,6 +2,6 @@
  "asd-xmf-d1-photo-dataset": "DONE",
  "asd-xmf-x1-datasets-benchmarks": "DONE",
  "asd-xmf-x2-photo-gaze": "DONE",
- "asd-xmf-x3-cohort-pipeline": "PENDING",
- "asd-xmf-x4-fusion-report": "PENDING"
+ "asd-xmf-x3-cohort-pipeline": "DONE",
+ "asd-xmf-x4-fusion-report": "RUNNING"
 }

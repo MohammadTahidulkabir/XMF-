@@ -1,0 +1,24 @@
+children with modality: {'voice': 42, 'cry': 28} of 60
+[mon] 15:34:16 RAM 1.6/33.7 GB ; GPU 3 MiB, 15360 MiB, 0 % | 3 MiB, 15360 MiB, 0 % ; work disk used 1.3 GB
+[job] melcnn_voice_f0 exit=0 :: Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[job] melcnn_voice_f1 exit=0 :: Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[job] melcnn_voice_f2 exit=0 :: Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[job] melcnn_voice_f3 exit=0 :: Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[job] melcnn_cry_f0 exit=0 :: Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[job] melcnn_voice_f4 exit=0 :: Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[job] melcnn_cry_f1 exit=0 :: Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[job] melcnn_cry_f2 exit=0 :: Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[mon] 15:39:16 RAM 4.8/33.7 GB ; GPU 533 MiB, 15360 MiB, 0 % | 575 MiB, 15360 MiB, 0 % ; work disk used 1.3 GB
+[job] melcnn_cry_f3 exit=0 :: Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[job] melcnn_cry_f4 exit=0 :: Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+| model                |   children |   oof_auroc |   test_auroc |
+|:---------------------|-----------:|------------:|-------------:|
+| cry_logreg_ast       |         28 |       1.000 |        1.000 |
+| cry_logreg_egemaps   |         28 |       1.000 |        1.000 |
+| cry_logreg_w2v       |         28 |       1.000 |        1.000 |
+| melcnn_cry           |         28 |       0.478 |        0.500 |
+| melcnn_voice         |         42 |       0.723 |        0.944 |
+| voice_logreg_ast     |         42 |       0.983 |        1.000 |
+| voice_logreg_egemaps |         42 |       0.983 |        1.000 |
+| voice_logreg_w2v     |         42 |       0.992 |        1.000 |
+SYNTHETIC DEV COHORT - pipeline test only. These numbers are NOT results and must never appear in a paper.

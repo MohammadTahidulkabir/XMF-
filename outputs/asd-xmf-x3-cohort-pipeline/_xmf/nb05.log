@@ -1,0 +1,8 @@
+children: 60 | NB03 ckpt dir: /kaggle/input/notebooks/shazedaoni/asd-xmf-x2-photo-gaze/p1/weights
+[time] embed efficientnet_b0_expr: 1.8 min
+[time] embed mobilenetv3_l_expr: 1.2 min
+[time] embed imagenet effb0: 0.1 min
+PCA explained variance (256): 0.993
+emb_efficientnet_b0_expr.npy (360, 40, 256) 7.4 MB
+emb_imagenet_effb0_pca.npy (360, 40, 256) 7.4 MB
+emb_mobilenetv3_l_expr.npy (360, 40, 256) 7.4 MB

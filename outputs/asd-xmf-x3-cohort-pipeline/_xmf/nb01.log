@@ -1,0 +1,43 @@
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+dopamine-rl 4.1.2 requires gym<=0.25.2, but you have gym 0.26.2 which is incompatible.
+cohort: /kaggle/working/nb00/dev_cohort DEV | children 60 | clips 360
+WARNING: Logging before InitGoogle() is written to STDERR
+W0000 00:00:1793633253.983135    2720 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+WARNING: Logging before InitGoogle() is written to STDERR
+W0000 00:00:1793633253.987435    2722 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+W0000 00:00:1793633254.011283    2726 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1793633254.016552    2731 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+WARNING: Logging before InitGoogle() is written to STDERR
+W0000 00:00:1793633254.020671    2734 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+WARNING: Logging before InitGoogle() is written to STDERR
+W0000 00:00:1793633254.039220    2741 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+W0000 00:00:1793633254.041136    2738 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1793633254.054284    2733 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1793633254.056447    2728 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+W0000 00:00:1793633254.067483    2745 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1793633254.080857    2738 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1793633254.109709    2747 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+1/60 children
+21/60 children
+41/60 children
+[time] face pipeline: 1.4 min
+failed children: none
+  child_id  clip_idx     clip_id  ... n_frames  n_valid                 phash
+0  DEV0000         0  DEV0000_00  ...       20       20  16738639241939073099
+1  DEV0000         1  DEV0000_01  ...       20       20  16738357766966556874
+2  DEV0000         2  DEV0000_02  ...       20       20  16774386563984472139
+3  DEV0000         3  DEV0000_03  ...       20       20  16774386563981326411
+4  DEV0000         4  DEV0000_04  ...       20       20  16738357766965508299
+
+[5 rows x 7 columns]
+       count      mean       std  min  25%  50%  75%  max
+label                                                    
+0      234.0  0.952350  0.179905  0.0  1.0  1.0  1.0  1.0
+1      126.0  0.930556  0.185900  0.0  1.0  1.0  1.0  1.0
+clips to repeat (face visible < 50 %): 15
+identical first-crop hashes across children: 3
+output GB: {'qual': 0.0, 'crops': 1.106, 'bg': 0.054, 'hand': 0.002, 'rows': 0.0, 'valid': 0.0, 'boxes': 0.0}

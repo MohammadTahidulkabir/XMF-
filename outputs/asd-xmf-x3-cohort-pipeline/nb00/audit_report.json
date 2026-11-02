@@ -1,0 +1,53 @@
+{
+ "is_synthetic": true,
+ "n_children": 60,
+ "n_clips": 360,
+ "n_cry": 28,
+ "problems": [],
+ "audit": [
+  {
+   "variable": "sex",
+   "test": "chi2",
+   "p": 0.044707716273717966,
+   "cramers_v": 0.2591534642897431,
+   "flag": ""
+  },
+  {
+   "variable": "device",
+   "test": "chi2",
+   "p": 0.288728427165309,
+   "cramers_v": 0.1369635672688863,
+   "flag": ""
+  },
+  {
+   "variable": "room",
+   "test": "chi2",
+   "p": 0.9105584698503927,
+   "cramers_v": 0.014502275676240722,
+   "flag": ""
+  },
+  {
+   "variable": "recorder",
+   "test": "chi2",
+   "p": 0.8707060776488063,
+   "cramers_v": 0.021012443050519768,
+   "flag": ""
+  },
+  {
+   "variable": "group",
+   "test": "chi2",
+   "p": 9.357622968840127e-14,
+   "cramers_v": 1.0,
+   "flag": ""
+  },
+  {
+   "variable": "age_months",
+   "test": "mann-whitney",
+   "p": 0.4999077023147116,
+   "cramers_v": NaN,
+   "flag": ""
+  }
+ ],
+ "test_children": 12,
+ "external_site": null
+}

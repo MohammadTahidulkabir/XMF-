@@ -1,0 +1,1 @@
+{"egemaps_kind": "egemaps_v02", "features": {"egemaps": [360, 88], "mfcc": [360, 160], "w2v": [360, 13, 768], "ast": [360, 768]}}

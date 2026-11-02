@@ -1,0 +1,31 @@
+cohort root: /kaggle/working/nb00/dev_cohort | DEV: True
+SYNTHETIC DEV COHORT - pipeline test only. These numbers are NOT results and must never appear in a paper.
+schema problems: none
+        n   age_mean     age_sd      male
+label                                    
+0      39  44.948718  15.794651  0.358974
+1      21  47.571429  17.926437  0.666667
+| variable   | test         |     p |   cramers_v | flag   |
+|:-----------|:-------------|------:|------------:|:-------|
+| sex        | chi2         | 0.045 |       0.259 |        |
+| device     | chi2         | 0.289 |       0.137 |        |
+| room       | chi2         | 0.911 |       0.015 |        |
+| recorder   | chi2         | 0.871 |       0.021 |        |
+| group      | chi2         | 0.000 |       1.000 |        |
+| age_months | mann-whitney | 0.500 |     nan     |        |
+clips per child: {'count': 60.0, 'mean': 6.0, 'std': 0.0, 'min': 6.0, '25%': 6.0, '50%': 6.0, '75%': 6.0, 'max': 6.0}
+children with cry: 28
+near-duplicate clip pairs: 24 | across different children: 11
+label   0   1
+split        
+cv     31  17
+test    8   4
+{
+ "is_synthetic": true,
+ "n_children": 60,
+ "n_clips": 360,
+ "n_cry": 28,
+ "problems": [],
+ "test_children": 12,
+ "external_site": null
+}

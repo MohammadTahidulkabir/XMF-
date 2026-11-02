@@ -1,0 +1,84 @@
+cohort: /kaggle/working/nb00/dev_cohort DEV
+[audio] voice: decoded 360/360 in 30s
+[audio] voice: egemaps_v02 done (360, 88)
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Loading weights:   0%|          | 0/211 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 211/211 [00:00<00:00, 16533.06it/s]
+[transformers] [1mWav2Vec2Model LOAD REPORT[0m from: facebook/wav2vec2-base
+Key                          | Status     |  | 
+-----------------------------+------------+--+-
+quantizer.codevectors        | UNEXPECTED |  | 
+project_hid.bias             | UNEXPECTED |  | 
+project_q.weight             | UNEXPECTED |  | 
+project_hid.weight           | UNEXPECTED |  | 
+project_q.bias               | UNEXPECTED |  | 
+quantizer.weight_proj.bias   | UNEXPECTED |  | 
+quantizer.weight_proj.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+[audio] voice: w2v (360, 13, 768) 31s
+
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 199/199 [00:00<00:00, 2606.55it/s]
+[transformers] [1mASTModel LOAD REPORT[0m from: MIT/ast-finetuned-audioset-10-10-0.4593
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+classifier.layernorm.bias   | UNEXPECTED |  | 
+classifier.dense.weight     | UNEXPECTED |  | 
+classifier.dense.bias       | UNEXPECTED |  | 
+classifier.layernorm.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+[audio] voice: ast (360, 768) 8s
+[time] voice: 2.0 min
+[audio] cry: decoded 28/28 in 0s
+[audio] cry: egemaps_v02 done (28, 88)
+
+Loading weights:   0%|          | 0/211 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 211/211 [00:00<00:00, 9553.19it/s]
+[transformers] [1mWav2Vec2Model LOAD REPORT[0m from: facebook/wav2vec2-base
+Key                          | Status     |  | 
+-----------------------------+------------+--+-
+quantizer.codevectors        | UNEXPECTED |  | 
+project_hid.bias             | UNEXPECTED |  | 
+project_q.weight             | UNEXPECTED |  | 
+project_hid.weight           | UNEXPECTED |  | 
+project_q.bias               | UNEXPECTED |  | 
+quantizer.weight_proj.bias   | UNEXPECTED |  | 
+quantizer.weight_proj.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+[audio] cry: w2v (28, 13, 768) 2s
+
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 199/199 [00:00<00:00, 2682.33it/s]
+[transformers] [1mASTModel LOAD REPORT[0m from: MIT/ast-finetuned-audioset-10-10-0.4593
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+classifier.layernorm.bias   | UNEXPECTED |  | 
+classifier.dense.weight     | UNEXPECTED |  | 
+classifier.dense.bias       | UNEXPECTED |  | 
+classifier.layernorm.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+[audio] cry: ast (28, 768) 1s
+[time] cry: 0.1 min
+voice items kept 252 / 360 | dim 1624
+           mean  50%
+label               
+0      0.717949  1.0
+1      0.666667  1.0
+cry items kept 28 / 28 | dim 1624
+       mean  50%
+label           
+0       1.0  1.0
+1       1.0  1.0
+       has_voice   has_cry
+label                     
+0       0.717949  0.487179
+1       0.666667  0.428571
