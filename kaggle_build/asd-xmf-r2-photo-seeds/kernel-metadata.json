@@ -1,0 +1,20 @@
+{
+  "id": "tahidulkabir/asd-xmf-r2-photo-seeds",
+  "title": "ASD-XMF R2 Photo Seeds",
+  "code_file": "asd-xmf-r2-photo-seeds.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "dataset_sources": [
+    "tahidulkabir/asd-xmf-lib"
+  ],
+  "kernel_sources": [
+    "tahidulkabir/asd-xmf-r1-photo-data-gaze"
+  ],
+  "competition_sources": [],
+  "model_sources": [],
+  "machine_shape": "NvidiaTeslaT4"
+}

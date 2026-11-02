@@ -16,7 +16,10 @@
 import numpy as np, pandas as pd
 OUT = U.WORK / "dup"; OUT.mkdir(parents=True, exist_ok=True)
 SRC = U.WORK / "xmf_photo" if (U.WORK / "xmf_photo" / "manifest.csv").exists() else U.find_path("images.npy").parent
-CLEAN_MAX_DIST = 8   # <= 8 of 64 bits: visually the same picture (pHash literature uses 6-10)
+# <= 4 of 64 bits: in the first full run ~85 % of test images at distance 2-4 shared the label of their nearest
+# training image (true copies), at 6 bits 70 %, at 8 bits 46 % (near the ~25 % of unrelated faces) -
+# small 48-px faces look alike to pHash, so wider thresholds catch look-alikes, not copies.  6 = sensitivity check.
+CLEAN_MAX_DIST = 4
 man = pd.read_csv(SRC / "manifest.csv", dtype={"phash": str})
 split = np.load(SRC / "split.npy", allow_pickle=True)
 assert len(man) == len(split), "manifest and split.npy differ"
@@ -48,12 +51,17 @@ for src, g in [("all", res)] + list(res.groupby("source")):
     r = {"source": src, "n_test": len(g)}
     for t in (0, 2, 4, 6, 8, 10, 12):
         r[f"le_{t}"] = int((g.min_dist_trainval <= t).sum())
-    r["pct_le_8"] = round(100 * (g.min_dist_trainval <= CLEAN_MAX_DIST).mean(), 2)
-    r["same_label_among_le_8"] = round(float(g.loc[g.min_dist_trainval <= CLEAN_MAX_DIST, "nearest_same_label"].mean()), 3) \
-        if (g.min_dist_trainval <= CLEAN_MAX_DIST).any() else np.nan
+    r[f"pct_le_{CLEAN_MAX_DIST}"] = round(100 * (g.min_dist_trainval <= CLEAN_MAX_DIST).mean(), 2)
     rows.append(r)
 summ = pd.DataFrame(rows)
 print(U.table_md(summ))
 summ.to_csv(OUT / "near_dup_summary.csv", index=False)
+# how often a test image and its nearest training image share the expression label, by distance
+# (true copies mostly share it; unrelated faces only by chance) - this is what sets CLEAN_MAX_DIST
+by_d = res.groupby("min_dist_trainval").agg(n=("row", "size"), same_label=("nearest_same_label", "mean")).reset_index()
+chance = float((man.label.value_counts(normalize=True) ** 2).sum())
+by_d["chance_same_label"] = round(chance, 3)
+print(U.table_md(by_d[by_d.min_dist_trainval <= 14]))
+by_d.to_csv(OUT / "near_dup_label_agreement.csv", index=False)
 U.save_json({"clean_max_dist": CLEAN_MAX_DIST, "n_test": len(te),
              "n_near_dup": int((min_d <= CLEAN_MAX_DIST).sum())}, OUT / "near_dup_config.json")

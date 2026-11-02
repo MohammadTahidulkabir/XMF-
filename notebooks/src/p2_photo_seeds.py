@@ -13,7 +13,8 @@
 # * EfficientNet-B0 (same backbone, plain recipe), ConvNeXt-T, Swin-T
 #
 # Reported: mean +- SD over seeds, per-seed wins, paired t-test over seeds, McNemar per seed (Holm), and
-# accuracy on the **clean** test set without near-duplicates of training images (from section `dup`).
+# accuracy on the **clean** test set without near-copies of training images (pHash distance <= 4 bits;
+# <= 6 bits as a sensitivity check; from section `dup`).
 
 # %%
 import numpy as np, pandas as pd
@@ -52,7 +53,7 @@ src = np.load(CACHE / "source.npy", allow_pickle=True)
 te = np.flatnonzero(split == "test")
 dup_p = U.find_path("near_dup_test.csv")
 dup = pd.read_csv(dup_p) if dup_p else None
-CLEAN_MAX = 8
+CLEAN_MAX = 4   # pHash bits; see section dup (label agreement by distance)
 MODELS = ["xmf_face"] + BASE
 rows, preds = [], {}
 for m in MODELS:
@@ -70,10 +71,13 @@ for m in MODELS:
             k = src[te][: len(p)] == so
             row[f"acc_{so}"] = float((p[k] == yt[k]).mean()) if k.any() else np.nan
         if dup is not None and len(dup) >= len(p):
-            clean = dup.min_dist_trainval.values[: len(p)] > CLEAN_MAX
+            dist = dup.min_dist_trainval.values[: len(p)]
+            clean = dist > CLEAN_MAX
             row["clean_test_acc"] = float((p[clean] == yt[clean]).mean())
             row["n_clean"] = int(clean.sum())
             row["near_dup_acc"] = float((p[~clean] == yt[~clean]).mean()) if (~clean).any() else np.nan
+            c6 = dist > 6   # sensitivity: also drop look-alikes at 5-6 bits
+            row["clean6_test_acc"] = float((p[c6] == yt[c6]).mean())
         rows.append(row)
 per_seed = pd.DataFrame(rows)
 per_seed.to_csv(OUT / "photo_seeds_per_seed.csv", index=False)
@@ -83,7 +87,7 @@ print(U.table_md(per_seed))
 # ## Mean +- SD over seeds, paired comparisons
 
 # %%
-metrics = [c for c in ("test_acc", "test_macro_f1", "clean_test_acc", "acc_fer2013", "acc_rafdb", "acc_ckplus") if c in per_seed]
+metrics = [c for c in ("test_acc", "test_macro_f1", "clean_test_acc", "clean6_test_acc", "acc_fer2013", "acc_rafdb", "acc_ckplus") if c in per_seed]
 summ = per_seed.groupby("model")[metrics].agg(["mean", "std"])
 summ.columns = [f"{a}_{b}" for a, b in summ.columns]
 summ = summ.reset_index().sort_values("test_acc_mean", ascending=False)
@@ -93,7 +97,7 @@ summ.to_csv(OUT / "photo_seeds_summary.csv", index=False)
 
 pair = []
 for b in BASE:
-    for met in [c for c in ("test_acc", "clean_test_acc", "test_macro_f1") if c in per_seed]:
+    for met in [c for c in ("test_acc", "clean_test_acc", "clean6_test_acc", "test_macro_f1") if c in per_seed]:
         a_ = per_seed[per_seed.model == "xmf_face"].set_index("seed")[met]
         b_ = per_seed[per_seed.model == b].set_index("seed")[met]
         common = a_.index.intersection(b_.index)

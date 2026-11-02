@@ -1,0 +1,21 @@
+{
+  "id": "tahidulkabir/asd-xmf-r1-photo-data-gaze",
+  "title": "ASD-XMF R1 Photo Data Gaze",
+  "code_file": "asd-xmf-r1-photo-data-gaze.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "dataset_sources": [
+    "tahidulkabir/asd-xmf-lib",
+    "msambare/fer2013",
+    "shuvoalok/raf-db-dataset",
+    "davilsena/ckdataset",
+    "imtkaggleteam/eye-tracking-autism"
+  ],
+  "kernel_sources": [],
+  "competition_sources": [],
+  "model_sources": []
+}

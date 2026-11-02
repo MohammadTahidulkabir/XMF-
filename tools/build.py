@@ -181,7 +181,7 @@ def build_combined(nbdef: dict, profile: str):
         suffix = f" ({s['variant']})" if s.get("variant") else (f" (seed {s['vars']['seed']})" if "seed" in s.get("vars", {}) else "")
         nb.cells.append(nbformat.v4.new_markdown_cell(f"## Section `{s['name']}`: {title}{suffix}"))
         nb.cells.append(nbformat.v4.new_code_cell(f"%%writefile {{R.SEC_DIR}}/{s['name']}.py\n" + section_code(src)))
-        nb.cells.append(nbformat.v4.new_code_cell(f"R.run({s['name']!r}" + (f", {json.dumps(vars_)}" if vars_ else "") + ")"))
+        nb.cells.append(nbformat.v4.new_code_cell(f"R.run({s['name']!r}" + (f", {vars_!r}" if vars_ else "") + ")"))  # Python literal (True, not true)
         for ds in meta.get("datasets", []):
             ds = ds.replace("tahidulkabir/", USER + "/")
             if ds not in datasets:

@@ -1,0 +1,24 @@
+{
+  "id": "tahidulkabir/asd-xmf-r3-audio-text-video-seeds",
+  "title": "ASD-XMF R3 Audio Text Video Seeds",
+  "code_file": "asd-xmf-r3-audio-text-video-seeds.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "dataset_sources": [
+    "tahidulkabir/asd-xmf-lib",
+    "tahidulkabir/asd-xmf-recanvo",
+    "warcoder/infant-cry-audio-corpus",
+    "sanmithasadhish/infant-cry-dataset",
+    "gursewakbfcet/mmasd-final-dataset",
+    "sharafatahmed/tasd-dataset-text-based-early-asd-detection",
+    "fabdelja/autism-screening-for-toddlers"
+  ],
+  "kernel_sources": [],
+  "competition_sources": [],
+  "model_sources": [],
+  "machine_shape": "NvidiaTeslaT4"
+}

@@ -1,0 +1,21 @@
+{
+  "id": "tahidulkabir/asd-xmf-r4-robustness-summary",
+  "title": "ASD-XMF R4 Robustness Summary",
+  "code_file": "asd-xmf-r4-robustness-summary.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "dataset_sources": [
+    "tahidulkabir/asd-xmf-lib"
+  ],
+  "kernel_sources": [
+    "tahidulkabir/asd-xmf-r1-photo-data-gaze",
+    "tahidulkabir/asd-xmf-r2-photo-seeds",
+    "tahidulkabir/asd-xmf-r3-audio-text-video-seeds"
+  ],
+  "competition_sources": [],
+  "model_sources": []
+}
