@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    import runpy, sys; runpy.run_path(sys.argv[1], run_name='__xmf_section__')
+                       ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen runpy>", line 294, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "/tmp/xmf_sections/run_a1s2.py", line 7, in <module>
+    VARIANT = {"seed": 2, "skip_melcnn": true}
+                                         ^^^^
+NameError: name 'true' is not defined. Did you mean: 'True'?

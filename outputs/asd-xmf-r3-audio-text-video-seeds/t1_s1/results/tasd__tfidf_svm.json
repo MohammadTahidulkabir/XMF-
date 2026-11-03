@@ -1,0 +1,22 @@
+{
+ "task": "tasd_asd_vs_nonasd",
+ "model": "tfidf_svm",
+ "proposed": false,
+ "test_acc": 0.9022082018927445,
+ "ci_lo": 0.8706624605678234,
+ "ci_hi": 0.9337539432176656,
+ "test_macro_f1": 0.9016444306546696,
+ "train_acc": 1.0,
+ "val_acc": NaN,
+ "gap": 0.09779179810725547,
+ "cm": [
+  [
+   131,
+   19
+  ],
+  [
+   12,
+   155
+  ]
+ ]
+}

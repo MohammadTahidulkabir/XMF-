@@ -1,0 +1,29 @@
+{
+ "task": "cry_detect",
+ "model": "xmf_audio",
+ "proposed": true,
+ "n": 284,
+ "test_acc": 0.9929577464788732,
+ "ci_lo": 0.9823943661971831,
+ "ci_hi": 1.0,
+ "test_macro_f1": 0.990428041793057,
+ "test_bal_acc": 0.9953703703703703,
+ "train_acc": 0.9894121751264608,
+ "val_acc": 1.0,
+ "gap": -0.003545571352412402,
+ "majority_baseline": 0.7605633802816901,
+ "cm": [
+  [
+   68,
+   0
+  ],
+  [
+   2,
+   214
+  ]
+ ],
+ "classes": [
+  "cry",
+  "non_cry"
+ ]
+}

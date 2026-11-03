@@ -1,0 +1,12 @@
+child_id,y_true,prob,uncertainty,model,seed,fold,part
+1,1,0.48111630364153085,,gaze_logreg,3,3,val
+5,1,0.6839257618923085,,gaze_logreg,3,3,val
+15,1,0.7721652437433293,,gaze_logreg,3,3,val
+27,1,0.9256997985494344,,gaze_logreg,3,3,val
+28,1,0.7230546300563013,,gaze_logreg,3,3,val
+35,0,0.416761582036045,,gaze_logreg,3,3,val
+38,0,0.30471493232295294,,gaze_logreg,3,3,val
+44,0,0.2345428690924619,,gaze_logreg,3,3,val
+51,0,0.2749003756225551,,gaze_logreg,3,3,val
+58,0,0.39384005611057815,,gaze_logreg,3,3,val
+59,0,0.3471428307474979,,gaze_logreg,3,3,val

@@ -1,0 +1,18 @@
+{'mfcc': (7443, 160), 'egemaps': (7443, 88), 'w2v': (7443, 768), 'ast': (7443, 768)}
+| task         | model      | proposed   |    n |   test_acc |   ci_lo |   ci_hi |   test_macro_f1 |   test_bal_acc |   train_acc |   val_acc |    gap |   majority_baseline | fit      |
+|:-------------|:-----------|:-----------|-----:|-----------:|--------:|--------:|----------------:|---------------:|------------:|----------:|-------:|--------------------:|:---------|
+| cry_detect   | xmf_audio  | True       |  284 |      0.993 |   0.982 |   1.000 |           0.990 |          0.995 |       0.989 |     1.000 | -0.004 |               0.761 | ok       |
+| cry_detect   | egemaps_lr | False      |  284 |      1.000 |   1.000 |   1.000 |           1.000 |          1.000 |       1.000 |   nan     |  0.000 |               0.761 | ok       |
+| cry_detect   | ast_lr     | False      |  284 |      1.000 |   1.000 |   1.000 |           1.000 |          1.000 |       1.000 |   nan     |  0.000 |               0.761 | ok       |
+| cry_detect   | mfcc_svm   | False      |  284 |      0.996 |   0.989 |   1.000 |           0.995 |          0.998 |       1.000 |   nan     |  0.004 |               0.761 | ok       |
+| cry_detect   | w2v_lr     | False      |  284 |      0.996 |   0.989 |   1.000 |           0.995 |          0.993 |       1.000 |   nan     |  0.004 |               0.761 | ok       |
+| cry_reason   | xmf_audio  | True       |  457 |      0.225 |   0.188 |   0.267 |           0.116 |          0.258 |       0.565 |     0.340 |  0.339 |               0.836 | overfit? |
+| cry_reason   | w2v_lr     | False      |  457 |      0.726 |   0.689 |   0.768 |           0.194 |          0.195 |       0.991 |   nan     |  0.264 |               0.836 | overfit? |
+| cry_reason   | ast_lr     | False      |  457 |      0.731 |   0.691 |   0.770 |           0.193 |          0.196 |       0.984 |   nan     |  0.253 |               0.836 | overfit? |
+| cry_reason   | mfcc_svm   | False      |  457 |      0.827 |   0.792 |   0.860 |           0.181 |          0.198 |       0.999 |   nan     |  0.172 |               0.836 | overfit? |
+| cry_reason   | egemaps_lr | False      |  457 |      0.433 |   0.387 |   0.481 |           0.150 |          0.147 |       0.624 |   nan     |  0.191 |               0.836 | overfit? |
+| vocal_affect | xmf_audio  | True       | 6702 |      0.193 |   0.184 |   0.202 |           0.164 |          0.348 |       0.684 |     0.453 |  0.492 |               0.281 | overfit? |
+| vocal_affect | ast_lr     | False      | 6702 |      0.218 |   0.208 |   0.227 |           0.146 |          0.150 |       0.751 |   nan     |  0.534 |               0.281 | overfit? |
+| vocal_affect | egemaps_lr | False      | 6702 |      0.175 |   0.166 |   0.184 |           0.136 |          0.150 |       0.453 |   nan     |  0.278 |               0.281 | overfit? |
+| vocal_affect | w2v_lr     | False      | 6702 |      0.197 |   0.188 |   0.207 |           0.136 |          0.142 |       0.734 |   nan     |  0.537 |               0.281 | overfit? |
+| vocal_affect | mfcc_svm   | False      | 6702 |      0.228 |   0.217 |   0.237 |           0.128 |          0.134 |       0.901 |   nan     |  0.673 |               0.281 | overfit? |

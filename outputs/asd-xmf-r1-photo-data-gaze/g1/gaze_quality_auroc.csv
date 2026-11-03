@@ -1,0 +1,7 @@
+analysis,model,n,auroc
+all children,quality_only,57,"0.843 [0.731, 0.943]"
+all children,gaze_only,57,"0.949 [0.882, 0.994]"
+all children,gaze_plus_quality,57,"0.948 [0.880, 0.994]"
+all children,gaze_quality_residualised,57,"0.832 [0.716, 0.926]"
+tracking ratio >= median,quality_only,29,"0.616 [0.363, 0.851]"
+tracking ratio >= median,gaze_only,29,"0.848 [0.636, 1.000]"

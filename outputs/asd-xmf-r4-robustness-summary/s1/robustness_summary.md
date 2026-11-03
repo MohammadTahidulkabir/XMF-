@@ -1,0 +1,239 @@
+# Robustness summary (R1-R4)
+
+
+## Audio over seeds
+
+| task         | model      |   test_macro_f1_mean |   test_macro_f1_std |   test_macro_f1_count |   test_bal_acc_mean |   test_bal_acc_std |   test_bal_acc_count |   test_acc_mean |   test_acc_std |   test_acc_count | proposed   |
+|:-------------|:-----------|---------------------:|--------------------:|----------------------:|--------------------:|-------------------:|---------------------:|----------------:|---------------:|-----------------:|:-----------|
+| cry_detect   | ast_lr     |               1.0000 |              0.0000 |                     5 |              1.0000 |             0.0000 |                    5 |          1.0000 |         0.0000 |                5 | False      |
+| cry_detect   | egemaps_lr |               1.0000 |              0.0000 |                     5 |              1.0000 |             0.0000 |                    5 |          1.0000 |         0.0000 |                5 | False      |
+| cry_detect   | mfcc_svm   |               0.9990 |              0.0022 |                     5 |              0.9995 |             0.0010 |                    5 |          0.9993 |         0.0016 |                5 | False      |
+| cry_detect   | xmf_audio  |               0.9962 |              0.0040 |                     5 |              0.9981 |             0.0019 |                    5 |          0.9972 |         0.0029 |                5 | True       |
+| cry_detect   | w2v_lr     |               0.9951 |              0.0000 |                     5 |              0.9926 |             0.0000 |                    5 |          0.9965 |         0.0000 |                5 | False      |
+| cry_reason   | ast_lr     |               0.2079 |              0.0099 |                     5 |              0.2104 |             0.0098 |                    5 |          0.7379 |         0.0068 |                5 | False      |
+| cry_reason   | w2v_lr     |               0.1868 |              0.0109 |                     5 |              0.1884 |             0.0101 |                    5 |          0.7256 |         0.0080 |                5 | False      |
+| cry_reason   | mfcc_svm   |               0.1811 |              0.0003 |                     5 |              0.1977 |             0.0003 |                    5 |          0.8263 |         0.0012 |                5 | False      |
+| cry_reason   | egemaps_lr |               0.1630 |              0.0125 |                     5 |              0.1738 |             0.0214 |                    5 |          0.4280 |         0.0200 |                5 | False      |
+| cry_reason   | xmf_audio  |               0.1128 |              0.0311 |                     5 |              0.2685 |             0.0244 |                    5 |          0.1724 |         0.0598 |                5 | True       |
+| vocal_affect | xmf_audio  |               0.1584 |              0.0044 |                     5 |              0.3426 |             0.0038 |                    5 |          0.1896 |         0.0029 |                5 | True       |
+| vocal_affect | ast_lr     |               0.1455 |              0.0000 |                     5 |              0.1501 |             0.0000 |                    5 |          0.2177 |         0.0000 |                5 | False      |
+| vocal_affect | egemaps_lr |               0.1364 |              0.0000 |                     5 |              0.1496 |             0.0000 |                    5 |          0.1747 |         0.0000 |                5 | False      |
+| vocal_affect | w2v_lr     |               0.1361 |              0.0000 |                     5 |              0.1419 |             0.0000 |                    5 |          0.1971 |         0.0000 |                5 | False      |
+| vocal_affect | mfcc_svm   |               0.1276 |              0.0000 |                     5 |              0.1342 |             0.0000 |                    5 |          0.2275 |         0.0000 |                5 | False      |
+
+
+Paired tests (audio, proposed vs baseline, over seeds):
+
+| task         | proposed   | baseline   | metric        |   n_seeds |   mean_diff |   wins |   p_paired_t |   p_holm |
+|:-------------|:-----------|:-----------|:--------------|----------:|------------:|-------:|-------------:|---------:|
+| cry_detect   | xmf_audio  | ast_lr     | test_macro_f1 |         5 |     -0.0038 |      0 |       0.0989 |   0.7910 |
+| cry_detect   | xmf_audio  | ast_lr     | test_bal_acc  |         5 |     -0.0019 |      0 |       0.0993 |   0.7910 |
+| cry_detect   | xmf_audio  | ast_lr     | test_acc      |         5 |     -0.0028 |      0 |       0.0993 |   0.7910 |
+| cry_detect   | xmf_audio  | egemaps_lr | test_macro_f1 |         5 |     -0.0038 |      0 |       0.0989 |   0.7910 |
+| cry_detect   | xmf_audio  | egemaps_lr | test_bal_acc  |         5 |     -0.0019 |      0 |       0.0993 |   0.7910 |
+| cry_detect   | xmf_audio  | egemaps_lr | test_acc      |         5 |     -0.0028 |      0 |       0.0993 |   0.7910 |
+| cry_detect   | xmf_audio  | mfcc_svm   | test_macro_f1 |         5 |     -0.0029 |      0 |       0.0705 |   0.7753 |
+| cry_detect   | xmf_audio  | mfcc_svm   | test_bal_acc  |         5 |     -0.0014 |      0 |       0.0705 |   0.7753 |
+| cry_detect   | xmf_audio  | mfcc_svm   | test_acc      |         5 |     -0.0021 |      0 |       0.0705 |   0.7753 |
+| cry_detect   | xmf_audio  | w2v_lr     | test_macro_f1 |         5 |      0.0010 |      4 |       0.5996 |   1.0000 |
+| cry_detect   | xmf_audio  | w2v_lr     | test_bal_acc  |         5 |      0.0055 |      5 |       0.0031 |   0.0577 |
+| cry_detect   | xmf_audio  | w2v_lr     | test_acc      |         5 |      0.0007 |      2 |       0.6213 |   1.0000 |
+| cry_reason   | xmf_audio  | ast_lr     | test_macro_f1 |         5 |     -0.0951 |      0 |       0.0045 |   0.0692 |
+| cry_reason   | xmf_audio  | ast_lr     | test_bal_acc  |         5 |      0.0581 |      5 |       0.0087 |   0.1128 |
+| cry_reason   | xmf_audio  | ast_lr     | test_acc      |         5 |     -0.5654 |      0 |       0.0000 |   0.0012 |
+| cry_reason   | xmf_audio  | egemaps_lr | test_macro_f1 |         5 |     -0.0503 |      0 |       0.0194 |   0.2333 |
+| cry_reason   | xmf_audio  | egemaps_lr | test_bal_acc  |         5 |      0.0947 |      5 |       0.0002 |   0.0059 |
+| cry_reason   | xmf_audio  | egemaps_lr | test_acc      |         5 |     -0.2556 |      0 |       0.0008 |   0.0179 |
+| cry_reason   | xmf_audio  | mfcc_svm   | test_macro_f1 |         5 |     -0.0683 |      0 |       0.0080 |   0.1117 |
+| cry_reason   | xmf_audio  | mfcc_svm   | test_bal_acc  |         5 |      0.0708 |      5 |       0.0030 |   0.0577 |
+| cry_reason   | xmf_audio  | mfcc_svm   | test_acc      |         5 |     -0.6538 |      0 |       0.0000 |   0.0005 |
+| cry_reason   | xmf_audio  | w2v_lr     | test_macro_f1 |         5 |     -0.0740 |      0 |       0.0032 |   0.0577 |
+| cry_reason   | xmf_audio  | w2v_lr     | test_bal_acc  |         5 |      0.0801 |      5 |       0.0011 |   0.0227 |
+| cry_reason   | xmf_audio  | w2v_lr     | test_acc      |         5 |     -0.5532 |      0 |       0.0000 |   0.0006 |
+| vocal_affect | xmf_audio  | ast_lr     | test_macro_f1 |         5 |      0.0129 |      5 |       0.0029 |   0.0577 |
+| vocal_affect | xmf_audio  | ast_lr     | test_bal_acc  |         5 |      0.1924 |      5 |       0.0000 |   0.0000 |
+| vocal_affect | xmf_audio  | ast_lr     | test_acc      |         5 |     -0.0281 |      0 |       0.0000 |   0.0008 |
+| vocal_affect | xmf_audio  | egemaps_lr | test_macro_f1 |         5 |      0.0220 |      5 |       0.0004 |   0.0087 |
+| vocal_affect | xmf_audio  | egemaps_lr | test_bal_acc  |         5 |      0.1929 |      5 |       0.0000 |   0.0000 |
+| vocal_affect | xmf_audio  | egemaps_lr | test_acc      |         5 |      0.0149 |      5 |       0.0003 |   0.0081 |
+| vocal_affect | xmf_audio  | mfcc_svm   | test_macro_f1 |         5 |      0.0308 |      5 |       0.0001 |   0.0027 |
+| vocal_affect | xmf_audio  | mfcc_svm   | test_bal_acc  |         5 |      0.2083 |      5 |       0.0000 |   0.0000 |
+| vocal_affect | xmf_audio  | mfcc_svm   | test_acc      |         5 |     -0.0380 |      0 |       0.0000 |   0.0003 |
+| vocal_affect | xmf_audio  | w2v_lr     | test_macro_f1 |         5 |      0.0223 |      5 |       0.0004 |   0.0086 |
+| vocal_affect | xmf_audio  | w2v_lr     | test_bal_acc  |         5 |      0.2006 |      5 |       0.0000 |   0.0000 |
+| vocal_affect | xmf_audio  | w2v_lr     | test_acc      |         5 |     -0.0075 |      0 |       0.0043 |   0.0692 |
+
+
+
+## Text over seeds
+
+| task               | model        |   test_acc_mean |   test_acc_std |   test_acc_count |   test_macro_f1_mean |   test_macro_f1_std |   test_macro_f1_count | proposed   |
+|:-------------------|:-------------|----------------:|---------------:|-----------------:|---------------------:|--------------------:|----------------------:|:-----------|
+| tasd_asd_vs_nonasd | tfidf_svm    |          0.9085 |         0.0184 |                5 |               0.9080 |              0.0183 |                     5 | False      |
+| tasd_asd_vs_nonasd | tfidf_lr     |          0.9047 |         0.0194 |                5 |               0.9042 |              0.0193 |                     5 | False      |
+| tasd_asd_vs_nonasd | xmf_text     |          0.8953 |         0.0110 |                5 |               0.8947 |              0.0109 |                     5 | True       |
+| tasd_asd_vs_nonasd | bert_base    |          0.8719 |         0.0140 |                5 |               0.8714 |              0.0141 |                     5 | False      |
+| tasd_asd_vs_nonasd | distilbert   |          0.8688 |         0.0185 |                5 |               0.8681 |              0.0185 |                     5 | False      |
+| tasd_asd_vs_nonasd | roberta_base |          0.8688 |         0.0210 |                5 |               0.8685 |              0.0210 |                     5 | False      |
+| tasd_asd_vs_nonasd | bilstm       |          0.8297 |         0.0153 |                5 |               0.8291 |              0.0155 |                     5 | False      |
+
+
+Paired tests (text, proposed vs baseline, over seeds):
+
+| task               | proposed   | baseline     | metric        |   n_seeds |   mean_diff |   wins |   p_paired_t |   p_holm |
+|:-------------------|:-----------|:-------------|:--------------|----------:|------------:|-------:|-------------:|---------:|
+| tasd_asd_vs_nonasd | xmf_text   | bert_base    | test_acc      |         5 |      0.0233 |      5 |       0.0098 |   0.0788 |
+| tasd_asd_vs_nonasd | xmf_text   | bert_base    | test_macro_f1 |         5 |      0.0233 |      5 |       0.0101 |   0.0788 |
+| tasd_asd_vs_nonasd | xmf_text   | bilstm       | test_acc      |         5 |      0.0656 |      5 |       0.0037 |   0.0446 |
+| tasd_asd_vs_nonasd | xmf_text   | bilstm       | test_macro_f1 |         5 |      0.0656 |      5 |       0.0038 |   0.0446 |
+| tasd_asd_vs_nonasd | xmf_text   | distilbert   | test_acc      |         5 |      0.0265 |      5 |       0.0298 |   0.1784 |
+| tasd_asd_vs_nonasd | xmf_text   | distilbert   | test_macro_f1 |         5 |      0.0266 |      5 |       0.0297 |   0.1784 |
+| tasd_asd_vs_nonasd | xmf_text   | roberta_base | test_acc      |         5 |      0.0265 |      5 |       0.0067 |   0.0674 |
+| tasd_asd_vs_nonasd | xmf_text   | roberta_base | test_macro_f1 |         5 |      0.0262 |      5 |       0.0070 |   0.0674 |
+| tasd_asd_vs_nonasd | xmf_text   | tfidf_lr     | test_acc      |         5 |     -0.0095 |      2 |       0.2126 |   0.4242 |
+| tasd_asd_vs_nonasd | xmf_text   | tfidf_lr     | test_macro_f1 |         5 |     -0.0095 |      2 |       0.2121 |   0.4242 |
+| tasd_asd_vs_nonasd | xmf_text   | tfidf_svm    | test_acc      |         5 |     -0.0132 |      0 |       0.0831 |   0.3302 |
+| tasd_asd_vs_nonasd | xmf_text   | tfidf_svm    | test_macro_f1 |         5 |     -0.0133 |      0 |       0.0825 |   0.3302 |
+
+
+
+## Video over seeds
+
+| task           | model        |   test_acc_mean |   test_acc_std |   test_acc_count |   test_macro_f1_mean |   test_macro_f1_std |   test_macro_f1_count | proposed   |
+|:---------------|:-------------|----------------:|---------------:|-----------------:|---------------------:|--------------------:|----------------------:|:-----------|
+| mmasd_activity | xmf_temporal |          0.6594 |         0.0137 |                5 |               0.6397 |              0.0199 |                     5 | True       |
+| mmasd_activity | mlp_pooled   |          0.6520 |         0.0224 |                5 |               0.6301 |              0.0266 |                     5 | False      |
+| mmasd_activity | cnn1d        |          0.6178 |         0.0206 |                5 |               0.5892 |              0.0143 |                     5 | False      |
+| mmasd_activity | cnn_lstm     |          0.6033 |         0.0163 |                5 |               0.5757 |              0.0133 |                     5 | False      |
+| mmasd_activity | bilstm       |          0.5777 |         0.0189 |                5 |               0.5448 |              0.0207 |                     5 | False      |
+
+
+Paired tests (video, proposed vs baseline, over seeds):
+
+| task           | proposed     | baseline   | metric        |   n_seeds |   mean_diff |   wins |   p_paired_t |   p_holm |
+|:---------------|:-------------|:-----------|:--------------|----------:|------------:|-------:|-------------:|---------:|
+| mmasd_activity | xmf_temporal | bilstm     | test_acc      |         5 |      0.0817 |      5 |       0.0014 |   0.0098 |
+| mmasd_activity | xmf_temporal | bilstm     | test_macro_f1 |         5 |      0.0949 |      5 |       0.0016 |   0.0098 |
+| mmasd_activity | xmf_temporal | cnn1d      | test_acc      |         5 |      0.0416 |      5 |       0.0299 |   0.0896 |
+| mmasd_activity | xmf_temporal | cnn1d      | test_macro_f1 |         5 |      0.0505 |      5 |       0.0119 |   0.0475 |
+| mmasd_activity | xmf_temporal | cnn_lstm   | test_acc      |         5 |      0.0560 |      5 |       0.0015 |   0.0098 |
+| mmasd_activity | xmf_temporal | cnn_lstm   | test_macro_f1 |         5 |      0.0639 |      5 |       0.0004 |   0.0030 |
+| mmasd_activity | xmf_temporal | mlp_pooled | test_acc      |         5 |      0.0074 |      3 |       0.3504 |   0.3504 |
+| mmasd_activity | xmf_temporal | mlp_pooled | test_macro_f1 |         5 |      0.0096 |      4 |       0.1601 |   0.3201 |
+
+
+
+## Near-duplicate audit (test vs train+val, pHash Hamming distance)
+
+| source   |   n_test |   le_0 |   le_2 |   le_4 |   le_6 |   le_8 |   le_10 |   le_12 |   pct_le_4 |
+|:---------|---------:|-------:|-------:|-------:|-------:|-------:|--------:|--------:|-----------:|
+| all      |    11014 |      0 |    127 |    356 |    700 |   1631 |    3879 |    7306 |     3.2300 |
+| ckplus   |      867 |      0 |      0 |      1 |     37 |    259 |     623 |     831 |     0.1200 |
+| fer2013  |     7080 |      0 |    114 |    315 |    556 |    971 |    2018 |    4115 |     4.4500 |
+| rafdb    |     3067 |      0 |     13 |     40 |    107 |    401 |    1238 |    2360 |     1.3000 |
+
+
+
+## Photo over seeds (accuracy on full and clean test set)
+
+| model           |   test_acc_mean |   test_acc_std |   test_macro_f1_mean |   test_macro_f1_std |   clean_test_acc_mean |   clean_test_acc_std |   clean6_test_acc_mean |   clean6_test_acc_std |   acc_fer2013_mean |   acc_fer2013_std |   acc_rafdb_mean |   acc_rafdb_std |   acc_ckplus_mean |   acc_ckplus_std |   n_seeds |
+|:----------------|----------------:|---------------:|---------------------:|--------------------:|----------------------:|---------------------:|-----------------------:|----------------------:|-------------------:|------------------:|-----------------:|----------------:|------------------:|-----------------:|----------:|
+| xmf_face        |          0.7633 |         0.0025 |               0.7222 |              0.0033 |                0.7606 |               0.0027 |                 0.7575 |                0.0027 |             0.7093 |            0.0024 |           0.8681 |          0.0023 |            0.8334 |           0.0255 |         5 |
+| convnext_tiny   |          0.7594 |         0.0028 |               0.7198 |              0.0021 |                0.7561 |               0.0026 |                 0.7523 |                0.0023 |             0.7068 |            0.0034 |           0.8682 |          0.0022 |            0.8035 |           0.0197 |         5 |
+| swin_t          |          0.7583 |         0.0022 |               0.7205 |              0.0040 |                0.7565 |               0.0023 |                 0.7542 |                0.0023 |             0.7007 |            0.0024 |           0.8704 |          0.0030 |            0.8314 |           0.0167 |         5 |
+| efficientnet_b0 |          0.7459 |         0.0012 |               0.7038 |              0.0037 |                0.7427 |               0.0012 |                 0.7392 |                0.0014 |             0.6946 |            0.0050 |           0.8526 |          0.0047 |            0.7866 |           0.0399 |         5 |
+
+
+
+## Photo paired tests over seeds (XMF-Face v2 vs baseline)
+
+| baseline        | metric          |   n_seeds |   mean_diff |   sd_diff |   xmf_wins |   p_paired_t |   p_holm |
+|:----------------|:----------------|----------:|------------:|----------:|-----------:|-------------:|---------:|
+| efficientnet_b0 | test_acc        |         5 |      0.0174 |    0.0033 |          5 |       0.0003 |   0.0035 |
+| efficientnet_b0 | clean_test_acc  |         5 |      0.0179 |    0.0035 |          5 |       0.0003 |   0.0037 |
+| efficientnet_b0 | clean6_test_acc |         5 |      0.0183 |    0.0036 |          5 |       0.0003 |   0.0037 |
+| efficientnet_b0 | test_macro_f1   |         5 |      0.0184 |    0.0042 |          5 |       0.0006 |   0.0054 |
+| convnext_tiny   | test_acc        |         5 |      0.0039 |    0.0022 |          5 |       0.0157 |   0.0939 |
+| convnext_tiny   | clean_test_acc  |         5 |      0.0046 |    0.0021 |          5 |       0.0086 |   0.0605 |
+| convnext_tiny   | clean6_test_acc |         5 |      0.0052 |    0.0019 |          5 |       0.0039 |   0.0310 |
+| convnext_tiny   | test_macro_f1   |         5 |      0.0025 |    0.0022 |          4 |       0.0660 |   0.2638 |
+| swin_t          | test_acc        |         5 |      0.0050 |    0.0039 |          5 |       0.0435 |   0.2177 |
+| swin_t          | clean_test_acc  |         5 |      0.0041 |    0.0040 |          5 |       0.0831 |   0.2638 |
+| swin_t          | clean6_test_acc |         5 |      0.0033 |    0.0040 |          5 |       0.1445 |   0.2890 |
+| swin_t          | test_macro_f1   |         5 |      0.0018 |    0.0060 |          2 |       0.5481 |   0.5481 |
+
+
+
+## Gaze models and shortcut baselines (10 repeats of child-wise 5-fold CV)
+
+| model                 |   n_children | auroc               | auprc               | sens                | spec                | bacc                | brier               | ece                 |
+|:----------------------|-------------:|:--------------------|:--------------------|:--------------------|:--------------------|:--------------------|:--------------------|:--------------------|
+| gaze_logreg           |           57 | 0.943 [0.872-0.991] | 0.948 [0.880-0.991] | 0.815 [0.654-0.952] | 0.900 [0.781-1.000] | 0.857 [0.758-0.946] | 0.106 [0.074-0.144] | 0.127 [0.108-0.218] |
+| gaze_svm              |           57 | 0.914 [0.820-0.983] | 0.918 [0.818-0.983] | 0.889 [0.750-1.000] | 0.867 [0.737-0.969] | 0.878 [0.789-0.952] | 0.113 [0.073-0.161] | 0.123 [0.109-0.220] |
+| gaze_rf               |           57 | 0.974 [0.935-0.998] | 0.972 [0.927-0.997] | 0.889 [0.750-1.000] | 0.933 [0.833-1.000] | 0.911 [0.828-0.981] | 0.086 [0.059-0.117] | 0.183 [0.140-0.242] |
+| gaze_et               |           57 | 0.963 [0.902-0.999] | 0.970 [0.920-0.998] | 0.852 [0.704-0.967] | 0.967 [0.886-1.000] | 0.909 [0.827-0.981] | 0.097 [0.071-0.127] | 0.165 [0.134-0.240] |
+| gaze_plus_demo_logreg |           57 | 0.948 [0.877-0.995] | 0.953 [0.882-0.995] | 0.852 [0.697-0.964] | 0.933 [0.833-1.000] | 0.893 [0.806-0.965] | 0.099 [0.067-0.138] | 0.147 [0.111-0.224] |
+| SHORTCUT_sex_age      |           57 | 0.560 [0.399-0.726] | 0.490 [0.355-0.691] | 0.852 [0.700-0.964] | 0.567 [0.393-0.750] | 0.709 [0.596-0.820] | 0.217 [0.169-0.266] | 0.145 [0.105-0.270] |
+| SHORTCUT_quality      |           57 | 0.843 [0.734-0.939] | 0.843 [0.699-0.952] | 0.815 [0.654-0.950] | 0.667 [0.500-0.833] | 0.741 [0.627-0.846] | 0.165 [0.119-0.216] | 0.113 [0.102-0.239] |
+| gaze_lgbm             |           57 | 0.981 [0.948-1.000] | 0.982 [0.945-1.000] | 0.741 [0.560-0.897] | 1.000 [1.000-1.000] | 0.870 [0.780-0.948] | 0.055 [0.018-0.101] | 0.076 [0.039-0.141] |
+
+
+
+## Gaze vs recording quality
+
+| analysis                 | model                     |   n | auroc                |
+|:-------------------------|:--------------------------|----:|:---------------------|
+| all children             | quality_only              |  57 | 0.843 [0.731, 0.943] |
+| all children             | gaze_only                 |  57 | 0.949 [0.882, 0.994] |
+| all children             | gaze_plus_quality         |  57 | 0.948 [0.880, 0.994] |
+| all children             | gaze_quality_residualised |  57 | 0.832 [0.716, 0.926] |
+| tracking ratio >= median | quality_only              |  29 | 0.616 [0.363, 0.851] |
+| tracking ratio >= median | gaze_only                 |  29 | 0.848 [0.636, 1.000] |
+
+
+
+## DeLong tests: does gaze add to quality?
+
+| model                     | vs                          |   auc1 |   auc2 |      z |     p |   p_holm |
+|:--------------------------|:----------------------------|-------:|-------:|-------:|------:|---------:|
+| gaze_plus_quality         | quality_only                |  0.948 |  0.843 |  2.501 | 0.012 |    0.062 |
+| gaze_only                 | quality_only                |  0.949 |  0.843 |  2.491 | 0.013 |    0.062 |
+| gaze_quality_residualised | quality_only                |  0.832 |  0.843 | -0.128 | 0.898 |    0.898 |
+| gaze_quality_residualised | gaze_only                   |  0.832 |  0.949 | -2.022 | 0.043 |    0.130 |
+| gaze_only (high-quality)  | quality_only (high-quality) |  0.848 |  0.616 |  1.983 | 0.047 |    0.130 |
+
+
+
+## Gaze permutation test
+
+```
+{
+ "gaze_only": {
+  "auroc": 0.9493827160493827,
+  "null_mean": 0.49809876543209874,
+  "null_95": 0.6680864197530864,
+  "p_perm": 0.004975124378109453,
+  "n_perm": 200
+ },
+ "gaze_quality_residualised": {
+  "auroc": 0.8320987654320988,
+  "null_mean": 0.4947438271604938,
+  "null_95": 0.6608024691358023,
+  "p_perm": 0.004975124378109453,
+  "n_perm": 200
+ }
+}
+```
+
+
+## Published results on the same datasets (context, protocols differ)
+
+| dataset                                  | task               | metric   |   published | method                                                                                                            | source                                   | verified   | ours_mean_sd                             |
+|:-----------------------------------------|:-------------------|:---------|------------:|:------------------------------------------------------------------------------------------------------------------|:-----------------------------------------|:-----------|:-----------------------------------------|
+| FER2013 (official test)                  | 7-class expression | accuracy |      0.7328 | VGGNet, single network, no extra data                                                                             | Khaireddin & Chen 2021, arXiv:2105.03588 | True       | 0.7093 +- 0.0024                         |
+| RAF-DB (official test)                   | 7-class expression | accuracy |      0.9221 | POSTER++ (ViT + landmark cross-fusion, 224 px, pre-trained on MS-Celeb)                                           | Mao et al. 2023, arXiv:2301.12149        | True       | 0.8681 +- 0.0023                         |
+| MMASD (activity)                         | 11-class activity  | accuracy |    nan      | no baseline in the dataset paper (Li et al. 2023, arXiv:2306.08243)                                               | -                                        | True       | 0.6594 +- 0.0137 (child-wise 5-fold)     |
+| TASD (text)                              | ASD vs non-ASD     | accuracy |    nan      | no peer-reviewed benchmark found                                                                                  | -                                        | False      | 0.8953 +- 0.0110                         |
+| ReCANVo (vocal affect)                   | vocalisation label | macro-F1 |    nan      | per-participant results in Johnson et al. 2023 (Sci Data 10) - protocol differs, number not checked               | -                                        | False      | 0.1584 +- 0.0044 (leave-one-speaker-out) |
+| Cilia/Carette eye-tracking (59 children) | ASD vs TD          | AUROC    |    nan      | scanpath images + CNN (Carette et al. 2019; Cilia et al. 2021 JMIR Hum Factors) - image-level, number not checked | -                                        | False      | 0.949 [0.882, 0.994] (child-level)       |
+

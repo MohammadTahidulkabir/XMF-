@@ -1,0 +1,6 @@
+{
+ "best_model": "gaze_lgbm",
+ "n_children": 57,
+ "n_gaze_features": 26,
+ "note": "Repeated 5-fold CV by child over all 59 children (no separate test set: n too small)."
+}

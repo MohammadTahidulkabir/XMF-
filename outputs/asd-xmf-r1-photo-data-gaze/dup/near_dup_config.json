@@ -1,0 +1,5 @@
+{
+ "clean_max_dist": 4,
+ "n_test": 11014,
+ "n_near_dup": 356
+}

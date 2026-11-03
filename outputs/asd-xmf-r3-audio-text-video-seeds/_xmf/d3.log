@@ -1,0 +1,14 @@
+clips: 1374
+activity
+drumming_dr                    343
+maracas_shaking_ms             130
+tree_pose_tr                   129
+twist_pose_tw                  120
+body_swing_bs                  117
+chest_expansion_ce             114
+sing_and_clap_sac              113
+arm_swing_as                   105
+squat_sq                       102
+maracas_forward_shaking_mfs    101
+Name: count, dtype: int64 
+subjects: 32 | clips kept: 1374

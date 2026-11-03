@@ -1,0 +1,7 @@
+dataset,task,metric,published,method,source,verified,ours_mean_sd
+FER2013 (official test),7-class expression,accuracy,0.7328,"VGGNet, single network, no extra data","Khaireddin & Chen 2021, arXiv:2105.03588",True,0.7093 +- 0.0024
+RAF-DB (official test),7-class expression,accuracy,0.9221,"POSTER++ (ViT + landmark cross-fusion, 224 px, pre-trained on MS-Celeb)","Mao et al. 2023, arXiv:2301.12149",True,0.8681 +- 0.0023
+MMASD (activity),11-class activity,accuracy,,"no baseline in the dataset paper (Li et al. 2023, arXiv:2306.08243)",-,True,0.6594 +- 0.0137 (child-wise 5-fold)
+TASD (text),ASD vs non-ASD,accuracy,,no peer-reviewed benchmark found,-,False,0.8953 +- 0.0110
+ReCANVo (vocal affect),vocalisation label,macro-F1,,"per-participant results in Johnson et al. 2023 (Sci Data 10) - protocol differs, number not checked",-,False,0.1584 +- 0.0044 (leave-one-speaker-out)
+Cilia/Carette eye-tracking (59 children),ASD vs TD,AUROC,,"scanpath images + CNN (Carette et al. 2019; Cilia et al. 2021 JMIR Hum Factors) - image-level, number not checked",-,False,"0.949 [0.882, 0.994] (child-level)"

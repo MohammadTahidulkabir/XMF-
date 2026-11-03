@@ -1,0 +1,37 @@
+57 children (27 ASD) | 26 gaze features | quality = all_track_ratio
+high-quality subset: 29 children (6 ASD), tracking ratio >= 79.2
+| analysis                 | model                     |   n | auroc                |
+|:-------------------------|:--------------------------|----:|:---------------------|
+| all children             | quality_only              |  57 | 0.843 [0.731, 0.943] |
+| all children             | gaze_only                 |  57 | 0.949 [0.882, 0.994] |
+| all children             | gaze_plus_quality         |  57 | 0.948 [0.880, 0.994] |
+| all children             | gaze_quality_residualised |  57 | 0.832 [0.716, 0.926] |
+| tracking ratio >= median | quality_only              |  29 | 0.616 [0.363, 0.851] |
+| tracking ratio >= median | gaze_only                 |  29 | 0.848 [0.636, 1.000] |
+| model                     | vs                          |   auc1 |   auc2 |      z |     p |   p_holm |
+|:--------------------------|:----------------------------|-------:|-------:|-------:|------:|---------:|
+| gaze_plus_quality         | quality_only                |  0.948 |  0.843 |  2.501 | 0.012 |    0.062 |
+| gaze_only                 | quality_only                |  0.949 |  0.843 |  2.491 | 0.013 |    0.062 |
+| gaze_quality_residualised | quality_only                |  0.832 |  0.843 | -0.128 | 0.898 |    0.898 |
+| gaze_quality_residualised | gaze_only                   |  0.832 |  0.949 | -2.022 | 0.043 |    0.130 |
+| gaze_only (high-quality)  | quality_only (high-quality) |  0.848 |  0.616 |  1.983 | 0.047 |    0.130 |
+gaze_only {'auroc': 0.9493827160493827, 'null_mean': 0.49809876543209874, 'null_95': 0.6680864197530864, 'p_perm': 0.004975124378109453, 'n_perm': 200}
+gaze_quality_residualised {'auroc': 0.8320987654320988, 'null_mean': 0.4947438271604938, 'null_95': 0.6608024691358023, 'p_perm': 0.004975124378109453, 'n_perm': 200}
+| feature                    |   spearman_with_quality |   spearman_with_label |
+|:---------------------------|------------------------:|----------------------:|
+| all_fix_prop               |                   0.961 |                -0.564 |
+| all_blink_prop             |                  -0.935 |                 0.600 |
+| 15 devant__fix_prop        |                   0.709 |                -0.680 |
+| 18 au revoir__fix_prop     |                   0.692 |                -0.401 |
+| all_fix_dur_median         |                   0.544 |                -0.504 |
+| all_gaze_disp_y            |                  -0.508 |                 0.487 |
+| all_aoi_on_prop            |                   0.498 |                -0.269 |
+| all_pupil_sd               |                  -0.444 |                 0.075 |
+| all_gaze_disp_x            |                  -0.421 |                 0.410 |
+| all_fix_rate               |                   0.398 |                 0.049 |
+| all_sac_rate               |                   0.397 |                 0.032 |
+| 15 devant__gaze_disp_x     |                  -0.278 |                 0.080 |
+| 18 au revoir__blink_rate   |                  -0.265 |                 0.294 |
+| 15 devant__fix_dur_mean    |                   0.252 |                -0.537 |
+| 18 au revoir__fix_dur_mean |                   0.250 |                -0.472 |
+label vs tracking ratio (Spearman): -0.611

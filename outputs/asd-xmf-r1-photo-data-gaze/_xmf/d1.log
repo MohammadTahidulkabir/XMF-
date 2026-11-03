@@ -1,0 +1,14 @@
+source   orig_split
+fer2013  test           7178
+         train         28709
+rafdb    test           3068
+         train         12271
+dtype: int64 
+CK+ images: 902
+decoded (52128, 160, 160, 3)
+duplicate (identical pHash) images removed: 2019
+split    test  train   val
+source                    
+ckplus    867      0     0
+fer2013  7080  24124  2707
+rafdb    3067  10971  1293

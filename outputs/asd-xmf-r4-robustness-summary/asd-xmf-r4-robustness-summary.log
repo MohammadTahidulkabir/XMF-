@@ -1,0 +1,138 @@
+[{"stream_name":"stderr","time":7.520253909,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":7.52030132,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":7.520305928,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":7.520308849,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":8.218100772,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":8.218137022,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":8.218142632,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":8.218146971,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stdout","time":11.692214888,"data":"asd_lib: /kaggle/input/datasets/tahidulkabir/asd-xmf-lib | profile: full\n"}
+,{"stream_name":"stdout","time":13.684457478,"data":"{\n"}
+,{"stream_name":"stdout","time":13.684491212,"data":" \"kaggle\": true,\n"}
+,{"stream_name":"stdout","time":13.684496229,"data":" \"python\": \"3.13.18\",\n"}
+,{"stream_name":"stdout","time":13.684500447,"data":" \"cpus\": 4,\n"}
+,{"stream_name":"stdout","time":13.684504313,"data":" \"torch\": \"2.11.0+cpu\",\n"}
+,{"stream_name":"stdout","time":13.684508388,"data":" \"cuda\": false,\n"}
+,{"stream_name":"stdout","time":13.684512313,"data":" \"gpus\": [],\n"}
+,{"stream_name":"stdout","time":13.684516232,"data":" \"work_free_gb\": 20.9\n"}
+,{"stream_name":"stdout","time":13.684520137,"data":"}\n"}
+,{"stream_name":"stdout","time":17.193700405,"data":"resume: no token dataset attached - starting from scratch\n"}
+,{"stream_name":"stdout","time":17.193742129,"data":"sections: s1(rev 1) | reused from earlier runs: [] | re-run (new revision): []\n"}
+,{"stream_name":"stdout","time":17.212129769,"data":"Writing /tmp/xmf_sections/s1.py\n"}
+,{"stream_name":"stdout","time":17.222912953,"data":"[s1] start (11.0 h left in this run)\n"}
+,{"stream_name":"stdout","time":20.98106873,"data":"== audio\n"}
+,{"stream_name":"stdout","time":20.982284254,"data":" | task         | model      |   test_macro_f1_mean |   test_macro_f1_std |   test_macro_f1_count |   test_bal_acc_mean |   test_bal_acc_std |   test_bal_acc_count |   test_acc_mean |   test_acc_std |   test_acc_count | proposed   |\n"}
+,{"stream_name":"stdout","time":20.983224969,"data":"|:-------------|:-----------|---------------------:|--------------------:|----------------------:|--------------------:|-------------------:|---------------------:|----------------:|---------------:|-----------------:|:-----------|\n"}
+,{"stream_name":"stdout","time":20.984278729,"data":"| cry_detect   | ast_lr     |               1.0000 |              0.0000 |                     5 |              1.0000 |             0.0000 |                    5 |          1.0000 |         0.0000 |                5 | False      |\n"}
+,{"stream_name":"stdout","time":20.98584764,"data":"| cry_detect   | egemaps_lr |               1.0000 |              0.0000 |                     5 |              1.0000 |             0.0000 |                    5 |          1.0000 |         0.0000 |                5 | False      |\n"}
+,{"stream_name":"stdout","time":20.986368893,"data":"| cry_detect   | mfcc_svm   |               0.9990 |              0.0022 |                     5 |              0.9995 |             0.0010 |                    5 |          0.9993 |         0.0016 |                5 | False      |\n"}
+,{"stream_name":"stdout","time":20.987380836,"data":"| cry_detect   | xmf_audio  |               0.9962 |              0.0040 |                     5 |              0.9981 |             0.0019 |                    5 |          0.9972 |         0.0029 |                5 | True       |\n"}
+,{"stream_name":"stdout","time":20.988454947,"data":"| cry_detect   | w2v_lr     |               0.9951 |              0.0000 |                     5 |              0.9926 |             0.0000 |                    5 |          0.9965 |         0.0000 |                5 | False      |\n"}
+,{"stream_name":"stdout","time":20.989516637,"data":"| cry_reason   | ast_lr     |               0.2079 |              0.0099 |                     5 |              0.2104 |             0.0098 |                    5 |          0.7379 |         0.0068 |                5 | False      |\n"}
+,{"stream_name":"stdout","time":20.990513137,"data":"| cry_reason   | w2v_lr     |               0.1868 |              0.0109 |                     5 |              0.1884 |             0.0101 |                    5 |          0.7256 |         0.0080 |                5 | False      |\n"}
+,{"stream_name":"stdout","time":20.991462151,"data":"| cry_reason   | mfcc_svm   |               0.1811 |              0.0003 |                     5 |              0.1977 |             0.0003 |                    5 |          0.8263 |         0.0012 |                5 | False      |\n"}
+,{"stream_name":"stdout","time":20.992497807,"data":"| cry_reason   | egemaps_lr |               0.1630 |              0.0125 |                     5 |              0.1738 |             0.0214 |                    5 |          0.4280 |         0.0200 |                5 | False      |\n"}
+,{"stream_name":"stdout","time":20.993525713,"data":"| cry_reason   | xmf_audio  |               0.1128 |              0.0311 |                     5 |              0.2685 |             0.0244 |                    5 |          0.1724 |         0.0598 |                5 | True       |\n"}
+,{"stream_name":"stdout","time":20.994633336,"data":"| vocal_affect | xmf_audio  |               0.1584 |              0.0044 |                     5 |              0.3426 |             0.0038 |                    5 |          0.1896 |         0.0029 |                5 | True       |\n"}
+,{"stream_name":"stdout","time":20.995461926,"data":"| vocal_affect | ast_lr     |               0.1455 |              0.0000 |                     5 |              0.1501 |             0.0000 |                    5 |          0.2177 |         0.0000 |                5 | False      |\n"}
+,{"stream_name":"stdout","time":20.996243422,"data":"| vocal_affect | egemaps_lr |               0.1364 |              0.0000 |                     5 |              0.1496 |             0.0000 |                    5 |          0.1747 |         0.0000 |                5 | False      |\n"}
+,{"stream_name":"stdout","time":20.997098074,"data":"| vocal_affect | w2v_lr     |               0.1361 |              0.0000 |                     5 |              0.1419 |             0.0000 |                    5 |          0.1971 |         0.0000 |                5 | False      |\n"}
+,{"stream_name":"stdout","time":20.997879171,"data":"| vocal_affect | mfcc_svm   |               0.1276 |              0.0000 |                     5 |              0.1342 |             0.0000 |                    5 |          0.2275 |         0.0000 |                5 | False      |\n"}
+,{"stream_name":"stdout","time":21.036011442,"data":"== text\n"}
+,{"stream_name":"stdout","time":21.037300805,"data":" | task               | model        |   test_acc_mean |   test_acc_std |   test_acc_count |   test_macro_f1_mean |   test_macro_f1_std |   test_macro_f1_count | proposed   |\n"}
+,{"stream_name":"stdout","time":21.038415251,"data":"|:-------------------|:-------------|----------------:|---------------:|-----------------:|---------------------:|--------------------:|----------------------:|:-----------|\n"}
+,{"stream_name":"stdout","time":21.039601747,"data":"| tasd_asd_vs_nonasd | tfidf_svm    |          0.9085 |         0.0184 |                5 |               0.9080 |              0.0183 |                     5 | False      |\n"}
+,{"stream_name":"stdout","time":21.04068575,"data":"| tasd_asd_vs_nonasd | tfidf_lr     |          0.9047 |         0.0194 |                5 |               0.9042 |              0.0193 |                     5 | False      |\n"}
+,{"stream_name":"stdout","time":21.04180642,"data":"| tasd_asd_vs_nonasd | xmf_text     |          0.8953 |         0.0110 |                5 |               0.8947 |              0.0109 |                     5 | True       |\n"}
+,{"stream_name":"stdout","time":21.042855133,"data":"| tasd_asd_vs_nonasd | bert_base    |          0.8719 |         0.0140 |                5 |               0.8714 |              0.0141 |                     5 | False      |\n"}
+,{"stream_name":"stdout","time":21.043956911,"data":"| tasd_asd_vs_nonasd | distilbert   |          0.8688 |         0.0185 |                5 |               0.8681 |              0.0185 |                     5 | False      |\n"}
+,{"stream_name":"stdout","time":21.045098987,"data":"| tasd_asd_vs_nonasd | roberta_base |          0.8688 |         0.0210 |                5 |               0.8685 |              0.0210 |                     5 | False      |\n"}
+,{"stream_name":"stdout","time":21.04613313,"data":"| tasd_asd_vs_nonasd | bilstm       |          0.8297 |         0.0153 |                5 |               0.8291 |              0.0155 |                     5 | False      |\n"}
+,{"stream_name":"stdout","time":21.075120442,"data":"== video\n"}
+,{"stream_name":"stdout","time":21.076077385,"data":" | task           | model        |   test_acc_mean |   test_acc_std |   test_acc_count |   test_macro_f1_mean |   test_macro_f1_std |   test_macro_f1_count | proposed   |\n"}
+,{"stream_name":"stdout","time":21.077246739,"data":"|:---------------|:-------------|----------------:|---------------:|-----------------:|---------------------:|--------------------:|----------------------:|:-----------|\n"}
+,{"stream_name":"stdout","time":21.07824166,"data":"| mmasd_activity | xmf_temporal |          0.6594 |         0.0137 |                5 |               0.6397 |              0.0199 |                     5 | True       |\n"}
+,{"stream_name":"stdout","time":21.07957768,"data":"| mmasd_activity | mlp_pooled   |          0.6520 |         0.0224 |                5 |               0.6301 |              0.0266 |                     5 | False      |\n"}
+,{"stream_name":"stdout","time":21.080319006,"data":"| mmasd_activity | cnn1d        |          0.6178 |         0.0206 |                5 |               0.5892 |              0.0143 |                     5 | False      |\n"}
+,{"stream_name":"stdout","time":21.081146789,"data":"| mmasd_activity | cnn_lstm     |          0.6033 |         0.0163 |                5 |               0.5757 |              0.0133 |                     5 | False      |\n"}
+,{"stream_name":"stdout","time":21.081990739,"data":"| mmasd_activity | bilstm       |          0.5777 |         0.0189 |                5 |               0.5448 |              0.0207 |                     5 | False      |\n"}
+,{"stream_name":"stdout","time":21.179510139,"data":"== Near-duplicate audit (test vs train+val, pHash Hamming distance)\n"}
+,{"stream_name":"stdout","time":21.181322918,"data":" | source   |   n_test |   le_0 |   le_2 |   le_4 |   le_6 |   le_8 |   le_10 |   le_12 |   pct_le_4 |\n"}
+,{"stream_name":"stdout","time":21.182908758,"data":"|:---------|---------:|-------:|-------:|-------:|-------:|-------:|--------:|--------:|-----------:|\n"}
+,{"stream_name":"stdout","time":21.184299469,"data":"| all      |    11014 |      0 |    127 |    356 |    700 |   1631 |    3879 |    7306 |     3.2300 |\n"}
+,{"stream_name":"stdout","time":21.186184819,"data":"| ckplus   |      867 |      0 |      0 |      1 |     37 |    259 |     623 |     831 |     0.1200 |\n"}
+,{"stream_name":"stdout","time":21.187512329,"data":"| fer2013  |     7080 |      0 |    114 |    315 |    556 |    971 |    2018 |    4115 |     4.4500 |\n"}
+,{"stream_name":"stdout","time":21.188712898,"data":"| rafdb    |     3067 |      0 |     13 |     40 |    107 |    401 |    1238 |    2360 |     1.3000 |\n"}
+,{"stream_name":"stdout","time":21.269646488,"data":"== Photo over seeds (accuracy on full and clean test set)\n"}
+,{"stream_name":"stdout","time":21.269744274,"data":" | model           |   test_acc_mean |   test_acc_std |   test_macro_f1_mean |   test_macro_f1_std |   clean_test_acc_mean |   clean_test_acc_std |   clean6_test_acc_mean |   clean6_test_acc_std |   acc_fer2013_mean |   acc_fer2013_std |   acc_rafdb_mean |   acc_rafdb_std |   acc_ckplus_mean |   acc_ckplus_std |   n_seeds |\n"}
+,{"stream_name":"stdout","time":21.270890622,"data":"|:----------------|----------------:|---------------:|---------------------:|--------------------:|----------------------:|---------------------:|-----------------------:|----------------------:|-------------------:|------------------:|-----------------:|----------------:|------------------:|-----------------:|----------:|\n"}
+,{"stream_name":"stdout","time":21.272061823,"data":"| xmf_face        |          0.7633 |         0.0025 |               0.7222 |              0.0033 |                0.7606 |               0.0027 |                 0.7575 |                0.0027 |             0.7093 |            0.0024 |           0.8681 |          0.0023 |            0.8334 |           0.0255 |         5 |\n"}
+,{"stream_name":"stdout","time":21.273053028,"data":"| convnext_tiny   |          0.7594 |         0.0028 |               0.7198 |              0.0021 |                0.7561 |               0.0026 |                 0.7523 |                0.0023 |             0.7068 |            0.0034 |           0.8682 |          0.0022 |            0.8035 |           0.0197 |         5 |\n"}
+,{"stream_name":"stdout","time":21.273881109,"data":"| swin_t          |          0.7583 |         0.0022 |               0.7205 |              0.0040 |                0.7565 |               0.0023 |                 0.7542 |                0.0023 |             0.7007 |            0.0024 |           0.8704 |          0.0030 |            0.8314 |           0.0167 |         5 |\n"}
+,{"stream_name":"stdout","time":21.274685036,"data":"| efficientnet_b0 |          0.7459 |         0.0012 |               0.7038 |              0.0037 |                0.7427 |               0.0012 |                 0.7392 |                0.0014 |             0.6946 |            0.0050 |           0.8526 |          0.0047 |            0.7866 |           0.0399 |         5 |\n"}
+,{"stream_name":"stdout","time":21.379521876,"data":"== Photo paired tests over seeds (XMF-Face v2 vs baseline)\n"}
+,{"stream_name":"stdout","time":21.379552374,"data":" | baseline        | metric          |   n_seeds |   mean_diff |   sd_diff |   xmf_wins |   p_paired_t |   p_holm |\n"}
+,{"stream_name":"stdout","time":21.380700076,"data":"|:----------------|:----------------|----------:|------------:|----------:|-----------:|-------------:|---------:|\n"}
+,{"stream_name":"stdout","time":21.381904381,"data":"| efficientnet_b0 | test_acc        |         5 |      0.0174 |    0.0033 |          5 |       0.0003 |   0.0035 |\n"}
+,{"stream_name":"stdout","time":21.382937512,"data":"| efficientnet_b0 | clean_test_acc  |         5 |      0.0179 |    0.0035 |          5 |       0.0003 |   0.0037 |\n"}
+,{"stream_name":"stdout","time":21.384021741,"data":"| efficientnet_b0 | clean6_test_acc |         5 |      0.0183 |    0.0036 |          5 |       0.0003 |   0.0037 |\n"}
+,{"stream_name":"stdout","time":21.385076013,"data":"| efficientnet_b0 | test_macro_f1   |         5 |      0.0184 |    0.0042 |          5 |       0.0006 |   0.0054 |\n"}
+,{"stream_name":"stdout","time":21.386053067,"data":"| convnext_tiny   | test_acc        |         5 |      0.0039 |    0.0022 |          5 |       0.0157 |   0.0939 |\n"}
+,{"stream_name":"stdout","time":21.387024971,"data":"| convnext_tiny   | clean_test_acc  |         5 |      0.0046 |    0.0021 |          5 |       0.0086 |   0.0605 |\n"}
+,{"stream_name":"stdout","time":21.387996979,"data":"| convnext_tiny   | clean6_test_acc |         5 |      0.0052 |    0.0019 |          5 |       0.0039 |   0.0310 |\n"}
+,{"stream_name":"stdout","time":21.388775993,"data":"| convnext_tiny   | test_macro_f1   |         5 |      0.0025 |    0.0022 |          4 |       0.0660 |   0.2638 |\n"}
+,{"stream_name":"stdout","time":21.389515572,"data":"| swin_t          | test_acc        |         5 |      0.0050 |    0.0039 |          5 |       0.0435 |   0.2177 |\n"}
+,{"stream_name":"stdout","time":21.390247426,"data":"| swin_t          | clean_test_acc  |         5 |      0.0041 |    0.0040 |          5 |       0.0831 |   0.2638 |\n"}
+,{"stream_name":"stdout","time":21.391023445,"data":"| swin_t          | clean6_test_acc |         5 |      0.0033 |    0.0040 |          5 |       0.1445 |   0.2890 |\n"}
+,{"stream_name":"stdout","time":21.391787877,"data":"| swin_t          | test_macro_f1   |         5 |      0.0018 |    0.0060 |          2 |       0.5481 |   0.5481 |\n"}
+,{"stream_name":"stdout","time":21.556586971,"data":"== Gaze models and shortcut baselines (10 repeats of child-wise 5-fold CV)\n"}
+,{"stream_name":"stdout","time":21.556654039,"data":" | model                 |   n_children | auroc               | auprc               | sens                | spec                | bacc                | brier               | ece                 |\n"}
+,{"stream_name":"stdout","time":21.557662283,"data":"|:----------------------|-------------:|:--------------------|:--------------------|:--------------------|:--------------------|:--------------------|:--------------------|:--------------------|\n"}
+,{"stream_name":"stdout","time":21.558859216,"data":"| gaze_logreg           |           57 | 0.943 [0.872-0.991] | 0.948 [0.880-0.991] | 0.815 [0.654-0.952] | 0.900 [0.781-1.000] | 0.857 [0.758-0.946] | 0.106 [0.074-0.144] | 0.127 [0.108-0.218] |\n"}
+,{"stream_name":"stdout","time":21.560003716,"data":"| gaze_svm              |           57 | 0.914 [0.820-0.983] | 0.918 [0.818-0.983] | 0.889 [0.750-1.000] | 0.867 [0.737-0.969] | 0.878 [0.789-0.952] | 0.113 [0.073-0.161] | 0.123 [0.109-0.220] |\n"}
+,{"stream_name":"stdout","time":21.561328778,"data":"| gaze_rf               |           57 | 0.974 [0.935-0.998] | 0.972 [0.927-0.997] | 0.889 [0.750-1.000] | 0.933 [0.833-1.000] | 0.911 [0.828-0.981] | 0.086 [0.059-0.117] | 0.183 [0.140-0.242] |\n"}
+,{"stream_name":"stdout","time":21.56206761,"data":"| gaze_et               |           57 | 0.963 [0.902-0.999] | 0.970 [0.920-0.998] | 0.852 [0.704-0.967] | 0.967 [0.886-1.000] | 0.909 [0.827-0.981] | 0.097 [0.071-0.127] | 0.165 [0.134-0.240] |\n"}
+,{"stream_name":"stdout","time":21.562965035,"data":"| gaze_plus_demo_logreg |           57 | 0.948 [0.877-0.995] | 0.953 [0.882-0.995] | 0.852 [0.697-0.964] | 0.933 [0.833-1.000] | 0.893 [0.806-0.965] | 0.099 [0.067-0.138] | 0.147 [0.111-0.224] |\n"}
+,{"stream_name":"stdout","time":21.56378145,"data":"| SHORTCUT_sex_age      |           57 | 0.560 [0.399-0.726] | 0.490 [0.355-0.691] | 0.852 [0.700-0.964] | 0.567 [0.393-0.750] | 0.709 [0.596-0.820] | 0.217 [0.169-0.266] | 0.145 [0.105-0.270] |\n"}
+,{"stream_name":"stdout","time":21.564564391,"data":"| SHORTCUT_quality      |           57 | 0.843 [0.734-0.939] | 0.843 [0.699-0.952] | 0.815 [0.654-0.950] | 0.667 [0.500-0.833] | 0.741 [0.627-0.846] | 0.165 [0.119-0.216] | 0.113 [0.102-0.239] |\n"}
+,{"stream_name":"stdout","time":21.565358772,"data":"| gaze_lgbm             |           57 | 0.981 [0.948-1.000] | 0.982 [0.945-1.000] | 0.741 [0.560-0.897] | 1.000 [1.000-1.000] | 0.870 [0.780-0.948] | 0.055 [0.018-0.101] | 0.076 [0.039-0.141] |\n"}
+,{"stream_name":"stdout","time":21.648357619,"data":"== Gaze vs recording quality\n"}
+,{"stream_name":"stdout","time":21.649946081,"data":" | analysis                 | model                     |   n | auroc                |\n"}
+,{"stream_name":"stdout","time":21.651226398,"data":"|:-------------------------|:--------------------------|----:|:---------------------|\n"}
+,{"stream_name":"stdout","time":21.652500072,"data":"| all children             | quality_only              |  57 | 0.843 [0.731, 0.943] |\n"}
+,{"stream_name":"stdout","time":21.653377751,"data":"| all children             | gaze_only                 |  57 | 0.949 [0.882, 0.994] |\n"}
+,{"stream_name":"stdout","time":21.654385291,"data":"| all children             | gaze_plus_quality         |  57 | 0.948 [0.880, 0.994] |\n"}
+,{"stream_name":"stdout","time":21.655132694,"data":"| all children             | gaze_quality_residualised |  57 | 0.832 [0.716, 0.926] |\n"}
+,{"stream_name":"stdout","time":21.655959545,"data":"| tracking ratio \u003e= median | quality_only              |  29 | 0.616 [0.363, 0.851] |\n"}
+,{"stream_name":"stdout","time":21.656795684,"data":"| tracking ratio \u003e= median | gaze_only                 |  29 | 0.848 [0.636, 1.000] |\n"}
+,{"stream_name":"stdout","time":21.773616079,"data":"== DeLong tests: does gaze add to quality?\n"}
+,{"stream_name":"stdout","time":21.774830663,"data":" | model                     | vs                          |   auc1 |   auc2 |      z |     p |   p_holm |\n"}
+,{"stream_name":"stdout","time":21.776164419,"data":"|:--------------------------|:----------------------------|-------:|-------:|-------:|------:|---------:|\n"}
+,{"stream_name":"stdout","time":21.777087277,"data":"| gaze_plus_quality         | quality_only                |  0.948 |  0.843 |  2.501 | 0.012 |    0.062 |\n"}
+,{"stream_name":"stdout","time":21.778180573,"data":"| gaze_only                 | quality_only                |  0.949 |  0.843 |  2.491 | 0.013 |    0.062 |\n"}
+,{"stream_name":"stdout","time":21.77920654,"data":"| gaze_quality_residualised | quality_only                |  0.832 |  0.843 | -0.128 | 0.898 |    0.898 |\n"}
+,{"stream_name":"stdout","time":21.780137193,"data":"| gaze_quality_residualised | gaze_only                   |  0.832 |  0.949 | -2.022 | 0.043 |    0.130 |\n"}
+,{"stream_name":"stdout","time":21.780977329,"data":"| gaze_only (high-quality)  | quality_only (high-quality) |  0.848 |  0.616 |  1.983 | 0.047 |    0.130 |\n"}
+,{"stream_name":"stdout","time":21.910606661,"data":"| dataset                                  | task               | metric   |   published | method                                                                                                            | source                                   | verified   | ours_mean_sd                             |\n"}
+,{"stream_name":"stdout","time":21.911775997,"data":"|:-----------------------------------------|:-------------------|:---------|------------:|:------------------------------------------------------------------------------------------------------------------|:-----------------------------------------|:-----------|:-----------------------------------------|\n"}
+,{"stream_name":"stdout","time":21.912891378,"data":"| FER2013 (official test)                  | 7-class expression | accuracy |      0.7328 | VGGNet, single network, no extra data                                                                             | Khaireddin \u0026 Chen 2021, arXiv:2105.03588 | True       | 0.7093 +- 0.0024                         |\n"}
+,{"stream_name":"stdout","time":21.914196712,"data":"| RAF-DB (official test)                   | 7-class expression | accuracy |      0.9221 | POSTER++ (ViT + landmark cross-fusion, 224 px, pre-trained on MS-Celeb)                                           | Mao et al. 2023, arXiv:2301.12149        | True       | 0.8681 +- 0.0023                         |\n"}
+,{"stream_name":"stdout","time":21.91523814,"data":"| MMASD (activity)                         | 11-class activity  | accuracy |    nan      | no baseline in the dataset paper (Li et al. 2023, arXiv:2306.08243)                                               | -                                        | True       | 0.6594 +- 0.0137 (child-wise 5-fold)     |\n"}
+,{"stream_name":"stdout","time":21.916281173,"data":"| TASD (text)                              | ASD vs non-ASD     | accuracy |    nan      | no peer-reviewed benchmark found                                                                                  | -                                        | False      | 0.8953 +- 0.0110                         |\n"}
+,{"stream_name":"stdout","time":21.917310999,"data":"| ReCANVo (vocal affect)                   | vocalisation label | macro-F1 |    nan      | per-participant results in Johnson et al. 2023 (Sci Data 10) - protocol differs, number not checked               | -                                        | False      | 0.1584 +- 0.0044 (leave-one-speaker-out) |\n"}
+,{"stream_name":"stdout","time":21.918295025,"data":"| Cilia/Carette eye-tracking (59 children) | ASD vs TD          | AUROC    |    nan      | scanpath images + CNN (Carette et al. 2019; Cilia et al. 2021 JMIR Hum Factors) - image-level, number not checked | -                                        | False      | 0.949 [0.882, 0.994] (child-level)       |\n"}
+,{"stream_name":"stdout","time":21.919252992,"data":"written /kaggle/working/s1/robustness_summary.md\n"}
+,{"stream_name":"stdout","time":22.135611128,"data":"[s1] done in 0.1 min\n"}
+,{"stream_name":"stdout","time":22.154593185,"data":"{\n"}
+,{"stream_name":"stdout","time":22.154623527,"data":" \"s1\": \"done\"\n"}
+,{"stream_name":"stdout","time":22.154629018,"data":"}\n"}
+,{"stream_name":"stdout","time":22.154632828,"data":"RESULT: COMPLETE\n"}
+,{"stream_name":"stderr","time":25.770702806,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":25.770743616,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":25.946812288,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":25.946841451,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":26.796396582,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":26.901767094,"data":"[NbConvertApp] Writing 36189 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":29.983660939,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":30.627298342,"data":"[NbConvertApp] Writing 345117 bytes to __results__.html\n"}
+]

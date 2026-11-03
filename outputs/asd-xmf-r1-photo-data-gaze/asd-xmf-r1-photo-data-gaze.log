@@ -1,0 +1,168 @@
+[{"stream_name":"stderr","time":9.699866352,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":9.699945734,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":9.699952393,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":9.699956025,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":10.65338369,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":10.653452702,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":10.653458374,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":10.65346236,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stdout","time":15.279313097,"data":"asd_lib: /kaggle/input/datasets/tahidulkabir/asd-xmf-lib | profile: full\n"}
+,{"stream_name":"stdout","time":17.720406604,"data":"{\n"}
+,{"stream_name":"stdout","time":17.720485449999998,"data":" \"kaggle\": true,\n"}
+,{"stream_name":"stdout","time":17.720492054,"data":" \"python\": \"3.13.15\",\n"}
+,{"stream_name":"stdout","time":17.720497596,"data":" \"cpus\": 4,\n"}
+,{"stream_name":"stdout","time":17.720502567,"data":" \"torch\": \"2.11.0+cpu\",\n"}
+,{"stream_name":"stdout","time":17.720507081,"data":" \"cuda\": false,\n"}
+,{"stream_name":"stdout","time":17.720511513,"data":" \"gpus\": [],\n"}
+,{"stream_name":"stdout","time":17.720516311,"data":" \"work_free_gb\": 20.9\n"}
+,{"stream_name":"stdout","time":17.720520582,"data":"}\n"}
+,{"stream_name":"stdout","time":139.260201504,"data":"resume: no token dataset attached - starting from scratch\n"}
+,{"stream_name":"stdout","time":139.260239164,"data":"sections: d1(rev 1), dup(rev 1), nb13(rev 1), g1(rev 1) | reused from earlier runs: [] | re-run (new revision): []\n"}
+,{"stream_name":"stdout","time":139.28232024,"data":"Writing /tmp/xmf_sections/d1.py\n"}
+,{"stream_name":"stdout","time":139.298517629,"data":"[d1] start (11.0 h left in this run)\n"}
+,{"stream_name":"stdout","time":143.158990867,"data":"source   orig_split\n"}
+,{"stream_name":"stdout","time":143.159310687,"data":"fer2013  test           7178\n"}
+,{"stream_name":"stdout","time":143.160748887,"data":"         train         28709\n"}
+,{"stream_name":"stdout","time":143.161767213,"data":"rafdb    test           3068\n"}
+,{"stream_name":"stdout","time":143.162664435,"data":"         train         12271\n"}
+,{"stream_name":"stdout","time":143.163506017,"data":"dtype: int64 \n"}
+,{"stream_name":"stdout","time":143.164439535,"data":"CK+ images: 902\n"}
+,{"stream_name":"stdout","time":222.77719327,"data":"decoded (52128, 160, 160, 3)\n"}
+,{"stream_name":"stdout","time":228.940352661,"data":"duplicate (identical pHash) images removed: 2019\n"}
+,{"stream_name":"stdout","time":232.746082146,"data":"split    test  train   val\n"}
+,{"stream_name":"stdout","time":232.747756398,"data":"source                    \n"}
+,{"stream_name":"stdout","time":232.749979555,"data":"ckplus    867      0     0\n"}
+,{"stream_name":"stdout","time":232.750884498,"data":"fer2013  7080  24124  2707\n"}
+,{"stream_name":"stdout","time":232.752246441,"data":"rafdb    3067  10971  1293\n"}
+,{"stream_name":"stdout","time":233.876086868,"data":"[d1] done in 1.6 min\n"}
+,{"stream_name":"stdout","time":233.901237162,"data":"Writing /tmp/xmf_sections/dup.py\n"}
+,{"stream_name":"stdout","time":233.917937233,"data":"[dup] start (10.9 h left in this run)\n"}
+,{"stream_name":"stdout","time":234.674363394,"data":"test images: 11014  | train+val images: 39095\n"}
+,{"stream_name":"stdout","time":236.816284498,"data":"| source   |   n_test |   le_0 |   le_2 |   le_4 |   le_6 |   le_8 |   le_10 |   le_12 |   pct_le_4 |\n"}
+,{"stream_name":"stdout","time":236.817594049,"data":"|:---------|---------:|-------:|-------:|-------:|-------:|-------:|--------:|--------:|-----------:|\n"}
+,{"stream_name":"stdout","time":236.818593671,"data":"| all      |    11014 |      0 |    127 |    356 |    700 |   1631 |    3879 |    7306 |      3.230 |\n"}
+,{"stream_name":"stdout","time":236.819658531,"data":"| ckplus   |      867 |      0 |      0 |      1 |     37 |    259 |     623 |     831 |      0.120 |\n"}
+,{"stream_name":"stdout","time":236.820645275,"data":"| fer2013  |     7080 |      0 |    114 |    315 |    556 |    971 |    2018 |    4115 |      4.450 |\n"}
+,{"stream_name":"stdout","time":236.821514728,"data":"| rafdb    |     3067 |      0 |     13 |     40 |    107 |    401 |    1238 |    2360 |      1.300 |\n"}
+,{"stream_name":"stdout","time":236.840330654,"data":"|   min_dist_trainval |        n |   same_label |   chance_same_label |\n"}
+,{"stream_name":"stdout","time":236.841518552,"data":"|--------------------:|---------:|-------------:|--------------------:|\n"}
+,{"stream_name":"stdout","time":236.842857675,"data":"|               2.000 |  127.000 |        0.866 |               0.187 |\n"}
+,{"stream_name":"stdout","time":236.84371265,"data":"|               4.000 |  229.000 |        0.860 |               0.187 |\n"}
+,{"stream_name":"stdout","time":236.846104867,"data":"|               6.000 |  344.000 |        0.695 |               0.187 |\n"}
+,{"stream_name":"stdout","time":236.846156265,"data":"|               8.000 |  931.000 |        0.470 |               0.187 |\n"}
+,{"stream_name":"stdout","time":236.846533344,"data":"|              10.000 | 2248.000 |        0.330 |               0.187 |\n"}
+,{"stream_name":"stdout","time":236.847444616,"data":"|              12.000 | 3427.000 |        0.246 |               0.187 |\n"}
+,{"stream_name":"stdout","time":236.848304174,"data":"|              14.000 | 2663.000 |        0.187 |               0.187 |\n"}
+,{"stream_name":"stdout","time":236.996123667,"data":"[dup] done in 0.1 min\n"}
+,{"stream_name":"stdout","time":237.031446209,"data":"Writing /tmp/xmf_sections/nb13.py\n"}
+,{"stream_name":"stdout","time":237.053890905,"data":"[nb13] start (10.9 h left in this run)\n"}
+,{"stream_name":"stdout","time":238.317951231,"data":"      n      male       age\n"}
+,{"stream_name":"stdout","time":238.318880428,"data":"cls                        \n"}
+,{"stream_name":"stdout","time":238.320289676,"data":"ASD  29  0.862069  7.737931\n"}
+,{"stream_name":"stdout","time":238.321300654,"data":"TD   30  0.433333  8.023333\n"}
+,{"stream_name":"stdout","time":265.796855359,"data":"(1351157, 15) 57 participants; 136 stimuli\n"}
+,{"stream_name":"stdout","time":268.907251041,"data":"common stimuli: ['15 devant', '18 au revoir']\n"}
+,{"stream_name":"stdout","time":270.261756318,"data":"children with gaze: 57 | gaze features: 26\n"}
+,{"stream_name":"stdout","time":397.204324704,"data":"| model                 |   n_children | auroc               | auprc               | sens                | spec                | bacc                | brier               | ece                 |\n"}
+,{"stream_name":"stdout","time":397.205802898,"data":"|:----------------------|-------------:|:--------------------|:--------------------|:--------------------|:--------------------|:--------------------|:--------------------|:--------------------|\n"}
+,{"stream_name":"stdout","time":397.206856848,"data":"| gaze_logreg           |           57 | 0.943 [0.872-0.991] | 0.948 [0.880-0.991] | 0.815 [0.654-0.952] | 0.900 [0.781-1.000] | 0.857 [0.758-0.946] | 0.106 [0.074-0.144] | 0.127 [0.108-0.218] |\n"}
+,{"stream_name":"stdout","time":397.207835576,"data":"| gaze_svm              |           57 | 0.914 [0.820-0.983] | 0.918 [0.818-0.983] | 0.889 [0.750-1.000] | 0.867 [0.737-0.969] | 0.878 [0.789-0.952] | 0.113 [0.073-0.161] | 0.123 [0.109-0.220] |\n"}
+,{"stream_name":"stdout","time":397.208727362,"data":"| gaze_rf               |           57 | 0.974 [0.935-0.998] | 0.972 [0.927-0.997] | 0.889 [0.750-1.000] | 0.933 [0.833-1.000] | 0.911 [0.828-0.981] | 0.086 [0.059-0.117] | 0.183 [0.140-0.242] |\n"}
+,{"stream_name":"stdout","time":397.209598555,"data":"| gaze_et               |           57 | 0.963 [0.902-0.999] | 0.970 [0.920-0.998] | 0.852 [0.704-0.967] | 0.967 [0.886-1.000] | 0.909 [0.827-0.981] | 0.097 [0.071-0.127] | 0.165 [0.134-0.240] |\n"}
+,{"stream_name":"stdout","time":397.210438025,"data":"| gaze_plus_demo_logreg |           57 | 0.948 [0.877-0.995] | 0.953 [0.882-0.995] | 0.852 [0.697-0.964] | 0.933 [0.833-1.000] | 0.893 [0.806-0.965] | 0.099 [0.067-0.138] | 0.147 [0.111-0.224] |\n"}
+,{"stream_name":"stdout","time":397.211319861,"data":"| SHORTCUT_sex_age      |           57 | 0.560 [0.399-0.726] | 0.490 [0.355-0.691] | 0.852 [0.700-0.964] | 0.567 [0.393-0.750] | 0.709 [0.596-0.820] | 0.217 [0.169-0.266] | 0.145 [0.105-0.270] |\n"}
+,{"stream_name":"stdout","time":397.212185334,"data":"| SHORTCUT_quality      |           57 | 0.843 [0.734-0.939] | 0.843 [0.699-0.952] | 0.815 [0.654-0.950] | 0.667 [0.500-0.833] | 0.741 [0.627-0.846] | 0.165 [0.119-0.216] | 0.113 [0.102-0.239] |\n"}
+,{"stream_name":"stdout","time":397.213062903,"data":"| gaze_lgbm             |           57 | 0.981 [0.948-1.000] | 0.982 [0.945-1.000] | 0.741 [0.560-0.897] | 1.000 [1.000-1.000] | 0.870 [0.780-0.948] | 0.055 [0.018-0.101] | 0.076 [0.039-0.141] |\n"}
+,{"stream_name":"stdout","time":397.224043448,"data":"| model                 |   auc1 |   auc2 |     z |     p |   p_holm |\n"}
+,{"stream_name":"stdout","time":397.225003942,"data":"|:----------------------|-------:|-------:|------:|------:|---------:|\n"}
+,{"stream_name":"stdout","time":397.226600852,"data":"| gaze_logreg           |  0.943 |  0.560 | 4.270 | 0.000 |    0.000 |\n"}
+,{"stream_name":"stdout","time":397.227902426,"data":"| gaze_svm              |  0.914 |  0.560 | 3.645 | 0.000 |    0.001 |\n"}
+,{"stream_name":"stdout","time":397.22932162,"data":"| gaze_rf               |  0.974 |  0.560 | 4.853 | 0.000 |    0.000 |\n"}
+,{"stream_name":"stdout","time":397.230269689,"data":"| gaze_et               |  0.963 |  0.560 | 4.584 | 0.000 |    0.000 |\n"}
+,{"stream_name":"stdout","time":397.231229206,"data":"| gaze_plus_demo_logreg |  0.948 |  0.560 | 4.522 | 0.000 |    0.000 |\n"}
+,{"stream_name":"stdout","time":397.2320555,"data":"| SHORTCUT_quality      |  0.843 |  0.560 | 2.735 | 0.006 |    0.006 |\n"}
+,{"stream_name":"stdout","time":397.232910361,"data":"| gaze_lgbm             |  0.981 |  0.560 | 5.053 | 0.000 |    0.000 |\n"}
+,{"stream_name":"stdout","time":397.243053098,"data":"best gaze model: gaze_lgbm\n"}
+,{"stream_name":"stdout","time":400.063946335,"data":"males only AUROC: 0.990 [0.960, 1.000] (n=36)\n"}
+,{"stream_name":"stdout","time":400.090052113,"data":"| group    | value   |   n |   prev |   auroc |   sens |   spec |   bacc |   ece |\n"}
+,{"stream_name":"stdout","time":400.090252842,"data":"|:---------|:--------|----:|-------:|--------:|-------:|-------:|-------:|------:|\n"}
+,{"stream_name":"stdout","time":400.091605758,"data":"| sex      | F       |  21 |  0.190 |   0.956 |  0.750 |  0.941 |  0.846 | 0.112 |\n"}
+,{"stream_name":"stdout","time":400.092722952,"data":"| sex      | M       |  36 |  0.639 |   0.990 |  0.957 |  0.923 |  0.940 | 0.065 |\n"}
+,{"stream_name":"stdout","time":400.093571707,"data":"| age_band | \u003c6y     |  18 |  0.500 |   1.000 |  1.000 |  1.000 |  1.000 | 0.056 |\n"}
+,{"stream_name":"stdout","time":400.094413389,"data":"| age_band | 6-9y    |  21 |  0.429 |   0.954 |  0.889 |  0.917 |  0.903 | 0.143 |\n"}
+,{"stream_name":"stdout","time":400.095408549,"data":"| age_band | 9y+     |  18 |  0.500 |   0.988 |  0.889 |  0.889 |  0.889 | 0.080 |\n"}
+,{"stream_name":"stdout","time":404.8669403,"data":"| feature                   |   mean_abs_shap |   coef |\n"}
+,{"stream_name":"stdout","time":404.875350646,"data":"|:--------------------------|----------------:|-------:|\n"}
+,{"stream_name":"stdout","time":404.882962444,"data":"| 15 devant__fix_prop       |           0.520 | -0.600 |\n"}
+,{"stream_name":"stdout","time":404.884912993,"data":"| 15 devant__blink_rate     |           0.267 |  0.320 |\n"}
+,{"stream_name":"stdout","time":404.889494552,"data":"| all_blink_prop            |           0.263 |  0.330 |\n"}
+,{"stream_name":"stdout","time":404.896557882,"data":"| 18 au revoir__blink_rate  |           0.249 |  0.296 |\n"}
+,{"stream_name":"stdout","time":404.8986457,"data":"| all_fix_prop              |           0.243 | -0.306 |\n"}
+,{"stream_name":"stdout","time":404.906132711,"data":"| all_gaze_disp_y           |           0.205 |  0.267 |\n"}
+,{"stream_name":"stdout","time":404.911679201,"data":"| all_pupil_sd              |           0.155 | -0.207 |\n"}
+,{"stream_name":"stdout","time":404.913284016,"data":"| all_blink_rate            |           0.137 |  0.182 |\n"}
+,{"stream_name":"stdout","time":404.91753788,"data":"| 15 devant__gaze_disp_y    |           0.121 |  0.167 |\n"}
+,{"stream_name":"stdout","time":404.921561887,"data":"| all_pupil_mean            |           0.109 |  0.139 |\n"}
+,{"stream_name":"stdout","time":404.923002317,"data":"| 18 au revoir__fix_prop    |           0.108 | -0.126 |\n"}
+,{"stream_name":"stdout","time":404.927570768,"data":"| 18 au revoir__gaze_disp_y |           0.106 |  0.150 |\n"}
+,{"stream_name":"stdout","time":404.929072565,"data":"| all_gaze_disp_x           |           0.102 |  0.134 |\n"}
+,{"stream_name":"stdout","time":404.93347515,"data":"| all_sac_prop              |           0.098 | -0.120 |\n"}
+,{"stream_name":"stdout","time":404.934955732,"data":"| all_fix_rate              |           0.081 |  0.111 |\n"}
+,{"stream_name":"stdout","time":406.198590763,"data":"['gaze_child_features.csv', 'gaze_delong_vs_sex_age.csv', 'gaze_fairness.csv', 'gaze_results_ci.csv', 'gaze_roc_calib_dca.png', 'gaze_shap_importance.csv', 'gaze_shap_summary.png', 'nb13_summary.json', 'preds']\n"}
+,{"stream_name":"stdout","time":407.798401896,"data":"[nb13] done in 2.8 min\n"}
+,{"stream_name":"stdout","time":407.837736766,"data":"Writing /tmp/xmf_sections/g1.py\n"}
+,{"stream_name":"stdout","time":407.860519943,"data":"[g1] start (10.9 h left in this run)\n"}
+,{"stream_name":"stdout","time":409.467715191,"data":"57 children (27 ASD) | 26 gaze features | quality = all_track_ratio\n"}
+,{"stream_name":"stdout","time":426.757185534,"data":"high-quality subset: 29 children (6 ASD), tracking ratio \u003e= 79.2\n"}
+,{"stream_name":"stdout","time":433.742887482,"data":"| analysis                 | model                     |   n | auroc                |\n"}
+,{"stream_name":"stdout","time":433.744328861,"data":"|:-------------------------|:--------------------------|----:|:---------------------|\n"}
+,{"stream_name":"stdout","time":433.745869439,"data":"| all children             | quality_only              |  57 | 0.843 [0.731, 0.943] |\n"}
+,{"stream_name":"stdout","time":433.747283836,"data":"| all children             | gaze_only                 |  57 | 0.949 [0.882, 0.994] |\n"}
+,{"stream_name":"stdout","time":433.748521096,"data":"| all children             | gaze_plus_quality         |  57 | 0.948 [0.880, 0.994] |\n"}
+,{"stream_name":"stdout","time":433.750048102,"data":"| all children             | gaze_quality_residualised |  57 | 0.832 [0.716, 0.926] |\n"}
+,{"stream_name":"stdout","time":433.751047145,"data":"| tracking ratio \u003e= median | quality_only              |  29 | 0.616 [0.363, 0.851] |\n"}
+,{"stream_name":"stdout","time":433.752348789,"data":"| tracking ratio \u003e= median | gaze_only                 |  29 | 0.848 [0.636, 1.000] |\n"}
+,{"stream_name":"stdout","time":433.753566209,"data":"| model                     | vs                          |   auc1 |   auc2 |      z |     p |   p_holm |\n"}
+,{"stream_name":"stdout","time":433.754543604,"data":"|:--------------------------|:----------------------------|-------:|-------:|-------:|------:|---------:|\n"}
+,{"stream_name":"stdout","time":433.755439797,"data":"| gaze_plus_quality         | quality_only                |  0.948 |  0.843 |  2.501 | 0.012 |    0.062 |\n"}
+,{"stream_name":"stdout","time":433.756328162,"data":"| gaze_only                 | quality_only                |  0.949 |  0.843 |  2.491 | 0.013 |    0.062 |\n"}
+,{"stream_name":"stdout","time":433.757215066,"data":"| gaze_quality_residualised | quality_only                |  0.832 |  0.843 | -0.128 | 0.898 |    0.898 |\n"}
+,{"stream_name":"stdout","time":433.758049257,"data":"| gaze_quality_residualised | gaze_only                   |  0.832 |  0.949 | -2.022 | 0.043 |    0.130 |\n"}
+,{"stream_name":"stdout","time":433.758862673,"data":"| gaze_only (high-quality)  | quality_only (high-quality) |  0.848 |  0.616 |  1.983 | 0.047 |    0.130 |\n"}
+,{"stream_name":"stdout","time":449.05758162,"data":"gaze_only {'auroc': 0.9493827160493827, 'null_mean': 0.49809876543209874, 'null_95': 0.6680864197530864, 'p_perm': 0.004975124378109453, 'n_perm': 200}\n"}
+,{"stream_name":"stdout","time":528.079194096,"data":"gaze_quality_residualised {'auroc': 0.8320987654320988, 'null_mean': 0.4947438271604938, 'null_95': 0.6608024691358023, 'p_perm': 0.004975124378109453, 'n_perm': 200}\n"}
+,{"stream_name":"stdout","time":528.108521891,"data":"| feature                    |   spearman_with_quality |   spearman_with_label |\n"}
+,{"stream_name":"stdout","time":528.116423868,"data":"|:---------------------------|------------------------:|----------------------:|\n"}
+,{"stream_name":"stdout","time":528.11801331,"data":"| all_fix_prop               |                   0.961 |                -0.564 |\n"}
+,{"stream_name":"stdout","time":528.122916968,"data":"| all_blink_prop             |                  -0.935 |                 0.600 |\n"}
+,{"stream_name":"stdout","time":528.125711576,"data":"| 15 devant__fix_prop        |                   0.709 |                -0.680 |\n"}
+,{"stream_name":"stdout","time":528.129255943,"data":"| 18 au revoir__fix_prop     |                   0.692 |                -0.401 |\n"}
+,{"stream_name":"stdout","time":528.133515331,"data":"| all_fix_dur_median         |                   0.544 |                -0.504 |\n"}
+,{"stream_name":"stdout","time":528.135779553,"data":"| all_gaze_disp_y            |                  -0.508 |                 0.487 |\n"}
+,{"stream_name":"stdout","time":528.137515359,"data":"| all_aoi_on_prop            |                   0.498 |                -0.269 |\n"}
+,{"stream_name":"stdout","time":528.141918335,"data":"| all_pupil_sd               |                  -0.444 |                 0.075 |\n"}
+,{"stream_name":"stdout","time":528.147736254,"data":"| all_gaze_disp_x            |                  -0.421 |                 0.410 |\n"}
+,{"stream_name":"stdout","time":528.153529702,"data":"| all_fix_rate               |                   0.398 |                 0.049 |\n"}
+,{"stream_name":"stdout","time":528.155640496,"data":"| all_sac_rate               |                   0.397 |                 0.032 |\n"}
+,{"stream_name":"stdout","time":528.159291648,"data":"| 15 devant__gaze_disp_x     |                  -0.278 |                 0.080 |\n"}
+,{"stream_name":"stdout","time":528.16057345,"data":"| 18 au revoir__blink_rate   |                  -0.265 |                 0.294 |\n"}
+,{"stream_name":"stdout","time":528.164056209,"data":"| 15 devant__fix_dur_mean    |                   0.252 |                -0.537 |\n"}
+,{"stream_name":"stdout","time":528.165541091,"data":"| 18 au revoir__fix_dur_mean |                   0.250 |                -0.472 |\n"}
+,{"stream_name":"stdout","time":528.167886256,"data":"label vs tracking ratio (Spearman): -0.611\n"}
+,{"stream_name":"stdout","time":528.512624907,"data":"[g1] done in 2.0 min\n"}
+,{"stream_name":"stdout","time":528.540817752,"data":"{\n"}
+,{"stream_name":"stdout","time":528.54087575,"data":" \"d1\": \"done\",\n"}
+,{"stream_name":"stdout","time":528.540885482,"data":" \"dup\": \"done\",\n"}
+,{"stream_name":"stdout","time":528.540890739,"data":" \"nb13\": \"done\",\n"}
+,{"stream_name":"stdout","time":528.540895262,"data":" \"g1\": \"done\"\n"}
+,{"stream_name":"stdout","time":528.540900165,"data":"}\n"}
+,{"stream_name":"stdout","time":528.540904479,"data":"RESULT: COMPLETE\n"}
+,{"stream_name":"stderr","time":533.426707981,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":533.426919132,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":533.686511144,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":533.686546282,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":534.709355871,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":534.845475544,"data":"[NbConvertApp] Writing 58150 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":538.578995078,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":539.454542899,"data":"[NbConvertApp] Writing 460468 bytes to __results__.html\n"}
+]

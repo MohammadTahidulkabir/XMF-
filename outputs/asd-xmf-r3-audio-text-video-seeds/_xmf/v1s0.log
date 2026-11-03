@@ -1,0 +1,14 @@
+(1374, 64, 75) 10 activities, 32 children
+{'task': 'mmasd_activity', 'model': 'mlp_pooled', 'proposed': False, 'test_acc': 0.6171761280931587, 'ci_lo': 0.5931586608442504, 'ci_hi': 0.6433770014556041, 'test_macro_f1': 0.5858485788796641, 'train_acc': 0.9691711338330637, 'val_acc': 0.7459646557219977, 'gap': 0.2232064781110661, 'params_m': 0.041226}
+{'task': 'mmasd_activity', 'model': 'cnn1d', 'proposed': False, 'test_acc': 0.6200873362445415, 'ci_lo': 0.5938864628820961, 'ci_hi': 0.6448326055312955, 'test_macro_f1': 0.5848879558599483, 'train_acc': 0.9489299518190482, 'val_acc': 0.717583059180807, 'gap': 0.23134689263824115, 'params_m': 0.131978}
+{'task': 'mmasd_activity', 'model': 'bilstm', 'proposed': False, 'test_acc': 0.5909752547307132, 'ci_lo': 0.5662299854439592, 'ci_hi': 0.616448326055313, 'test_macro_f1': 0.5445617812950025, 'train_acc': 0.9273622217087845, 'val_acc': 0.6860230964071824, 'gap': 0.24133912530160206, 'params_m': 0.21249}
+{'task': 'mmasd_activity', 'model': 'cnn_lstm', 'proposed': False, 'test_acc': 0.598981077147016, 'ci_lo': 0.5727802037845706, 'ci_hi': 0.6251819505094615, 'test_macro_f1': 0.5583846445591721, 'train_acc': 0.9516052586529806, 'val_acc': 0.6945017162248812, 'gap': 0.2571035424280994, 'params_m': 0.315146}
+{'task': 'mmasd_activity', 'model': 'xmf_temporal', 'proposed': True, 'test_acc': 0.6390101892285298, 'ci_lo': 0.6120815138282387, 'ci_hi': 0.6623180494905385, 'test_macro_f1': 0.6056672238456718, 'train_acc': 0.9826862324622795, 'val_acc': 0.7672463622911433, 'gap': 0.2154398701711362, 'params_m': 0.326923}
+[time] video benchmark: 1.3 min
+| task           | model        | proposed   |   test_acc |   ci_lo |   ci_hi |   test_macro_f1 |   train_acc |   val_acc |   gap |   params_m | fit      |   majority_baseline |
+|:---------------|:-------------|:-----------|-----------:|--------:|--------:|----------------:|------------:|----------:|------:|-----------:|:---------|--------------------:|
+| mmasd_activity | xmf_temporal | True       |      0.639 |   0.612 |   0.662 |           0.606 |       0.983 |     0.767 | 0.215 |      0.327 | overfit? |               0.250 |
+| mmasd_activity | cnn1d        | False      |      0.620 |   0.594 |   0.645 |           0.585 |       0.949 |     0.718 | 0.231 |      0.132 | overfit? |               0.250 |
+| mmasd_activity | mlp_pooled   | False      |      0.617 |   0.593 |   0.643 |           0.586 |       0.969 |     0.746 | 0.223 |      0.041 | overfit? |               0.250 |
+| mmasd_activity | cnn_lstm     | False      |      0.599 |   0.573 |   0.625 |           0.558 |       0.952 |     0.695 | 0.257 |      0.315 | overfit? |               0.250 |
+| mmasd_activity | bilstm       | False      |      0.591 |   0.566 |   0.616 |           0.545 |       0.927 |     0.686 | 0.241 |      0.212 | overfit? |               0.250 |
