@@ -147,7 +147,7 @@ def run(name, vars_=None):
     prelude = (f"RUN_PROFILE = {_cfg['profile']!r}\nPREFLIGHT = RUN_PROFILE == 'preflight'\n"
                "import os, sys, glob, json, time, warnings\nwarnings.filterwarnings('ignore')\n"
                f"sys.path.insert(0, {str(U.LIB_DIR)!r})\nimport asd_utils as U\n"
-               f"VARIANT = {json.dumps(vars_ or {})}\n")
+               f"VARIANT = {(vars_ or {})!r}\n")
     script = SEC_DIR / f"run_{name}.py"
     script.write_text(prelude + (SEC_DIR / f"{name}.py").read_text(encoding="utf-8"), encoding="utf-8")
     env = {**os.environ, "ASD_SEARCH_WORK": "1", "MPLBACKEND": "Agg", "PYTHONUNBUFFERED": "1",

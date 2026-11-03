@@ -1,0 +1,21 @@
+{
+  "id": "tahidulkabir/asd-xmf-r3b-audio-seeds",
+  "title": "ASD-XMF R3b Audio Seeds",
+  "code_file": "asd-xmf-r3b-audio-seeds.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "dataset_sources": [
+    "tahidulkabir/asd-xmf-lib",
+    "tahidulkabir/asd-xmf-recanvo",
+    "warcoder/infant-cry-audio-corpus",
+    "sanmithasadhish/infant-cry-dataset"
+  ],
+  "kernel_sources": [],
+  "competition_sources": [],
+  "model_sources": [],
+  "machine_shape": "NvidiaTeslaT4"
+}

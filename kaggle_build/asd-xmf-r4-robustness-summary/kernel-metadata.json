@@ -14,7 +14,8 @@
   "kernel_sources": [
     "tahidulkabir/asd-xmf-r1-photo-data-gaze",
     "tahidulkabir/asd-xmf-r2-photo-seeds",
-    "tahidulkabir/asd-xmf-r3-audio-text-video-seeds"
+    "tahidulkabir/asd-xmf-r3-audio-text-video-seeds",
+    "tahidulkabir/asd-xmf-r3b-audio-seeds"
   ],
   "competition_sources": [],
   "model_sources": []

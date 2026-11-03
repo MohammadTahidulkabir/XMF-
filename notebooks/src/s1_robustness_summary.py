@@ -1,7 +1,7 @@
 # %% [meta]
 # {"slug": "asd-xmf-s1-robustness-summary", "title": "ASD-XMF S1 Robustness Summary",
 #  "gpu": false, "internet": true, "datasets": [],
-#  "kernels": ["asd-xmf-r1-photo-data-gaze", "asd-xmf-r2-photo-seeds", "asd-xmf-r3-audio-text-video-seeds"], "phase": "R"}
+#  "kernels": ["asd-xmf-r1-photo-data-gaze", "asd-xmf-r2-photo-seeds", "asd-xmf-r3-audio-text-video-seeds", "asd-xmf-r3b-audio-seeds"], "phase": "R"}
 
 # %% [markdown]
 # # S1 - Robustness summary (R1-R3) and comparison with published results

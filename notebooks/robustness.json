@@ -230,6 +230,75 @@
    ]
   },
   {
+   "slug": "asd-xmf-r3b-audio-seeds",
+   "title": "ASD-XMF R3b Audio Seeds",
+   "orch_key": false,
+   "gpu": true,
+   "kernels": [],
+   "about": "GPU: rebuild D2 and run the audio comparison over 5 seeds (split out of R3, whose audio sections failed on a build bug; R3 keeps the text and video seeds).",
+   "sections": [
+    {
+     "name": "d2",
+     "src": "d2_audio_builder.py"
+    },
+    {
+     "name": "a1s0",
+     "src": "a1_audio_benchmark.py",
+     "vars": {
+      "seed": 0,
+      "skip_melcnn": true
+     },
+     "after": [
+      "d2"
+     ]
+    },
+    {
+     "name": "a1s1",
+     "src": "a1_audio_benchmark.py",
+     "vars": {
+      "seed": 1,
+      "skip_melcnn": true
+     },
+     "after": [
+      "d2"
+     ]
+    },
+    {
+     "name": "a1s2",
+     "src": "a1_audio_benchmark.py",
+     "vars": {
+      "seed": 2,
+      "skip_melcnn": true
+     },
+     "after": [
+      "d2"
+     ]
+    },
+    {
+     "name": "a1s3",
+     "src": "a1_audio_benchmark.py",
+     "vars": {
+      "seed": 3,
+      "skip_melcnn": true
+     },
+     "after": [
+      "d2"
+     ]
+    },
+    {
+     "name": "a1s4",
+     "src": "a1_audio_benchmark.py",
+     "vars": {
+      "seed": 4,
+      "skip_melcnn": true
+     },
+     "after": [
+      "d2"
+     ]
+    }
+   ]
+  },
+  {
    "slug": "asd-xmf-r4-robustness-summary",
    "title": "ASD-XMF R4 Robustness Summary",
    "orch_key": false,
@@ -237,7 +306,8 @@
    "kernels": [
     "asd-xmf-r1-photo-data-gaze",
     "asd-xmf-r2-photo-seeds",
-    "asd-xmf-r3-audio-text-video-seeds"
+    "asd-xmf-r3-audio-text-video-seeds",
+    "asd-xmf-r3b-audio-seeds"
    ],
    "about": "CPU: mean +- SD over seeds, paired tests, gaze quality checks and the published-results table for every sector.",
    "sections": [
