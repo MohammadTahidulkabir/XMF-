@@ -1,0 +1,58 @@
+C:\Users\HP\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+primary_gaze_lr        AUROC 0.949 [0.882, 0.994]  sens 0.863 spec 0.897
+gaze_rf                AUROC 0.974 [0.932, 0.999]  sens 0.867 spec 0.917
+quality_only_lr        AUROC 0.843 [0.731, 0.943]  sens 0.833 spec 0.640
+sex_age_lr             AUROC 0.500 [0.333, 0.673]  sens 0.844 spec 0.400
+gaze_plus_quality_lr   AUROC 0.948 [0.880, 0.994]  sens 0.848 spec 0.903
+resid_gaze_lr          AUROC 0.827 [0.710, 0.927]  sens 0.844 spec 0.540
+resid_gaze_rf          AUROC 0.938 [0.863, 0.991]  sens 0.859 spec 0.880
+gaze_lgbm              AUROC 0.969 [0.914, 1.000]  sens 0.852 spec 0.943
+resid_gaze_lgbm        AUROC 0.930 [0.845, 0.990]  sens 0.856 spec 0.830
+               model              vs   auc1   auc2       z      p  p_holm
+     primary_gaze_lr quality_only_lr 0.9494 0.8432  2.4909 0.0127  0.0742
+     primary_gaze_lr      sex_age_lr 0.9494 0.5000  5.0421 0.0000  0.0000
+gaze_plus_quality_lr quality_only_lr 0.9481 0.8432  2.5013 0.0124  0.0742
+       resid_gaze_lr quality_only_lr 0.8272 0.8432 -0.1837 0.8543  0.8543
+       resid_gaze_lr primary_gaze_lr 0.8272 0.9494 -2.0454 0.0408  0.1632
+       resid_gaze_rf quality_only_lr 0.9383 0.8432  2.0242 0.0429  0.1632
+     resid_gaze_lgbm quality_only_lr 0.9296 0.8432  1.7261 0.0843  0.1687
+upper-quality half: {"n": 29, "n_asd": 6, "n_td": 23, "primary_gaze_lr": {"auroc": 0.8478260869565218, "lo": 0.6362121212121212, "hi": 1.0}, "quality_only_lr": {"auroc": 0.6159420289855073, "lo": 0.36294047619047626, "hi": 0.8506764069264069}, "delong": {"auc1": 0.8478260869565217, "auc2": 0.6159420289855073, "z": 1.9834464432493082, "p": 0.047317583761647915}}
+primary_gaze_lr {'auroc': 0.9493827160493827, 'n_perm': 1000, 'null_mean': 0.48964444444444444, 'null_95': 0.6556172839506171, 'p_perm': 0.000999000999000999}
+resid_gaze_lr {'auroc': 0.8271604938271605, 'n_perm': 1000, 'null_mean': 0.49460617283950614, 'null_95': 0.6641975308641975, 'p_perm': 0.000999000999000999}
+{
+ "n_children": 57,
+ "n_asd": 27,
+ "n_td": 30,
+ "age_min": 2.7,
+ "age_max": 12.9,
+ "age_median": 8.0,
+ "age_median_asd": 7.1,
+ "age_median_td": 8.149999999999999,
+ "boys_asd": 23,
+ "girls_asd": 4,
+ "boys_td": 13,
+ "girls_td": 17,
+ "cars_asd_median": 33.5,
+ "cars_td_median": NaN,
+ "n_gaze_features_used": 24,
+ "constant_features_dropped": [
+  "15 devant__aoi_on_prop",
+  "18 au revoir__aoi_on_prop"
+ ],
+ "missing_values_per_feature": {
+  "15 devant__fix_prop": 4,
+  "15 devant__fix_dur_mean": 12,
+  "15 devant__gaze_disp_x": 12,
+  "15 devant__gaze_disp_y": 12,
+  "15 devant__blink_rate": 4,
+  "18 au revoir__fix_prop": 4,
+  "18 au revoir__fix_dur_mean": 13,
+  "18 au revoir__gaze_disp_x": 13,
+  "18 au revoir__gaze_disp_y": 13,
+  "18 au revoir__blink_rate": 4
+ },
+ "repeats": 10,
+ "target_sensitivity": 0.85,
+ "minutes": 38.9
+}

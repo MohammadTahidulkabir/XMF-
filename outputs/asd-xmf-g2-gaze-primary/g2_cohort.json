@@ -1,0 +1,36 @@
+{
+ "n_children": 57,
+ "n_asd": 27,
+ "n_td": 30,
+ "age_min": 2.7,
+ "age_max": 12.9,
+ "age_median": 8.0,
+ "age_median_asd": 7.1,
+ "age_median_td": 8.149999999999999,
+ "boys_asd": 23,
+ "girls_asd": 4,
+ "boys_td": 13,
+ "girls_td": 17,
+ "cars_asd_median": 33.5,
+ "cars_td_median": NaN,
+ "n_gaze_features_used": 24,
+ "constant_features_dropped": [
+  "15 devant__aoi_on_prop",
+  "18 au revoir__aoi_on_prop"
+ ],
+ "missing_values_per_feature": {
+  "15 devant__fix_prop": 4,
+  "15 devant__fix_dur_mean": 12,
+  "15 devant__gaze_disp_x": 12,
+  "15 devant__gaze_disp_y": 12,
+  "15 devant__blink_rate": 4,
+  "18 au revoir__fix_prop": 4,
+  "18 au revoir__fix_dur_mean": 13,
+  "18 au revoir__gaze_disp_x": 13,
+  "18 au revoir__gaze_disp_y": 13,
+  "18 au revoir__blink_rate": 4
+ },
+ "repeats": 10,
+ "target_sensitivity": 0.85,
+ "minutes": 38.9
+}
